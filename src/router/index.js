@@ -1,6 +1,10 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-// import HelloWorld from '@/components/HelloWorld'
+import Favorites from '@/components/Favorites/Favorites'
+import Main from '@/components/Main/Main'
+import MyPage from '@/components/My_page/My_page'
+import News from '@/components/News/News'
+import Top from '@/components/Top/Top'
 
 Vue.use(Router)
 
@@ -9,8 +13,28 @@ export default new Router({
   routes: [
     {
       path: '/',
-      name: 'First',
-      // component: HelloWorld
+      name: 'Main',
+      component: Main
+    },
+    {
+      path: '/favorites',
+      name: 'Favorites',
+      component: Favorites
+    },
+    {
+      path: '/profile/:id',
+      name: 'Profile',
+      component: MyPage
+    },
+    {
+      path: '/news',
+      name: 'News',
+      component: News
+    },
+    {
+      path: '/top',
+      name: 'Top',
+      component: Top
     }
   ]
 })
