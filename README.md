@@ -51,12 +51,14 @@ For a detailed explanation on how things work, check out the [guide](http://vuej
 3. Most active following people
 
 ### Favorites
-1. Popular tags
+1. User's favorite tags 
 
 ### Top
+1. Popular tags
 
 ### Get question
-1. Recommended
+1. Recommended followers
+2. Choice of best tag
 
 ### Login component / Login page
 
