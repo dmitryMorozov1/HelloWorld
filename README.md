@@ -55,6 +55,7 @@ For a detailed explanation on how things work, check out the [guide](http://vuej
 
 ### Top
 1. Popular tags
+2. Choosing time of posts
 
 ### Get question
 1. Recommended followers
