@@ -24,10 +24,14 @@ For a detailed explanation on how things work, check out the [guide](http://vuej
 ## Components
 
 > `first` - this component designed and you can take this
+>
 > **second** - this component in progress
+>
 > ~~third~~ - this component already done
+>
 > If you want to make component, write me at first, please. 
-> Header of each part is component too
+>
+> P.S. header of each part is component too
 
 ### Main 
 1. **Header**
