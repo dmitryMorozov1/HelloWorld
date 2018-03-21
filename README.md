@@ -34,7 +34,7 @@ For a detailed explanation on how things work, check out the [guide](http://vuej
 > P.S. header of each part is component too
 
 ### Main 
-1. **Header**
+1. ~~Header~~
 2. Notifications
 3. Create question
 4. `Question component`
