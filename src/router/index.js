@@ -5,6 +5,7 @@ import Main from '@/components/Main/Main'
 import MyPage from '@/components/My_page/My_page'
 import News from '@/components/News/News'
 import Top from '@/components/Top/Top'
+import Error404 from '@/components/Main/404'
 
 Vue.use(Router)
 
@@ -35,6 +36,11 @@ export default new Router({
       path: '/top',
       name: 'Top',
       component: Top
+    },
+    {
+      path: '/*',
+      name: '404',
+      component: Error404
     }
   ]
 })
