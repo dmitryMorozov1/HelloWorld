@@ -1,9 +1,9 @@
 <template>
   <v-app id="app">
     <main-header></main-header>
-    <v-container>
+    <transition>
       <router-view/>
-    </v-container>
+    </transition>
   </v-app>
 </template>
 
@@ -14,18 +14,18 @@ export default {
   name: 'App',
   data () {
     return {
-
+      tab: ''
     }
   },
   components: {
-    'main-header' : header
+    'main-header': header
   }
-  
 }
 </script>
 
 <style>
-body {
+#app {
+  background-color: #C6D7E9;
   height: 1000px;
 }
 </style>
