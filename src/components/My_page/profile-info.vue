@@ -1,12 +1,14 @@
 <template>
 <div class="profileInfo">
-   <img v-bind:src="profileInfo.avatar" class="profilePhoto">
+   <img v-bind:src="profileInfo.avatar" id="Photo" class="profilePhoto"
+        onclick="this.style.width=document.body.clientWidth+'px'"
+        onmouseout="this.style.width=100+'%'">
    <div class="profileName" align="left">{{profileInfo.name}}</div>
    <div class="ageAndSex" align="left" style="color:#808080">{{profileInfo.age}} лет, {{profileInfo.sex===1? "М" : "Ж"}}</div>
    <div class="links">
      <v-tooltip bottom>
        <span slot="activator">
-         <a v-bind:href="profileInfo.social.facebook" class="link">
+         <a v-bind:href="profileInfo.social.facebook" target="_blank" class="link">
            <img v-bind:src="'./static/facebook.png'" class="linkImage">
          </a>
        </span>
@@ -15,7 +17,7 @@
 
      <v-tooltip bottom>
        <span slot="activator">
-        <a v-bind:href="profileInfo.social.vk" class="link">
+        <a v-bind:href="profileInfo.social.vk" target="_blank" class="link">
           <img v-bind:src="'./static/facebook.png'" class="linkImage">
         </a>
        </span>
@@ -24,7 +26,7 @@
 
      <v-tooltip bottom>
        <span slot="activator">
-        <a v-bind:href="profileInfo.social.twitter" class="link">
+        <a v-bind:href="profileInfo.social.twitter" target="_blank" class="link">
           <img v-bind:src="'./static/facebook.png'" class="linkImage">
         </a>
        </span>
@@ -33,7 +35,7 @@
 
      <v-tooltip bottom>
        <span slot="activator">
-        <a v-bind:href="profileInfo.social.ok" class="link">
+        <a v-bind:href="profileInfo.social.ok" target="_blank" class="link">
           <img v-bind:src="'./static/facebook.png'" class="linkImage">
         </a>
        </span>
@@ -42,7 +44,7 @@
 
      <v-tooltip bottom>
        <span slot="activator">
-        <a v-bind:href="profileInfo.social.telegram" class="link">
+        <a v-bind:href="profileInfo.social.telegram" target="_blank" class="link">
           <img v-bind:src="'./static/facebook.png'" class="linkImage">
         </a>
        </span>
@@ -139,6 +141,19 @@
       }
     },
     methods: {
+      /*
+      changePhotoSize:()=>{
+       let phase=0;
+       let photo=this.$el.getElementsByClassName("profilePhoto")[0];
+       if (phase===0){
+         photo.width=document.body.clientWidth+'px';
+         phase=1;
+       }
+       else{
+         photo.width=100+'%';
+         phase=0;
+       }
+      }*/
     },
     props: ['profileInfo'],
     /**
@@ -147,12 +162,15 @@
      * At least window.location.href -- is never used by me
     * */
     mounted(){
+      /*let photo=this.$el.getElementsByClassName("profilePhoto")[0];
+      photo.onclick=this.changePhotoSize();*/
       /*localhost:8080/profile/1*/
       let headers = new Headers();
       let options = { method: 'POST',
                       headers: headers,
                       mode: 'cors',
-                      cache: 'default' };
+                      cache: 'default'
+                    };
       let profileUrl=window.location.href;
       fetch(profileUrl, options)
             .then(function(response){
@@ -255,4 +273,7 @@
   .questions,.shows,.answers{
     margin-bottom: 15px;
   }
+
+
+
 </style>
