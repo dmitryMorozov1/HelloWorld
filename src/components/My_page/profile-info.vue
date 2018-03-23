@@ -4,11 +4,50 @@
    <div class="profileName" align="left">{{profileInfo.name}}</div>
    <div class="ageAndSex" align="left" style="color:#808080">{{profileInfo.age}} лет, {{profileInfo.sex===1? "М" : "Ж"}}</div>
    <div class="links">
-     <a v-bind:href="profileInfo.social.facebook" class="link"><img v-bind:src="'./static/facebook.png'" class="linkImage"></a>
-     <a v-bind:href="profileInfo.social.vk" class="link"><img v-bind:src="'./static/facebook.png'" class="linkImage"></a>
-     <a v-bind:href="profileInfo.social.twitter" class="link"><img v-bind:src="'./static/facebook.png'" class="linkImage"></a>
-     <a v-bind:href="profileInfo.social.ok" class="link"><img v-bind:src="'./static/facebook.png'" class="linkImage"></a>
-     <a v-bind:href="profileInfo.social.telegram" class="link"><img v-bind:src="'./static/facebook.png'" class="linkImage"></a>
+     <v-tooltip bottom>
+       <span slot="activator">
+         <a v-bind:href="profileInfo.social.facebook" class="link">
+           <img v-bind:src="'./static/facebook.png'" class="linkImage">
+         </a>
+       </span>
+       <span>{{profileInfo.social.facebook}}</span>
+     </v-tooltip>
+
+     <v-tooltip bottom>
+       <span slot="activator">
+        <a v-bind:href="profileInfo.social.vk" class="link">
+          <img v-bind:src="'./static/facebook.png'" class="linkImage">
+        </a>
+       </span>
+       <span>{{profileInfo.social.vk}}</span>
+     </v-tooltip>
+
+     <v-tooltip bottom>
+       <span slot="activator">
+        <a v-bind:href="profileInfo.social.twitter" class="link">
+          <img v-bind:src="'./static/facebook.png'" class="linkImage">
+        </a>
+       </span>
+       <span>{{profileInfo.social.twitter}}</span>
+     </v-tooltip>
+
+     <v-tooltip bottom>
+       <span slot="activator">
+        <a v-bind:href="profileInfo.social.ok" class="link">
+          <img v-bind:src="'./static/facebook.png'" class="linkImage">
+        </a>
+       </span>
+       <span>{{profileInfo.social.ok}}</span>
+     </v-tooltip>
+
+     <v-tooltip bottom>
+       <span slot="activator">
+        <a v-bind:href="profileInfo.social.telegram" class="link">
+          <img v-bind:src="'./static/facebook.png'" class="linkImage">
+        </a>
+       </span>
+       <span>{{profileInfo.social.telegram}}</span>
+     </v-tooltip>
    </div>
   <div class="about" align="left">О себе</div>
   <div class="aboutMe" align="left" style="color:#808080">{{profileInfo.about}}</div>
