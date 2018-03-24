@@ -1,13 +1,13 @@
 <template>
   <v-app>
-    <v-container fluid class="profileInfo">
+    <v-container fluid class="profileInfo elevation-5 pa-2">
       <v-content class="mb-3 elevation-5 block" >
         <v-container fluid>
           <img v-bind:src="profileInfo.avatar" id="Photo" class="profilePhoto elevation-3"
                onclick="this.style.width = document.body.clientWidth+'px'"
                onmouseout="this.style.width = 100+'%'">
-          <p class="profileName text-md-left" align="left">{{profileInfo.name}}</p>
-          <div class="ageAndSex " align="left" style="color:#808080">{{profileInfo.age}} лет,
+          <p class="profileName text-xs-left">{{profileInfo.name}}</p>
+          <div class="ageAndSex text-xs-left" style="color:#808080">{{profileInfo.age}} лет,
             {{profileInfo.sex}}
           </div>
           <v-container class="links">
@@ -56,29 +56,29 @@
                <span>{{profileInfo.social.telegram}}</span>
               </v-tooltip>
             </v-container>
-            <p class="about text-md-left">О себе</p>
-            <p class="aboutMe text-lg-left" style="color:#808080">{{profileInfo.about}}</p>
+            <p class="about text-xs-left heading">О себе</p>
+            <p class="aboutMe text-xs-left" style="color:#808080">{{profileInfo.about}}</p>
           </v-container>
       </v-content>
 
       <v-content class="mb-3 elevation-5 block">
         <v-container fluid>
           <div class="stats-wrapper">
-            <p class="statistics text-md-left" align="left" style="margin-bottom: 5px;">
+            <p class="statistics text-xs-left heading" align="left" style="margin-bottom: 5px;">
               Статистика
             </p>
-            <div class="stats-wrapper-row">
-              <div class="stats-wrapper-column">
-                <div class="questions stats">Вопросы <p>{{profileInfo.stats.questions}}</p></div>
-                <div class="likes stats">Лайки <p>{{profileInfo.stats.likes}}</p></div>
+            <div class="stats-wrapper-row mb-2">
+              <div class="stats-wrapper-column mr-2">
+                <div class="questions stats pa-1 mb-2">Вопросы <p>{{profileInfo.stats.questions}}</p></div>
+                <div class="likes stats pa-1">Лайки <p>{{profileInfo.stats.likes}}</p></div>
               </div>
-              <div class="stats-wrapper-column">
-                <div class="shows stats">Показы <p>{{profileInfo.stats.shows}}</p></div>
-                <div class="rating stats">Рейтинг <p>{{profileInfo.stats.rating}}</p></div>
+              <div class="stats-wrapper-column mr-2">
+                <div class="shows stats pa-1 mb-2">Показы <p>{{profileInfo.stats.shows}}</p></div>
+                <div class="rating stats pa-1">Рейтинг <p>{{profileInfo.stats.rating}}</p></div>
               </div>
-              <div class="stats-wrapper-column">
-                <div class="answers stats">Ответы <p>{{profileInfo.stats.answers}}</p></div>
-                <div class="dislikes stats">Дизлайки <p>{{profileInfo.stats.dislikes}}</p></div>
+              <div class="stats-wrapper-column mr-2">
+                <div class="answers stats pa-1 mb-2">Ответы <p>{{profileInfo.stats.answers}}</p></div>
+                <div class="dislikes stats pa-1">Дизлайки <p>{{profileInfo.stats.dislikes}}</p></div>
               </div>
             </div>
           </div>
@@ -86,15 +86,15 @@
       </v-content>
       <v-content class="elevation-5 block">
         <v-container fluid>
-          <p class="achievements text-md-left" align="left">Достижения</p>
+          <p class="achievements text-xs-left heading" align="left">Достижения</p>
           <div class="achievements-wrapper">
-            <img v-bind:src="profileInfo.achievements.achievement1.url" class="achievement">
-            <img v-bind:src="profileInfo.achievements.achievement2.url" class="achievement">
-            <img v-bind:src="profileInfo.achievements.achievement3.url" class="achievement">
-            <img v-bind:src="profileInfo.achievements.achievement4.url" class="achievement">
-            <img v-bind:src="profileInfo.achievements.achievement5.url" class="achievement">
-            <img v-bind:src="profileInfo.achievements.achievement6.url" class="achievement">
-            <img v-bind:src="profileInfo.achievements.achievement7.url" class="achievement">
+            <img v-bind:src="profileInfo.achievements.achievement1.url" class="ma-1 achievement">
+            <img v-bind:src="profileInfo.achievements.achievement2.url" class="ma-1 achievement">
+            <img v-bind:src="profileInfo.achievements.achievement3.url" class="ma-1 achievement">
+            <img v-bind:src="profileInfo.achievements.achievement4.url" class="ma-1 achievement">
+            <img v-bind:src="profileInfo.achievements.achievement5.url" class="ma-1 achievement">
+            <img v-bind:src="profileInfo.achievements.achievement6.url" class="ma-1 achievement">
+            <img v-bind:src="profileInfo.achievements.achievement7.url" class="ma-1 achievement">
           </div>
         </v-container>
       </v-content>
@@ -208,9 +208,7 @@
 <style scoped>
   .profileInfo {
     background-color: #c6d7e9;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
     width: 40%;
-    padding: 10px;
     display: flex;
     flex-direction: column;
     border-radius: 2px;
@@ -220,12 +218,10 @@
     border-radius: 5px;
     height: 50%;
   }
-
   .links {
     display: flex;
     flex-direction: row;
-    width: 40%;
-    height: 40%;
+    width: 45%;
     margin-left: 0px;
     padding: 0px;
   }
@@ -233,21 +229,15 @@
   .stats-wrapper-row {
     display: flex;
     flex-direction: row;
-    margin-bottom: 3px;
-    cursor: default;
   }
 
   .stats {
     margin: 0px;
     border: 1px solid #808080;
     border-radius: 5px;
-    padding: 1px 1px 5px 1px;
     color: #808080;
     width: 100%;
     height: 100%;
-    word-wrap: break-word;
-    float: left;
-    cursor: default;
     vertical-align: top;
   }
 
@@ -259,16 +249,10 @@
   .achievement {
     width: 10%;
     height: 10%;
-    margin: 2px;
   }
-
-
-
   .linkImage {
     width: 100%;
     height: 100%;
-    margin-left: 0px;
-    margin-right: 0px;
   }
 
   .stats-wrapper-column {
@@ -276,19 +260,31 @@
     flex-direction: column;
     width: 33%;
     margin-left: 0px;
-    margin-right: 20px;
-    cursor: default;
   }
-
-  .questions, .shows, .answers {
-    margin-bottom: 15px;
-  }
-
   p {
     margin-bottom: 0px;
   }
   .block{
        background-color: #fafafa !important;
+       border-radius: 5px;
   }
-
+  /*Fonts*/
+  .profileName,.ageAndSex,.heading,.aboutMe,.stats-wrapper{
+    font-family: 'Roboto', sans-serif;
+  }
+  .profileName {
+    font-size: 20px;
+  }
+  .ageAndSex{
+    font-size:16px;
+  }
+  .heading{
+    font-size:18px;
+  }
+  .aboutMe{
+    font-size:14px;
+  }
+  .stats-wrapper{
+    font-size:14px;
+  }
 </style>
