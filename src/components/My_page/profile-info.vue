@@ -6,7 +6,7 @@
           <img v-bind:src="profileInfo.avatar" id="Photo" class="profilePhoto elevation-3"
                onclick="this.style.width = document.body.clientWidth+'px'"
                onmouseout="this.style.width = 100+'%'">
-          <p class="profileName text-md-right" align="left">{{profileInfo.name}}</p>
+          <p class="profileName text-md-left" align="left">{{profileInfo.name}}</p>
           <div class="ageAndSex " align="left" style="color:#808080">{{profileInfo.age}} лет,
             {{profileInfo.sex}}
           </div>
@@ -56,15 +56,15 @@
                <span>{{profileInfo.social.telegram}}</span>
               </v-tooltip>
             </v-container>
-            <p class="about text-md-right" align="left">О себе</p>
-            <p class="aboutMe text-lg-right" align="left" style="color:#808080">{{profileInfo.about}}</p>
+            <p class="about text-md-left">О себе</p>
+            <p class="aboutMe text-lg-left" style="color:#808080">{{profileInfo.about}}</p>
           </v-container>
       </v-content>
 
       <v-content class="mb-3 elevation-5 block">
         <v-container fluid>
           <div class="stats-wrapper">
-            <p class="statistics text-md-right" align="left" style="margin-bottom: 5px;">
+            <p class="statistics text-md-left" align="left" style="margin-bottom: 5px;">
               Статистика
             </p>
             <div class="stats-wrapper-row">
@@ -86,7 +86,7 @@
       </v-content>
       <v-content class="elevation-5 block">
         <v-container fluid>
-          <p class="achievements text-md-right" align="left">Достижения</p>
+          <p class="achievements text-md-left" align="left">Достижения</p>
           <div class="achievements-wrapper">
             <img v-bind:src="profileInfo.achievements.achievement1.url" class="achievement">
             <img v-bind:src="profileInfo.achievements.achievement2.url" class="achievement">
