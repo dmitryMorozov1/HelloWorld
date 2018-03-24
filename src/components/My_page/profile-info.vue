@@ -1,90 +1,105 @@
 <template>
-  <div class="profileInfo">
-    <img v-bind:src="profileInfo.avatar" id="Photo" class="profilePhoto elevation-3"
-         onclick="this.style.width = document.body.clientWidth+'px'"
-         onmouseout="this.style.width = 100+'%'">
-    <div class="profileName display-2" align="left">{{profileInfo.name}}</div>
-    <div class="ageAndSex" align="left" style="color:#808080">{{profileInfo.age}} лет,
-      {{profileInfo.sex === 1? "М" : "Ж"}}
-    </div>
-    <div class="links">
-      <v-tooltip bottom>
-     <span slot="activator">
-       <a v-bind:href="profileInfo.social.facebook" target="_blank" class="link">
-         <img v-bind:src="'./static/facebook.png'" class="linkImage">
-       </a>
-     </span>
-        <span>{{profileInfo.social.facebook}}</span>
-      </v-tooltip>
+  <v-app>
+    <v-container fluid class="profileInfo">
+      <v-content class="mb-3 elevation-5 block" >
+        <v-container fluid>
+          <img v-bind:src="profileInfo.avatar" id="Photo" class="profilePhoto elevation-3"
+               onclick="this.style.width = document.body.clientWidth+'px'"
+               onmouseout="this.style.width = 100+'%'">
+          <p class="profileName text-md-right" align="left">{{profileInfo.name}}</p>
+          <div class="ageAndSex " align="left" style="color:#808080">{{profileInfo.age}} лет,
+            {{profileInfo.sex}}
+          </div>
+          <v-container class="links">
+              <v-tooltip bottom>
+                <span slot="activator">
+                  <a v-bind:href="profileInfo.social.facebook" target="_blank" class="link">
+                   <img v-bind:src="'./static/facebook.png'" class="linkImage">
+                  </a>
+                </span>
+                <span>{{profileInfo.social.facebook}}</span>
+              </v-tooltip>
 
-      <v-tooltip bottom>
-     <span slot="activator">
-      <a v-bind:href="profileInfo.social.vk" target="_blank" class="link">
-        <img v-bind:src="'./static/facebook.png'" class="linkImage">
-      </a>
-     </span>
-        <span>{{profileInfo.social.vk}}</span>
-      </v-tooltip>
+              <v-tooltip bottom>
+               <span slot="activator">
+                 <a v-bind:href="profileInfo.social.vk" target="_blank" class="link">
+                   <img v-bind:src="'./static/facebook.png'" class="linkImage">
+                 </a>
+               </span>
+               <span>{{profileInfo.social.vk}}</span>
+              </v-tooltip>
 
-      <v-tooltip bottom>
-     <span slot="activator">
-      <a v-bind:href="profileInfo.social.twitter" target="_blank" class="link">
-        <img v-bind:src="'./static/facebook.png'" class="linkImage">
-      </a>
-     </span>
-        <span>{{profileInfo.social.twitter}}</span>
-      </v-tooltip>
+              <v-tooltip bottom>
+               <span slot="activator">
+                <a v-bind:href="profileInfo.social.twitter" target="_blank" class="link">
+                  <img v-bind:src="'./static/facebook.png'" class="linkImage">
+                </a>
+               </span>
+               <span>{{profileInfo.social.twitter}}</span>
+              </v-tooltip>
 
-      <v-tooltip bottom>
-     <span slot="activator">
-      <a v-bind:href="profileInfo.social.ok" target="_blank" class="link">
-        <img v-bind:src="'./static/facebook.png'" class="linkImage">
-      </a>
-     </span>
-        <span>{{profileInfo.social.ok}}</span>
-      </v-tooltip>
+              <v-tooltip bottom>
+               <span slot="activator">
+                <a v-bind:href="profileInfo.social.ok" target="_blank" class="link">
+                  <img v-bind:src="'./static/facebook.png'" class="linkImage">
+                </a>
+               </span>
+               <span>{{profileInfo.social.ok}}</span>
+              </v-tooltip>
 
-      <v-tooltip bottom>
-     <span slot="activator">
-      <a v-bind:href="profileInfo.social.telegram" target="_blank" class="link">
-        <img v-bind:src="'./static/facebook.png'" class="linkImage">
-      </a>
-     </span>
-        <span>{{profileInfo.social.telegram}}</span>
-      </v-tooltip>
-    </div>
-    <div class="about display-1" align="left">О себе</div>
-    <div class="aboutMe" align="left" style="color:#808080">{{profileInfo.about}}</div>
-    <div class="stats-wrapper">
-      <div class="statistics display-1" align="left" style="margin-bottom: 5px;">
-        Статистика
-      </div>
-      <div class="stats-wrapper-row">
-        <div class="stats-wrapper-column">
-          <div class="questions stats">Вопросы <p>{{profileInfo.stats.questions}}</p></div>
-          <div class="likes stats">Лайки <p>{{profileInfo.stats.likes}}</p></div>
-        </div>
-        <div class="stats-wrapper-column">
-          <div class="shows stats">Показы <p>{{profileInfo.stats.shows}}</p></div>
-          <div class="rating stats">Рейтинг <p>{{profileInfo.stats.rating}}</p></div>
-        </div>
-        <div class="stats-wrapper-column">
-          <div class="answers stats">Ответы <p>{{profileInfo.stats.answers}}</p></div>
-          <div class="dislikes stats">Дизлайки <p>{{profileInfo.stats.dislikes}}</p></div>
-        </div>
-      </div>
-    </div>
-    <div class="achievements display-1" align="left">Достижения</div>
-    <div class="achievements-wrapper">
-      <img v-bind:src="profileInfo.achievements.achievement1.url" class="achievement">
-      <img v-bind:src="profileInfo.achievements.achievement2.url" class="achievement">
-      <img v-bind:src="profileInfo.achievements.achievement3.url" class="achievement">
-      <img v-bind:src="profileInfo.achievements.achievement4.url" class="achievement">
-      <img v-bind:src="profileInfo.achievements.achievement5.url" class="achievement">
-      <img v-bind:src="profileInfo.achievements.achievement6.url" class="achievement">
-      <img v-bind:src="profileInfo.achievements.achievement7.url" class="achievement">
-    </div>
-  </div>
+              <v-tooltip bottom>
+               <span slot="activator">
+                <a v-bind:href="profileInfo.social.telegram" target="_blank" class="link">
+                  <img v-bind:src="'./static/facebook.png'" class="linkImage">
+                </a>
+               </span>
+               <span>{{profileInfo.social.telegram}}</span>
+              </v-tooltip>
+            </v-container>
+            <p class="about text-md-right" align="left">О себе</p>
+            <p class="aboutMe text-lg-right" align="left" style="color:#808080">{{profileInfo.about}}</p>
+          </v-container>
+      </v-content>
+
+      <v-content class="mb-3 elevation-5 block">
+        <v-container fluid>
+          <div class="stats-wrapper">
+            <p class="statistics text-md-right" align="left" style="margin-bottom: 5px;">
+              Статистика
+            </p>
+            <div class="stats-wrapper-row">
+              <div class="stats-wrapper-column">
+                <div class="questions stats">Вопросы <p>{{profileInfo.stats.questions}}</p></div>
+                <div class="likes stats">Лайки <p>{{profileInfo.stats.likes}}</p></div>
+              </div>
+              <div class="stats-wrapper-column">
+                <div class="shows stats">Показы <p>{{profileInfo.stats.shows}}</p></div>
+                <div class="rating stats">Рейтинг <p>{{profileInfo.stats.rating}}</p></div>
+              </div>
+              <div class="stats-wrapper-column">
+                <div class="answers stats">Ответы <p>{{profileInfo.stats.answers}}</p></div>
+                <div class="dislikes stats">Дизлайки <p>{{profileInfo.stats.dislikes}}</p></div>
+              </div>
+            </div>
+          </div>
+        </v-container>
+      </v-content>
+      <v-content class="elevation-5 block">
+        <v-container fluid>
+          <p class="achievements text-md-right" align="left">Достижения</p>
+          <div class="achievements-wrapper">
+            <img v-bind:src="profileInfo.achievements.achievement1.url" class="achievement">
+            <img v-bind:src="profileInfo.achievements.achievement2.url" class="achievement">
+            <img v-bind:src="profileInfo.achievements.achievement3.url" class="achievement">
+            <img v-bind:src="profileInfo.achievements.achievement4.url" class="achievement">
+            <img v-bind:src="profileInfo.achievements.achievement5.url" class="achievement">
+            <img v-bind:src="profileInfo.achievements.achievement6.url" class="achievement">
+            <img v-bind:src="profileInfo.achievements.achievement7.url" class="achievement">
+          </div>
+        </v-container>
+      </v-content>
+    </v-container>
+  </v-app>
 </template>
 
 <script>
@@ -93,56 +108,58 @@
     data() {
       return {
         profileInfo: {
-          id: "",
-          name: "",
-          sex: "",
-          age: "",
-          about: "",
-          avatar: "",
-          stats: {
-            questions: "",
-            shows: "",
-            answers: "",
-            likes: "",
-            rating: "",
-            dislikes: "",
+          id:"1",
+          name:"Елизавета Седова",
+          sex:"Ж",
+          age:"20",
+          about:"Студентка 3 курса национального исследовательского " +
+          "университета информационных технологий, механики и " +
+          "оптики",
+          avatar:"./static/profileImage.png",
+          stats:{
+            questions:"94",
+            shows:"123",
+            answers:"321",
+            likes:"94",
+            rating:"123",
+            dislikes:"321",
           },
-          achievements: {
-            achievement1: {
-              url: "",
-              name: ""
+          achievements:{
+            achievement1:{
+              url:"./static/facebook.png",
+              name:"name1"
             },
-            achievement2: {
-              url: "",
-              name: ""
+            achievement2:{
+              url:"./static/facebook.png",
+              name:"name2"
             },
-            achievement3: {
-              url: "",
-              name: ""
+            achievement3:{
+              url:"./static/facebook.png",
+              name:"name3"
             },
-            achievement4: {
-              url: "",
-              name: ""
+            achievement4:{
+              url:"./static/facebook.png",
+              name:"name4"
             },
-            achievement5: {
-              url: "",
-              name: ""
+            achievement5:{
+              url:"./static/facebook.png",
+              name:"name5"
             },
-            achievement6: {
-              url: "",
-              name: ""
+            achievement6:{
+              url:"./static/facebook.png",
+              name:"name6"
             },
-            achievement7: {
-              url: "",
-              name: ""
+            achievement7:{
+              url:"./static/facebook.png",
+              name:"name7"
             },
           },
-          social: {
-            facebook: "",
-            vk: "",
-            twitter: "",
-            ok: "",
-            telegram: ""
+          social:{
+            facebook:"https://vk.com/id224332750",
+            vk:"https://vk.com/id224332750",
+            twitter:"https://vk.com/id224332750",
+            ok:"https://vk.com/id224332750",
+            telegram:"https://vk.com/id224332750"
           },
         }
       }
@@ -158,6 +175,7 @@
       /*let photo=this.$el.getElementsByClassName("profilePhoto")[0];
       photo.onclick=this.changePhotoSize();*/
       /*localhost:8080/profile/1*/
+      /*
       let headers = new Headers();
       let options = {
         method: 'POST',
@@ -170,7 +188,18 @@
       fetch(profileUrl, options)
         .then(function (response) {
           this.profileInfo = response.body;
-        })
+          switch (profileInfo.sex){
+            case 1:
+                  profileInfo.sex="М";
+                  break;
+            case 2:
+                  profileInfo.sex="Ж";
+                  break;
+            default:
+                  profileInfo.sex="Не указан";
+                  break;
+          }
+        })*/
     }
 
   }
@@ -178,7 +207,7 @@
 
 <style scoped>
   .profileInfo {
-    background-color: #fafafa;
+    background-color: #c6d7e9;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
     width: 40%;
     padding: 10px;
@@ -188,9 +217,7 @@
   }
 
   .profilePhoto {
-    /*box-shadow: 0 0 10px rgba(0,0,0,0.5);*/
     border-radius: 5px;
-    width: 100%;
     height: 50%;
   }
 
@@ -203,17 +230,10 @@
     padding: 0px;
   }
 
-  .stats-wrapper {
-    display: flex;
-    flex-direction: column;
-    padding: 0px;
-    cursor: default;
-  }
-
   .stats-wrapper-row {
     display: flex;
     flex-direction: row;
-    margin-bottom: 5px;
+    margin-bottom: 3px;
     cursor: default;
   }
 
@@ -242,10 +262,7 @@
     margin: 2px;
   }
 
-  .about, .profileName, .statistics, .achievements {
-    font-weight: bold;
-    font-size: larger;
-  }
+
 
   .linkImage {
     width: 100%;
@@ -254,19 +271,12 @@
     margin-right: 0px;
   }
 
-  .link {
-    margin-left: 0px;
-    margin-right: 1px;
-    width: 100%;
-    height: 100%;
-  }
-
   .stats-wrapper-column {
     display: flex;
     flex-direction: column;
-    width: 32%;
+    width: 33%;
     margin-left: 0px;
-    margin-right: 5px;
+    margin-right: 20px;
     cursor: default;
   }
 
@@ -276,6 +286,9 @@
 
   p {
     margin-bottom: 0px;
+  }
+  .block{
+       background-color: #fafafa !important;
   }
 
 </style>
