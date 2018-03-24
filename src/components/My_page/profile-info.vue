@@ -203,11 +203,12 @@
   .achievements-wrapper {
     display: flex;
     flex-direction: row;
+    padding: 0px;
   }
 
   .achievement {
-    width: 10%;
-    height: 10%;
+    width: 12%;
+    height: 12%;
   }
   .linkImage {
     width: 100%;
