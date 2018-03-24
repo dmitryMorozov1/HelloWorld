@@ -11,56 +11,19 @@
             {{profileInfo.sex}}
           </div>
           <v-container class="links">
-              <v-tooltip bottom>
-                <span slot="activator">
-                  <a v-bind:href="profileInfo.social.facebook" target="_blank" class="link">
+            <v-tooltip bottom v-for="link in profileInfo.social">
+               <span slot="activator">
+                  <a v-bind:href="link" target="_blank" class="link">
                    <img v-bind:src="'./static/facebook.png'" class="linkImage">
                   </a>
                 </span>
-                <span>{{profileInfo.social.facebook}}</span>
-              </v-tooltip>
-
-              <v-tooltip bottom>
-               <span slot="activator">
-                 <a v-bind:href="profileInfo.social.vk" target="_blank" class="link">
-                   <img v-bind:src="'./static/facebook.png'" class="linkImage">
-                 </a>
-               </span>
-               <span>{{profileInfo.social.vk}}</span>
-              </v-tooltip>
-
-              <v-tooltip bottom>
-               <span slot="activator">
-                <a v-bind:href="profileInfo.social.twitter" target="_blank" class="link">
-                  <img v-bind:src="'./static/facebook.png'" class="linkImage">
-                </a>
-               </span>
-               <span>{{profileInfo.social.twitter}}</span>
-              </v-tooltip>
-
-              <v-tooltip bottom>
-               <span slot="activator">
-                <a v-bind:href="profileInfo.social.ok" target="_blank" class="link">
-                  <img v-bind:src="'./static/facebook.png'" class="linkImage">
-                </a>
-               </span>
-               <span>{{profileInfo.social.ok}}</span>
-              </v-tooltip>
-
-              <v-tooltip bottom>
-               <span slot="activator">
-                <a v-bind:href="profileInfo.social.telegram" target="_blank" class="link">
-                  <img v-bind:src="'./static/facebook.png'" class="linkImage">
-                </a>
-               </span>
-               <span>{{profileInfo.social.telegram}}</span>
-              </v-tooltip>
-            </v-container>
-            <p class="about text-xs-left heading">О себе</p>
-            <p class="aboutMe text-xs-left" style="color:#808080">{{profileInfo.about}}</p>
+              <span>{{link}}</span>
+            </v-tooltip>
           </v-container>
+          <p class="about text-xs-left heading">О себе</p>
+          <p class="aboutMe text-xs-left" style="color:#808080">{{profileInfo.about}}</p>
+        </v-container>
       </v-content>
-
       <v-content class="mb-3 elevation-5 block">
         <v-container fluid>
           <div class="stats-wrapper">
@@ -87,15 +50,9 @@
       <v-content class="elevation-5 block">
         <v-container fluid>
           <p class="achievements text-xs-left heading" align="left">Достижения</p>
-          <div class="achievements-wrapper">
-            <img v-bind:src="profileInfo.achievements.achievement1.url" class="ma-1 achievement">
-            <img v-bind:src="profileInfo.achievements.achievement2.url" class="ma-1 achievement">
-            <img v-bind:src="profileInfo.achievements.achievement3.url" class="ma-1 achievement">
-            <img v-bind:src="profileInfo.achievements.achievement4.url" class="ma-1 achievement">
-            <img v-bind:src="profileInfo.achievements.achievement5.url" class="ma-1 achievement">
-            <img v-bind:src="profileInfo.achievements.achievement6.url" class="ma-1 achievement">
-            <img v-bind:src="profileInfo.achievements.achievement7.url" class="ma-1 achievement">
-          </div>
+          <v-container class="achievements-wrapper left">
+            <img v-for="achievment in profileInfo.achievements" class="ma-1 achievement" v-bind:src="achievment.url">
+          </v-container>
         </v-container>
       </v-content>
     </v-container>
@@ -108,59 +65,6 @@
     data() {
       return {
         profileInfo: {
-          id:"1",
-          name:"Елизавета Седова",
-          sex:"Ж",
-          age:"20",
-          about:"Студентка 3 курса национального исследовательского " +
-          "университета информационных технологий, механики и " +
-          "оптики",
-          avatar:"./static/profileImage.png",
-          stats:{
-            questions:"94",
-            shows:"123",
-            answers:"321",
-            likes:"94",
-            rating:"123",
-            dislikes:"321",
-          },
-          achievements:{
-            achievement1:{
-              url:"./static/facebook.png",
-              name:"name1"
-            },
-            achievement2:{
-              url:"./static/facebook.png",
-              name:"name2"
-            },
-            achievement3:{
-              url:"./static/facebook.png",
-              name:"name3"
-            },
-            achievement4:{
-              url:"./static/facebook.png",
-              name:"name4"
-            },
-            achievement5:{
-              url:"./static/facebook.png",
-              name:"name5"
-            },
-            achievement6:{
-              url:"./static/facebook.png",
-              name:"name6"
-            },
-            achievement7:{
-              url:"./static/facebook.png",
-              name:"name7"
-            },
-          },
-          social:{
-            facebook:"https://vk.com/id224332750",
-            vk:"https://vk.com/id224332750",
-            twitter:"https://vk.com/id224332750",
-            ok:"https://vk.com/id224332750",
-            telegram:"https://vk.com/id224332750"
-          },
         }
       }
     },
@@ -172,6 +76,61 @@
      * At least window.location.href -- is never used by me
      * */
     mounted() {
+      this.profileInfo={
+        id:"1",
+        name:"Елизавета Седова",
+        sex:"Ж",
+        age:"20",
+        about:"Студентка 3 курса национального исследовательского " +
+        "университета информационных технологий, механики и " +
+        "оптики",
+        avatar:"./static/profileImage.png",
+        stats:{
+          questions:"94",
+          shows:"123",
+          answers:"321",
+          likes:"94",
+          rating:"123",
+          dislikes:"321",
+        },
+        achievements:{
+          achievement1:{
+            url:"./static/facebook.png",
+            name:"name1"
+          },
+          achievement2:{
+            url:"./static/facebook.png",
+            name:"name2"
+          },
+          achievement3:{
+            url:"./static/facebook.png",
+            name:"name3"
+          },
+          achievement4:{
+            url:"./static/facebook.png",
+            name:"name4"
+          },
+          achievement5:{
+            url:"./static/facebook.png",
+            name:"name5"
+          },
+          achievement6:{
+            url:"./static/facebook.png",
+            name:"name6"
+          },
+          achievement7:{
+            url:"./static/facebook.png",
+            name:"name7"
+          },
+        },
+        social:{
+          facebook:"https://vk.com/id224332750",
+          vk:"https://vk.com/id224332750",
+          twitter:"https://vk.com/id224332750",
+          ok:"https://vk.com/id224332750",
+          telegram:"https://vk.com/id224332750"
+        },
+      }
       /*let photo=this.$el.getElementsByClassName("profilePhoto")[0];
       photo.onclick=this.changePhotoSize();*/
       /*localhost:8080/profile/1*/
@@ -196,7 +155,7 @@
                   profileInfo.sex="Ж";
                   break;
             default:
-                  profileInfo.sex="Не указан";
+                  profileInfo.sex="";
                   break;
           }
         })*/
@@ -276,15 +235,15 @@
     font-size: 20px;
   }
   .ageAndSex{
-    font-size:16px;
+    font-size: 16px;
   }
   .heading{
-    font-size:18px;
+    font-size: 18px;
   }
   .aboutMe{
-    font-size:14px;
+    font-size: 14px;
   }
   .stats-wrapper{
-    font-size:14px;
+    font-size: 14px;
   }
 </style>
