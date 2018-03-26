@@ -1,7 +1,6 @@
 <!-- 
 TODO:
 1) Одинаковые padding вне зависимости от заданной ширины
-2) При уменьшении увеличении окна скачет текст
 HELP:
 1 - В вьютифай есть какие то стандартные шаблоны - получается либо по-уродски, либо никак
    <v-btn-toggle v-model="text">, или позиционирование с помощью флексов и еще че то
@@ -10,13 +9,12 @@ HELP:
    при первой загрузке страницы, отображение слетает. Да и вообще не стоит доверять процентам
    в падинге
 1 - больше идей нет
-2 - даже не смотрел еще
 DONE:
 1) Реализован алгоритм сохранения вкладки на моей странице. Но убрал его, пока решли что не нужен
  -->
 
 <template>
-  <v-toolbar class="mini-header">
+  <v-toolbar height="54px" class="mini-header">
     <v-toolbar-items class="mini-toolbar" >
       <v-btn
           flat 
@@ -67,18 +65,11 @@ export default {
 
 <style scoped>
 .mini-header {
-  height: 54px;
-  /*---------*/
-  background-color: #fafafa;
-  min-height: 40px;
-  max-height: 64px;
   display: flex;
   flex-direction: column;
   border-radius: 2px;
 }
 .mini-header .mini-toolbar {
-  height: 54px; 
-  /*---------*/
   width: 100%;
 }
 .mini-header .mini-header-btn {
