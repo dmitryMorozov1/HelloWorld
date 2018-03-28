@@ -2,7 +2,7 @@
   <v-app id="app">
     <main-header></main-header>
     <transition>
-      <router-view/>
+      <router-view class="mt-5"/>
     </transition>
   </v-app>
 </template>
@@ -25,7 +25,6 @@ export default {
 
 <style>
 #app {
-  background-color: #C6D7E9;
-  height: 1000px;
+  background-color: #F7F7F7;
 }
 </style>
