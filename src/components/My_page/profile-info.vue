@@ -1,74 +1,74 @@
 <template>
   <v-app>
     <!--<v-container fluid class="profileInfo elevation-5 pa-2">-->
-      <v-content class="mb-3 elevation-5 block">
-        <v-container fluid>
-          <img v-bind:src="profileInfo.avatar" id="Photo" class="profilePhoto elevation-3"
-               onclick="this.style.width = document.body.clientWidth+'px'"
-               onmouseout="this.style.width = 100+'%'">
-          <p class="profileName text-xs-left">{{profileInfo.name}}</p>
-          <div class="ageAndSex text-xs-left" style="color:#808080">{{profileInfo.age}} лет,
-            {{profileInfo.sex}}
-          </div>
-          <div class="buttons">
-              <v-btn v-if="!profileInfo.you_following && !profileInfo.owns"
-                     class="follow elevation-5">Подписаться</v-btn>
-              <v-btn v-if="profileInfo.you_following && !profileInfo.owns"
-                     class="follow elevation-5" >Вы подписаны</v-btn>
-              <v-btn v-if="profileInfo.owns" class="follow elevation-5 ml-3">Редактировать</v-btn>
-              <v-btn class="options elevation-5"><p class="opt">...</p></v-btn>
-          </div>
-          <p class="follows" v-if="profileInfo.follows===true">Подписан(а) на вас</p>
-          <p class="about text-xs-left heading">О себе</p>
-          <p class="aboutMe text-xs-left" style="color:#808080">{{profileInfo.about}}</p>
-          <v-container class="links">
-            <v-tooltip bottom v-for="link in profileInfo.social">
+    <v-content class="mb-3 elevation-5 block">
+      <v-container fluid>
+        <img v-bind:src="profileInfo.avatar" id="Photo" class="profilePhoto elevation-3"
+             onclick="this.style.width = document.body.clientWidth+'px'"
+             onmouseout="this.style.width = 100+'%'">
+        <p class="profileName text-xs-left">{{profileInfo.name}}</p>
+        <div class="ageAndSex text-xs-left" style="color:#808080">{{profileInfo.age}} лет,
+          {{profileInfo.sex}}
+        </div>
+        <div class="buttons">
+          <v-btn v-if="!profileInfo.you_following && !profileInfo.owns"
+                 class="follow elevation-5">Подписаться</v-btn>
+          <v-btn v-if="profileInfo.you_following && !profileInfo.owns"
+                 class="follow elevation-5" >Вы подписаны</v-btn>
+          <v-btn v-if="profileInfo.owns" class="follow elevation-5 ml-3">Редактировать</v-btn>
+          <v-btn class="options elevation-5"><p class="opt">...</p></v-btn>
+        </div>
+        <p class="follows" v-if="profileInfo.follows===true">Подписан(а) на вас</p>
+        <p class="about text-xs-left heading">О себе</p>
+        <p class="aboutMe text-xs-left" style="color:#808080">{{profileInfo.about}}</p>
+        <v-container class="links mb-2">
+          <v-tooltip bottom v-for="link in profileInfo.social">
                <span slot="activator">
                   <a v-bind:href="link" target="_blank" class="link">
                    <img v-bind:src="'./static/facebook.png'" class="linkImage">
                   </a>
                 </span>
-              <span>{{link}}</span>
-            </v-tooltip>
-          </v-container>
+            <span>{{link}}</span>
+          </v-tooltip>
         </v-container>
-      </v-content>
-      <v-content class="mb-3 elevation-5 block">
-        <v-container fluid>
-          <div class="stats-wrapper">
-            <p class="statistics text-xs-left heading" align="left" style="margin-bottom: 5px;">
-              Статистика
-            </p>
-            <div class="stats-wrapper-row mb-2">
-              <div class="stats-wrapper-column mr-2">
-                <div class="questions stats pa-1 mb-2">Вопросы <p>
-                  {{profileInfo.stats.questions}}</p></div>
-                <div class="likes stats pa-1">Лайки <p>{{profileInfo.stats.likes}}</p></div>
+      </v-container>
+    </v-content>
+    <v-content class="mb-3 elevation-5 block">
+      <v-container fluid>
+        <div class="stats-wrapper">
+          <p class="statistics text-xs-left heading" align="left" style="margin-bottom: 5px;">
+            Статистика
+          </p>
+          <div class="stats-wrapper-row mb-2">
+            <div class="stats-wrapper-column mr-2">
+              <div class="questions stats pa-1 mb-2">Вопросы <p>
+                {{profileInfo.stats.questions}}</p></div>
+              <div class="likes stats pa-1">Лайки <p>{{profileInfo.stats.likes}}</p></div>
+            </div>
+            <div class="stats-wrapper-column mr-2">
+              <div class="shows stats pa-1 mb-2">Показы <p>{{profileInfo.stats.shows}}</p></div>
+              <div class="rating stats pa-1">Рейтинг <p>{{profileInfo.stats.rating}}</p></div>
+            </div>
+            <div class="stats-wrapper-column mr-2">
+              <div class="answers stats pa-1 mb-2">Ответы <p>{{profileInfo.stats.answers}}</p>
               </div>
-              <div class="stats-wrapper-column mr-2">
-                <div class="shows stats pa-1 mb-2">Показы <p>{{profileInfo.stats.shows}}</p></div>
-                <div class="rating stats pa-1">Рейтинг <p>{{profileInfo.stats.rating}}</p></div>
-              </div>
-              <div class="stats-wrapper-column mr-2">
-                <div class="answers stats pa-1 mb-2">Ответы <p>{{profileInfo.stats.answers}}</p>
-                </div>
-                <div class="dislikes stats pa-1">Дизлайки <p>{{profileInfo.stats.dislikes}}</p>
-                </div>
+              <div class="dislikes stats pa-1">Дизлайки <p>{{profileInfo.stats.dislikes}}</p>
               </div>
             </div>
           </div>
+        </div>
+      </v-container>
+    </v-content>
+    <v-content class="elevation-5 block mb-2">
+      <v-container fluid>
+        <p class="achievements text-xs-left heading" align="left">Достижения</p>
+        <v-container class="achievements-wrapper left">
+          <img v-for="achievment in profileInfo.achievements" class="ma-1 achievement"
+               v-bind:src="achievment.url">
         </v-container>
-      </v-content>
-      <v-content class="elevation-5 block">
-        <v-container fluid>
-          <p class="achievements text-xs-left heading" align="left">Достижения</p>
-          <v-container class="achievements-wrapper left">
-            <img v-for="achievment in profileInfo.achievements" class="ma-1 achievement"
-                 v-bind:src="achievment.url">
-          </v-container>
-        </v-container>
-      </v-content>
-   <!-- </v-container> -->
+      </v-container>
+    </v-content>
+    <!-- </v-container> -->
   </v-app>
 </template>
 
