@@ -1,6 +1,6 @@
 <template>
   <v-app>
-    <v-container fluid class="profileInfo elevation-5 pa-2">
+    <!--<v-container fluid class="profileInfo elevation-5 pa-2">-->
       <v-content class="mb-3 elevation-5 block">
         <v-container fluid>
           <img v-bind:src="profileInfo.avatar" id="Photo" class="profilePhoto elevation-3"
@@ -12,13 +12,11 @@
           </div>
           <div class="buttons">
               <v-btn v-if="!profileInfo.you_following && !profileInfo.owns"
-                     class="follow elevation-5 ml-3" right="true" small="true">Подписаться</v-btn>
+                     class="follow elevation-5">Подписаться</v-btn>
               <v-btn v-if="profileInfo.you_following && !profileInfo.owns"
-                     class="follow elevation-5 ml-3" right="true" small="true">Вы подписаны</v-btn>
-              <v-btn v-if="profileInfo.owns" class="follow elevation-5 ml-3" right="true"
-                     small="true">Редактировать</v-btn>
-              <v-btn class="options elevation-5 mr-3" left="true" small="true"
-                     block="true"><p class="opt">...</p></v-btn>
+                     class="follow elevation-5" >Вы подписаны</v-btn>
+              <v-btn v-if="profileInfo.owns" class="follow elevation-5 ml-3">Редактировать</v-btn>
+              <v-btn class="options elevation-5"><p class="opt">...</p></v-btn>
           </div>
           <p class="follows" v-if="profileInfo.follows===true">Подписан(а) на вас</p>
           <p class="about text-xs-left heading">О себе</p>
@@ -70,7 +68,7 @@
           </v-container>
         </v-container>
       </v-content>
-    </v-container>
+   <!-- </v-container> -->
   </v-app>
 </template>
 
@@ -89,7 +87,7 @@
      * !!! Should be tested
      * At least window.location.href -- is never used by me
      * */
-    mounted() {
+    created() {
       this.profileInfo = {
         id: "1",
         name: "Елизавета Седова",
@@ -201,6 +199,7 @@
     width: 45%;
     margin-left: 0px;
     padding: 0px;
+    float:right;
   }
 
   .stats-wrapper-row {
@@ -261,15 +260,18 @@
   }
   .options{
     background-color: #fafafa !important;
-    border-radius: 5px;
+    border-radius: 15px;
+    width:20%;
   }
   .follow{
     text-transform: none;
     background-color: #fafafa !important;
-    border-radius: 5px;
+    border-radius: 15px;
     margin-left: 0px;
     margin-right: 0px;
     font-weight: bold;
+    width:80%;
+
   }
   .follows{
     text-align: center;
