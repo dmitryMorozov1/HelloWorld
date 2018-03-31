@@ -1,73 +1,91 @@
 <template>
   <v-app>
     <!--<v-container fluid class="profileInfo elevation-5 pa-2">-->
-    <v-content class="mb-3 elevation-5 block">
-      <v-container fluid>
-        <img v-bind:src="profileInfo.avatar" id="Photo" class="profilePhoto elevation-3"
-             onclick="this.style.width = document.body.clientWidth+'px'"
-             onmouseout="this.style.width = 100+'%'">
+    <div class="mb-3 elevation-5 block">
+      <v-container fluid class="pt-3 pr-3 pl-3 pb-1">
+        <p class="pic" @click.stop="showAvatar = true"
+           @onmouseout.stop="showAvatar =false">
+          <img v-bind:src="profileInfo.avatar" id="Photo" align="center"
+               class="profilePhoto elevation-3">
+        </p>
+        <v-dialog v-model="showAvatar" max-width="50%">
+          <p style="text-align: center">
+            <img v-bind:src="profileInfo.avatar"
+                 class="" style="width: 100%; height: 100%;">
+          </p>
+        </v-dialog>
         <p class="profileName text-xs-left">{{profileInfo.name}}</p>
         <div class="ageAndSex text-xs-left" style="color:#808080">{{profileInfo.age}} лет,
           {{profileInfo.sex}}
         </div>
         <div class="buttons">
-          <v-btn v-if="!profileInfo.you_following && !profileInfo.owns"
-                 class="follow elevation-5">Подписаться</v-btn>
-          <v-btn v-if="profileInfo.you_following && !profileInfo.owns"
-                 class="follow elevation-5" >Вы подписаны</v-btn>
-          <v-btn v-if="profileInfo.owns" class="follow elevation-5 ml-3">Редактировать</v-btn>
-          <v-btn class="options elevation-5"><p class="opt">...</p></v-btn>
+          <v-btn color="grey lighten-2" round v-if="!profileInfo.you_following && !profileInfo.owns"
+                 class="follow elevation-5 pr-1 pl-1" block small>Подписаться
+          </v-btn>
+          <v-btn round v-if="profileInfo.you_following && !profileInfo.owns"
+                 class="following elevation-5" block small>Вы подписаны
+          </v-btn>
+          <v-btn round v-if="profileInfo.owns" class="edit elevation-5 ml-3"
+                 block small>Редактировать
+          </v-btn>
+          <v-btn round class="options elevation-5" small><i class="material-icons">more_horiz</i>
+          </v-btn>
         </div>
         <p class="follows" v-if="profileInfo.follows===true">Подписан(а) на вас</p>
         <p class="about text-xs-left heading">О себе</p>
         <p class="aboutMe text-xs-left" style="color:#808080">{{profileInfo.about}}</p>
-        <v-container class="links mb-2">
-          <v-tooltip bottom v-for="link in profileInfo.social">
+        <v-container class="links mb-0">
+          <v-tooltip bottom v-for="(link, index) in profileInfo.social">
                <span slot="activator">
                   <a v-bind:href="link" target="_blank" class="link">
-                   <img v-bind:src="'./static/facebook.png'" class="linkImage">
+                   <img v-bind:src="link.url" class="linkImage">
                   </a>
                 </span>
-            <span>{{link}}</span>
+            <span>{{link.url}}</span>
           </v-tooltip>
         </v-container>
       </v-container>
-    </v-content>
-    <v-content class="mb-3 elevation-5 block">
-      <v-container fluid>
+    </div>
+    <div class="mb-3 elevation-5 block">
+      <v-container fluid class="pb-0 pt-1 pr-1">
         <div class="stats-wrapper">
           <p class="statistics text-xs-left heading" align="left" style="margin-bottom: 5px;">
             Статистика
           </p>
           <div class="stats-wrapper-row mb-2">
             <div class="stats-wrapper-column mr-2">
-              <div class="questions stats pa-1 mb-2">Вопросы <p>
+              <div class="questions stats pa-0 mb-2" align="center">Вопросы <p>
                 {{profileInfo.stats.questions}}</p></div>
-              <div class="likes stats pa-1">Лайки <p>{{profileInfo.stats.likes}}</p></div>
-            </div>
-            <div class="stats-wrapper-column mr-2">
-              <div class="shows stats pa-1 mb-2">Показы <p>{{profileInfo.stats.shows}}</p></div>
-              <div class="rating stats pa-1">Рейтинг <p>{{profileInfo.stats.rating}}</p></div>
-            </div>
-            <div class="stats-wrapper-column mr-2">
-              <div class="answers stats pa-1 mb-2">Ответы <p>{{profileInfo.stats.answers}}</p>
+              <div class="likes stats pa-0" align="center">Лайки <p>{{profileInfo.stats.likes}}</p>
               </div>
-              <div class="dislikes stats pa-1">Дизлайки <p>{{profileInfo.stats.dislikes}}</p>
+            </div>
+            <div class="stats-wrapper-column mr-2">
+              <div class="shows stats pa-0 mb-2" align="center">Показы <p>
+                {{profileInfo.stats.shows}}</p></div>
+              <div class="rating stats pa-0" align="center">Рейтинг <p>
+                {{profileInfo.stats.rating}}</p></div>
+            </div>
+            <div class="stats-wrapper-column mr-2">
+              <div class="answers stats pa-0 mb-2" align="center">Ответы <p>
+                {{profileInfo.stats.answers}}</p>
+              </div>
+              <div class="dislikes stats pa-0" align="center">Дизлайки <p>
+                {{profileInfo.stats.dislikes}}</p>
               </div>
             </div>
           </div>
         </div>
       </v-container>
-    </v-content>
-    <v-content class="elevation-5 block mb-2">
-      <v-container fluid>
+    </div>
+    <div class="elevation-5 block mb-2 pb-1">
+      <v-container fluid class="pt-1">
         <p class="achievements text-xs-left heading" align="left">Достижения</p>
         <v-container class="achievements-wrapper left">
-          <img v-for="achievment in profileInfo.achievements" class="ma-1 achievement"
-               v-bind:src="achievment.url">
+          <img v-for="(achievement, index) in profileInfo.achievements" class="ma-1 achievement"
+               v-bind:src="achievement.url">
         </v-container>
       </v-container>
-    </v-content>
+    </div>
     <!-- </v-container> -->
   </v-app>
 </template>
@@ -77,18 +95,34 @@
     name: "profile-info",
     data() {
       return {
-        profileInfo: {}
+        profile: {},
+        showAvatar: false,
       }
     },
     methods: {},
-    props: {},
+    props: {
+      profileInfo: {}
+    },
     /**
      * Makes AJAX-request to get profile data
      * !!! Should be tested
      * At least window.location.href -- is never used by me
      * */
-    created() {
-      this.profileInfo = {
+    mounted() {
+      switch (this.profileInfo.sex) {
+        case "1":
+          this.profileInfo.sex = "М";
+          break;
+        case "2":
+          this.profileInfo.sex = "Ж";
+          break;
+        default:
+          this.profileInfo.sex = "";
+          break;
+      }
+      this.profileInfo.you_following = true;
+      this.profileInfo.owns = false;
+      /*this.profileInfo = {
         id: "1",
         name: "Елизавета Седова",
         sex: "Ж",
@@ -162,17 +196,7 @@
       fetch(profileUrl, options)
         .then(function (response) {
           this.profileInfo = response.body;
-          switch (profileInfo.sex){
-            case 1:
-                  profileInfo.sex="М";
-                  break;
-            case 2:
-                  profileInfo.sex="Ж";
-                  break;
-            default:
-                  profileInfo.sex="";
-                  break;
-          }
+
         })*/
     }
 
@@ -180,17 +204,14 @@
 </script>
 
 <style scoped>
-  .profileInfo {
-    background-color: #c6d7e9;
-    width: 40%;
-    display: flex;
-    flex-direction: column;
+  .profilePhoto {
     border-radius: 2px;
+    width: 100%;
+    margin-left: auto !important;
   }
 
-  .profilePhoto {
-    border-radius: 5px;
-    height: 50%;
+  .pic {
+    text-align: center;
   }
 
   .links {
@@ -199,7 +220,7 @@
     width: 45%;
     margin-left: 0px;
     padding: 0px;
-    float:right;
+    float: right;
   }
 
   .stats-wrapper-row {
@@ -209,8 +230,8 @@
 
   .stats {
     margin: 0px;
-    border: 1px solid #808080;
-    border-radius: 5px;
+    border: 2px solid #E0E0E0;
+    border-radius: 2px;
     color: #808080;
     width: 100%;
     height: 100%;
@@ -224,13 +245,13 @@
   }
 
   .achievement {
-    width: 12%;
-    height: 12%;
+    width: 27px;
+    height: 27px;
   }
 
   .linkImage {
-    width: 100%;
-    height: 100%;
+    width: 22px;
+    height: 22px;
   }
 
   .stats-wrapper-column {
@@ -244,43 +265,52 @@
     margin-bottom: 0px;
   }
 
-  .block {
-    background-color: #fafafa !important;
-    border-radius: 5px;
+  .material-icons {
+    transform: scale(1.8);
   }
-  .buttons{
+
+  .block {
+    background-color: white !important;
+    border-radius: 2px;
+  }
+
+  .buttons {
     display: flex;
     flex-direction: row;
   }
-  .opt{
-    transform: translate(-0%,-20%) !important;
-    font-size: 40px;
-    font-weight: bold;
+
+  .options {
+    background-color: #fafafa !important;
 
   }
-  .options{
-    background-color: #fafafa !important;
-    border-radius: 15px;
-    width:20%;
-  }
-  .follow{
+
+  .edit, .follow, .following {
     text-transform: none;
-    background-color: #fafafa !important;
-    border-radius: 15px;
     margin-left: 0px;
     margin-right: 0px;
     font-weight: bold;
-    width:80%;
-
+    width: 100% !important;
   }
-  .follows{
+
+  .edit {
+    background-color: #E0E0E0 !important;
+  }
+
+  .follow {
+    background-color: #64B5F6 !important;
+  }
+
+  .following {
+    background-color: #DCEDC8 !important;
+  }
+
+  .follows {
     text-align: center;
-    color:#808080;
+    color: #808080;
   }
-
 
   /*Fonts*/
-  .profileName, .ageAndSex, .heading, .aboutMe, .stats-wrapper,.options {
+  .profileName, .ageAndSex, .heading, .aboutMe, .stats-wrapper, {
     font-family: 'Roboto', sans-serif;
   }
 
@@ -296,7 +326,7 @@
     font-size: 18px;
   }
 
-  .aboutMe,.stats-wrapper {
+  .aboutMe, .stats-wrapper {
     font-size: 14px;
   }
 
