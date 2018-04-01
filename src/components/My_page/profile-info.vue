@@ -13,10 +13,10 @@
           </v-layout>
         </v-dialog>
         <p class="profileName text-xs-left">{{profileInfo.name}}</p>
-        <div class="ageAndSex text-xs-left" style="color:#808080">{{profileInfo.age}} лет,
+        <v-layout justify-left class="ageAndSex text-xs-left" style="color:#808080">{{profileInfo.age}} лет,
           {{profileInfo.sex}}
-        </div>
-        <div class="buttons">
+        </v-layout>
+        <v-layout row justify-left class="buttons">
           <v-btn color="grey lighten-2" round v-if="!profileInfo.you_following && !profileInfo.owns"
                  class="follow elevation-5 pr-1 pl-1" block small>Подписаться
           </v-btn>
@@ -28,10 +28,10 @@
           </v-btn>
           <v-btn round class="options elevation-5" small><i class="material-icons">more_horiz</i>
           </v-btn>
-        </div>
-        <p class="follows" v-if="profileInfo.follows===true">Подписан(а) на вас</p>
-        <p class="about text-xs-left heading">О себе</p>
-        <p class="aboutMe text-xs-left" style="color:#808080">{{profileInfo.about}}</p>
+        </v-layout>
+        <v-layout justify-center class="follows" v-if="profileInfo.follows===true">Подписан(а) на вас</v-layout>
+        <v-layout justify-left class="about text-xs-left heading">О себе</v-layout>
+        <v-layout class="aboutMe text-xs-left" style="color:#808080">{{profileInfo.about}}</v-layout>
         <v-container class="links mb-0">
           <v-tooltip bottom v-for="(link, index) in profileInfo.social" :key="link.url">
                <span slot="activator">
@@ -47,31 +47,31 @@
     <div class="mb-3 elevation-5 block">
       <v-container fluid class="pb-0 pt-1 pr-1">
         <div class="stats-wrapper">
-          <p class="statistics text-xs-left heading" align="left" style="margin-bottom: 5px;">
+          <v-layout justify-left class="statistics text-xs-left heading" style="margin-bottom: 5px;">
             Статистика
-          </p>
-          <div class="stats-wrapper-row mb-2">
-            <div class="stats-wrapper-column mr-2">
-              <div class="questions stats pa-0 mb-2" align="center">Вопросы <p>
+          </v-layout>
+          <v-layout row class="mb-2">
+            <v-layout column class="mr-2">
+              <div class="questions stats pa-1 mb-2" align="center">Вопросы<p>
                 {{profileInfo.stats.questions}}</p></div>
-              <div class="likes stats pa-0" align="center">Лайки <p>{{profileInfo.stats.likes}}</p>
+              <div class="likes stats pa-1" align="center">Лайки <p>{{profileInfo.stats.likes}}</p>
               </div>
-            </div>
-            <div class="stats-wrapper-column mr-2">
-              <div class="shows stats pa-0 mb-2" align="center">Показы <p>
+            </v-layout>
+            <v-layout column class="mr-2">
+              <div class="shows stats pa-1 mb-2" align="center">Показы<p>
                 {{profileInfo.stats.shows}}</p></div>
-              <div class="rating stats pa-0" align="center">Рейтинг <p>
+              <div class="rating stats pa-1" align="center">Рейтинг<p>
                 {{profileInfo.stats.rating}}</p></div>
-            </div>
-            <div class="stats-wrapper-column mr-2">
-              <div class="answers stats pa-0 mb-2" align="center">Ответы <p>
+            </v-layout>
+            <v-layout column class="mr-2">
+              <div class="answers stats pa-1 mb-2" align="center">Ответы<p>
                 {{profileInfo.stats.answers}}</p>
               </div>
-              <div class="dislikes stats pa-0" align="center">Дизлайки <p>
+              <div class="dislikes stats pa-1" align="center">Дизлайки<p>
                 {{profileInfo.stats.dislikes}}</p>
               </div>
-            </div>
-          </div>
+            </v-layout>
+          </v-layout>
         </div>
       </v-container>
     </div>
@@ -117,7 +117,8 @@
           this.profileInfo.sex = "";
           break;
       }
-      this.profileInfo.you_following = true;
+      this.profileInfo.follows = true;
+      this.profileInfo.you_following=true;
       this.profileInfo.owns = false;
     }
 
@@ -143,10 +144,7 @@
     float: right;
   }
 
-  .stats-wrapper-row {
-    display: flex;
-    flex-direction: row;
-  }
+
 
   .stats {
     margin: 0px;
@@ -174,13 +172,6 @@
     height: 22px;
   }
 
-  .stats-wrapper-column {
-    display: flex;
-    flex-direction: column;
-    width: 33%;
-    margin-left: 0px;
-  }
-
   p {
     margin-bottom: 0px;
   }
@@ -192,11 +183,6 @@
   .block {
     background-color: white !important;
     border-radius: 2px;
-  }
-
-  .buttons {
-    display: flex;
-    flex-direction: row;
   }
 
   .options {
