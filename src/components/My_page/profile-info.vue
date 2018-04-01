@@ -144,8 +144,6 @@
     float: right;
   }
 
-
-
   .stats {
     margin: 0px;
     border: 2px solid #E0E0E0;
