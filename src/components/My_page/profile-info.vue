@@ -1,18 +1,16 @@
 <template>
   <v-app>
-    <!--<v-container fluid class="profileInfo elevation-5 pa-2">-->
     <div class="mb-3 elevation-5 block">
       <v-container fluid class="pt-3 pr-3 pl-3 pb-1">
         <p class="pic" @click.stop="showAvatar = true"
-           @onmouseout.stop="showAvatar =false">
+           @onmouseout.stop="showAvatar = false">
           <img v-bind:src="profileInfo.avatar" id="Photo" align="center"
                class="profilePhoto elevation-3">
         </p>
         <v-dialog v-model="showAvatar" max-width="50%">
-          <p style="text-align: center">
-            <img v-bind:src="profileInfo.avatar"
-                 class="" style="width: 100%; height: 100%;">
-          </p>
+          <v-layout justify-center style="text-align: center">
+            <img v-bind:src="profileInfo.avatar" style="width: 100%">
+          </v-layout>
         </v-dialog>
         <p class="profileName text-xs-left">{{profileInfo.name}}</p>
         <div class="ageAndSex text-xs-left" style="color:#808080">{{profileInfo.age}} лет,
@@ -35,10 +33,10 @@
         <p class="about text-xs-left heading">О себе</p>
         <p class="aboutMe text-xs-left" style="color:#808080">{{profileInfo.about}}</p>
         <v-container class="links mb-0">
-          <v-tooltip bottom v-for="(link, index) in profileInfo.social">
+          <v-tooltip bottom v-for="(link, index) in profileInfo.social" :key="link.url">
                <span slot="activator">
-                  <a v-bind:href="link" target="_blank" class="link">
-                   <img v-bind:src="link.url" class="linkImage">
+                  <a v-bind:href="link.url" target="_blank" class="link">
+                   <img v-bind:src="link" class="linkImage">
                   </a>
                 </span>
             <span>{{link.url}}</span>
@@ -86,7 +84,6 @@
         </v-container>
       </v-container>
     </div>
-    <!-- </v-container> -->
   </v-app>
 </template>
 
@@ -122,82 +119,6 @@
       }
       this.profileInfo.you_following = true;
       this.profileInfo.owns = false;
-      /*this.profileInfo = {
-        id: "1",
-        name: "Елизавета Седова",
-        sex: "Ж",
-        age: "20",
-        about: "Студентка 3 курса национального исследовательского " +
-        "университета информационных технологий, механики и " +
-        "оптики",
-        avatar: "./static/profileImage.png",
-        stats: {
-          questions: "94",
-          shows: "123",
-          answers: "321",
-          likes: "94",
-          rating: "123",
-          dislikes: "321",
-        },
-        achievements: {
-          achievement1: {
-            url: "./static/facebook.png",
-            name: "name1"
-          },
-          achievement2: {
-            url: "./static/facebook.png",
-            name: "name2"
-          },
-          achievement3: {
-            url: "./static/facebook.png",
-            name: "name3"
-          },
-          achievement4: {
-            url: "./static/facebook.png",
-            name: "name4"
-          },
-          achievement5: {
-            url: "./static/facebook.png",
-            name: "name5"
-          },
-          achievement6: {
-            url: "./static/facebook.png",
-            name: "name6"
-          },
-          achievement7: {
-            url: "./static/facebook.png",
-            name: "name7"
-          },
-        },
-        social: {
-          facebook: "https://vk.com/id224332750",
-          vk: "https://vk.com/id224332750",
-          twitter: "https://vk.com/id224332750",
-          ok: "https://vk.com/id224332750",
-          telegram: "https://vk.com/id224332750"
-        },
-        you_following:false,
-        follows:false,
-        owns:false,
-      }
-      /*let photo=this.$el.getElementsByClassName("profilePhoto")[0];
-      photo.onclick=this.changePhotoSize();*/
-      /*localhost:8080/profile/1*/
-      /*
-      let headers = new Headers();
-      let options = {
-        method: 'POST',
-        headers: headers,
-        mode: 'cors',
-        cache: 'default'
-      };
-      let profileUrl=window.location.href;
-      console.log(this.name);
-      fetch(profileUrl, options)
-        .then(function (response) {
-          this.profileInfo = response.body;
-
-        })*/
     }
 
   }
@@ -213,7 +134,6 @@
   .pic {
     text-align: center;
   }
-
   .links {
     display: flex;
     flex-direction: row;
@@ -310,7 +230,7 @@
   }
 
   /*Fonts*/
-  .profileName, .ageAndSex, .heading, .aboutMe, .stats-wrapper, {
+  .profileName, .ageAndSex, .heading, .aboutMe, .stats-wrapper{
     font-family: 'Roboto', sans-serif;
   }
 
@@ -329,5 +249,4 @@
   .aboutMe, .stats-wrapper {
     font-size: 14px;
   }
-
 </style>
