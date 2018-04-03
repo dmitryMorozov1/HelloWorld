@@ -2,10 +2,10 @@
 <v-container class="main-layout px-0">
   <v-layout>
     <v-flex>              <!-- send all information for this component as abject 'profile'-->
-      <profile-info class="profile-info mr-4" :profile="profile"></profile-info>
+      <profile-info class="profile-info mr-4" :profileInfo="profile"></profile-info>
     </v-flex>
     <v-flex>              <!-- send amounts for this component as abject 'amounts'-->
-      <mini-header class="mini-header" :amounts="amounts"></mini-header>
+      <mini-header class="mini-header mb-2" :amounts="amounts"></mini-header>
       <router-view/>
     </v-flex>
   </v-layout>
@@ -23,7 +23,7 @@ export default {
       amounts: {}
     }
   },
-  mounted() {
+  created() {
     // request to server will be here
     // but now
     this.profile = {
@@ -45,31 +45,31 @@ export default {
       achievements: [
         {
           url: 'http://www.awardsaplus.com/wp-content/uploads/2016/08/ICON_achievement-icon.png',
-          name: 'Achievement'
+          name: 'Achievement1'
         },
         {
           url: 'http://www.awardsaplus.com/wp-content/uploads/2016/08/ICON_achievement-icon.png',
-          name: 'Achievement'
+          name: 'Achievement2'
         },
         {
           url: 'http://www.awardsaplus.com/wp-content/uploads/2016/08/ICON_achievement-icon.png',
-          name: 'Achievement'
+          name: 'Achievement3'
         },
         {
           url: 'http://www.awardsaplus.com/wp-content/uploads/2016/08/ICON_achievement-icon.png',
-          name: 'Achievement'
+          name: 'Achievement4'
         },
         {
           url: 'http://www.awardsaplus.com/wp-content/uploads/2016/08/ICON_achievement-icon.png',
-          name: 'Achievement'
+          name: 'Achievement5'
         },
         {
           url: 'http://www.awardsaplus.com/wp-content/uploads/2016/08/ICON_achievement-icon.png',
-          name: 'Achievement'
+          name: 'Achievement6'
         },
         {
           url: 'http://www.awardsaplus.com/wp-content/uploads/2016/08/ICON_achievement-icon.png',
-          name: 'Achievement'
+          name: 'Achievement7'
         }
       ],
       social: [
@@ -117,8 +117,8 @@ export default {
   max-width: 275px;
 }
 .mini-header {
-  width: 775px;
-  max-width: 775px;
+  width: 777px;
+  max-width: 777px;
 }
 .main-layout {
   width: 1076px;
