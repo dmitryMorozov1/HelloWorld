@@ -1,15 +1,15 @@
 <template>
   <v-layout px-2 my-0 class="border blocklight med-16" id="follower-comp">
-    <v-avatar>
+    <v-avatar class="mr-3">
       <img :src="personData.img" alt="avatar">
     </v-avatar>
-    {{ personData.name }}
+    <div class="follower-fild-title"> {{ personData.name }} </div>
     <v-spacer></v-spacer>
     <v-btn round disabled class="sig med-16 border"
       v-if="personData.sig"> Подписан на вас </v-btn>
-    <v-btn round class="issub med-16 blockgreen border"
+    <v-btn round class="mr-0 med-16 blockgreen border"
       v-if="sub" @click="unfollow"> Вы подписаны </v-btn>
-    <v-btn round class="nosub med-16 blocklight-text blockblue border"
+    <v-btn round class="mr-0 med-16 blocklight-text blockblue border"
       v-else @click="follow"> Подписаться </v-btn>
   </v-layout>
 </template>
@@ -46,7 +46,6 @@ export default {
 #follower-comp .avatar {
   height: 47px !important;
   width: 47px !important;
-  margin-right: 10px;
 }
 #follower-comp .btn {
   text-transform: inherit;
@@ -56,11 +55,5 @@ export default {
 #follower-comp  .sig {
   background-color: #fdfdfd !important;
   color: #000 !important;
-}
-#follower-comp .nosub {
-  margin-right: 0;
-}
-#follower-comp .issub {
-  margin-right: 0;
 }
 </style>
