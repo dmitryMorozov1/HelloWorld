@@ -1,17 +1,13 @@
-<!-- 
-Внимание: добавлена логика поиска. (Без родителя работать не будет)
--->
 <template>
-<v-container px-0 py-0 class="search" id="search-comp">
-  <v-text-field
-          class="search-line"
-          label="Поиск"
-          prepend-icon="search"
-          single-line
-          v-model="search"
-          dark
-  ></v-text-field>
-</v-container>
+  <v-container px-0 py-0 id="search-comp">
+    <v-text-field
+      class="search-line"
+      label="Поиск"
+      prepend-icon="search"
+      single-line
+      v-model="search"
+    ></v-text-field>
+  </v-container>
 </template>
 
 <script>
@@ -27,16 +23,16 @@ export default {
   },
   mounted () {
     document.getElementById('search-comp').firstChild.lastChild.style.maxWidth = "100%";
-    document.getElementById('search-comp').firstChild.childNodes[1].lastChild.style.color = "#111";
+    document.getElementById('search-comp').firstChild.childNodes[1].lastChild.classList.add("med-18");
   },
 }
 </script>
 
 <style scoped>
 #search-comp {
-    width: 100%;
+  width: 100%;
 }
 #search-comp .search-line {
-    color: #1A93F0 !important;
+  color: #1A93F0 !important;
 }
 </style>
