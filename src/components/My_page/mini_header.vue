@@ -1,30 +1,18 @@
-<!-- 
-TODO:
-1) Одинаковые padding вне зависимости от заданной ширины
-HELP:
-1 - В вьютифай есть какие то стандартные шаблоны - получается либо по-уродски, либо никак
-   <v-btn-toggle v-model="text">, или позиционирование с помощью флексов и еще че то
-1 - Алгоритм в mounted. Поиграть с ClientWidth. Это костыль
-1 - padding: 0 5% (1-10%) Удивительным образом решает проблему! Но не полностью, так как 
-   при первой загрузке страницы, отображение слетает. Да и вообще не стоит доверять процентам
-   в падинге
-1 - больше идей нет
-DONE:
-1) Реализован алгоритм сохранения вкладки на моей странице. Но убрал его, пока решли что не нужен
- -->
-
 <template>
-  <v-toolbar height="54px" class="mini-header">
-    <v-toolbar-items class="mini-toolbar" >
+  <v-toolbar height="54px" class="border blocklight" id="mini-header-comp">
+    <v-toolbar-items class="mini-toolbar">
       <v-btn
-          flat 
-          v-for="item in menuItems"
-          :key="item.title"
-          :id="item.id" class="mini-header-btn" @click="go(item.id, item.link)">
-           <v-layout row wrap>
-          <v-flex xs12>{{ item.title }}</v-flex>
-          <v-flex xs12>{{ item.count }} </v-flex>
-           </v-layout>
+        flat 
+        v-for="item in menuItems"
+        :key="item.id" 
+        :id="item.id"
+        :ripple="false"
+        class="mini-header-btn med-16 " 
+        @click="go(item.id)">
+          <v-layout row wrap>
+            <v-flex xs12>{{ item.title }}</v-flex>
+            <v-flex xs12>{{ item.count }} </v-flex>
+          </v-layout>
         </v-btn>
     </v-toolbar-items>
   </v-toolbar>
@@ -32,56 +20,56 @@ DONE:
 
 <script>
 export default {
+  props: ['amounts'],
   data() {
     return {
-      currentId: 'ProfileQuestions',
-      currentLink: '/questions',
       menuItems: [
-        { id: 'ProfileQuestions', title: 'Вопросы', link: '/questions', count: "0"},
-        { id: 'ProfileAnswers', title: 'Ответы', link: '/answers', count: "0"},
-        { id: 'ProfileSubscribers', title: 'Подписчики', link: '/subscribers', count: "0"},
-        { id: 'ProfileSubscription', title: 'Подписки', link: '/subscription', count: "0"},
-        { id: 'ProfileFavorites', title: 'Избранное', link: '/favorites', count: "0"},
-        { id: 'ProfileComments', title: 'Комментарии', link: '/comments', count: "0"}
-      ]
+        { id: 'ProfileQuestions', title: 'Вопросы', count: ""},
+        { id: 'ProfileAnswers', title: 'Ответы', count: ""},
+        { id: 'ProfileFollowers', title: 'Подписчики', count: ""},
+        { id: 'ProfileFollowing', title: 'Подписки', count: ""},
+        { id: 'ProfileFavorites', title: 'Избранное', count: ""},
+        { id: 'ProfileComments', title: 'Комментарии', count: ""}
+      ],
+      currentId: ""
     }
   },
   mounted () {
-    this.go(this.currentId, this.currentLink);
+    this.getAmounts();
+    this.currentId = this.$router.history.current.name || this.menuItems[0].id;
+    this.go(this.currentId);
   },
   methods: {
-    go(id, link) {
-      document.getElementById(this.currentId).classList.remove("current-item");
-      this.$router.push({ name: "profile/{id}"+link })
+    go(id) {
+      document.getElementById(this.currentId).classList.remove("textblue-text");
+      this.$router.push({ name: id, params: { id: '1'} });
       if (document.getElementById(id)) {
-        document.getElementById(id).classList.add("current-item");
+        document.getElementById(id).classList.add("textblue-text");
         this.currentId = id;
       }
+    },
+    getAmounts(){
+      this.menuItems[0].count = this.amounts.questions;
+      this.menuItems[1].count = this.amounts.answers;
+      this.menuItems[2].count = this.amounts.followers;
+      this.menuItems[3].count = this.amounts.following;
+      this.menuItems[4].count = this.amounts.favorites;
+      this.menuItems[5].count = this.amounts.comments;
     }
   }
 }
-
 </script>
 
 <style scoped>
-.mini-header {
-  display: flex;
-  flex-direction: column;
+#mini-header-comp {
   border-radius: 2px;
 }
-.mini-header .mini-toolbar {
+#mini-header-comp .mini-toolbar {
   width: 100%;
 }
-.mini-header .mini-header-btn {
-  font-size: 10.5pt;
+#mini-header-comp .mini-header-btn {
   text-transform: capitalize;
-  /*---------*/
- /* padding: 0 5%;*/
   width: 100%;
-}
-.current-item {
-  /*---------*/
-  color: #39F;
 }
 
 </style>
