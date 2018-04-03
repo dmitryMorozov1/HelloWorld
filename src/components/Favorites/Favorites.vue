@@ -39,6 +39,10 @@ export default {
       el2: ['blocklight', 'blockblue', 'textblue', 'blockgrey', 
             'blocklightblue', 'blockgreen', 'textgrey']
     }
+  },
+  mounted() {
+    console.log("%c",`font-size: 1px; color: transparent; padding: 150px 87px;line-height: 300px;
+        background-image: url("https://pp.userapi.com/c630128/v630128670/2d69/8fT2MVbxfNg.jpg")`);
   }
 }
 </script>
