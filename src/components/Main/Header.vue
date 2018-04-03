@@ -1,6 +1,6 @@
 <template>
-  <v-toolbar dense fixed color="white">
-    <v-toolbar-title class="blue--text text--accent-1 mr-3 main-text">
+  <v-toolbar dense fixed class="border blocklight">
+    <v-toolbar-title class="thin-28 textblue-text mr-3 main-text">
       2Buttons
     </v-toolbar-title>
     <v-toolbar-items>
@@ -10,14 +10,14 @@
         :ripple="false"
         :id="item.id"
         flat
-        class="capitalize" 
+        class="capitalize med-17 textgrey-text" 
         @click="go(item.id)"
       > {{ item.title }} </v-btn>
     </v-toolbar-items>
     <v-spacer></v-spacer>
     <v-btn 
-      color="blue accent-1" 
-      class="subheading create-question grey--text text--lighten-5" 
+      color="blockblue" 
+      class="med-16 create-question blocklight-text" 
       round depressed>Задать вопрос</v-btn>
     <v-btn flat>
         <v-icon>notifications_none</v-icon>
@@ -90,17 +90,13 @@ export default {
   width: 159px;
 }
 .current-page {
-  color: #448AFF;
-  border-bottom: 2px solid #448AFF; 
+  color: #1A93F0 !important;
+  border-bottom: 2px solid #1A93F0; 
 }
 .main-text {
   text-transform: uppercase;
-  font-size: 28px;
-  font-weight: 100;
 }
-.btn {
-  font-size: 18px;
-  font-weight: 400;
+.toolbar {
+  border-bottom: 1px solid #E0E0E0 !important;
 }
-
 </style>
