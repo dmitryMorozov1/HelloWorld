@@ -1,30 +1,39 @@
-<!-- 
-Внимание: добавлена логика поиска. (Без родителя работать не будет)
--->
 <template>
 <v-container px-0 py-0>
-  <v-container px-0 py-0 mb-2 v-for="person in filteredList"
-  :key="person.id" v-if="person.sub" class="followers">
-      <follower v-bind:person-data="person"></follower>
+  <search @inputsearch="inputsearch"></search>
+  <v-container px-0 py-0 mb-2 
+    v-for="person in filteredList"
+    :key="person.id" 
+    class="following">
+      <follower :person-data="person"></follower>
+  </v-container>
+  <v-container px-0 py-0 mb-2 
+    v-if="!!!filteredList.length">
+      <v-layout px-2 my-0
+        class="followers border blocklight med-16">
+          Ни одной подписки не найдено.
+      </v-layout>
   </v-container>
 </v-container>
 </template>
 
 <script>
 import follower from './follower.vue'
+import search from './search.vue'
 
 export default {
   data() {
     return {
-      following: []
+      following: [],
+      search: ""
     }
   },
   components: {
-    'follower': follower
+    'follower': follower,
+    'search': search
   },
-  props: ['search'],
   mounted () {
-    this.addfollowing();
+    this.addfollowing;
   },
   computed: {
     addfollowing() {
@@ -40,15 +49,23 @@ export default {
     },
     filteredList() {
       return this.following.filter(post => {
-        return post.name.toLowerCase().includes(this.search.toLowerCase())
-      })
+        if(post.sub)
+        return post.name.toLowerCase().includes(this.search.toLowerCase());
+        else
+        return false;
+      });
+    }
+  },
+  methods: {
+    inputsearch(input) {
+      this.search = input.search;
     }
   }
 }
 </script>
 
 <style>
-.followers {
+.following {
   height: 58px;
 }
 </style>
