@@ -10,7 +10,7 @@
   <v-container px-0 py-0 mb-2 
     v-if="!!!filteredList.length">
       <v-layout px-2 my-0
-        class="followers border blocklight med-16">
+        class="following border blocklight med-16">
           Ни одной подписки не найдено.
       </v-layout>
   </v-container>
@@ -25,7 +25,9 @@ export default {
   data() {
     return {
       following: [],
-      search: ""
+      search: "",
+      copy_name: [],
+      cur_copy_name: []
     }
   },
   components: {
@@ -34,6 +36,9 @@ export default {
   },
   mounted () {
     this.addfollowing;
+  },
+  updated () {
+    this.coloringSearch();     
   },
   computed: {
     addfollowing() {
@@ -48,24 +53,56 @@ export default {
       ];
     },
     filteredList() {
+      this.cur_copy_name = this.copy_name.filter(post => {
+        let str = this.search.trim();
+        return post.toLowerCase().includes(str.toLowerCase());
+      });
       return this.following.filter(post => {
-        if(post.sub)
-        return post.name.toLowerCase().includes(this.search.toLowerCase());
-        else
-        return false;
+        if(post.sub) {
+          let str = this.search.trim();
+          return post.name.toLowerCase().includes(this.search.toLowerCase());
+        }
+        else {
+          return false;
+        }
       });
     }
   },
   methods: {
     inputsearch(input) {
       this.search = input.search;
+    },
+    coloringSearch() {
+      let list = document.getElementsByClassName("follower-fild-title");
+      for (let i = 0; i < list.length; i++) {
+        if(!!!this.copy_name[i]){
+          this.copy_name[i] = list[i].innerHTML;
+        }
+        if(!!this.cur_copy_name[i])
+          list[i].innerHTML = this.cur_copy_name[i];
+        else 
+          this.cur_copy_name[i] = list[i].innerHTML;
+        let str = this.search.trim();
+        str = list[i].innerHTML.match(new RegExp(str,"i"));
+
+        let result = list[i].innerHTML.match(new RegExp(str,"gi"));
+        result = result.filter(function(item, pos) {
+          return result.indexOf(item) == pos;
+        });
+        for (let k = 0; k < result.length; k++) {
+          list[i].innerHTML = 
+          list[i].innerHTML.replace(eval("/" + result[k] + "/g"),
+            "<span style='background:#c7dae8'>" + result[k] + "</span>"); 
+        }
+      }
     }
   }
 }
 </script>
 
-<style>
+<style scoped>
 .following {
   height: 58px;
+  align-items: center;
 }
 </style>
