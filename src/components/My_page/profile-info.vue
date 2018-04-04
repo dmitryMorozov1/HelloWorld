@@ -10,25 +10,24 @@
       </v-dialog>
       <v-content class="text-xs-left med-20">{{profileInfo.name}}</v-content>
       <v-layout class="text-xs-left med-16 textgrey-text">
-        {{profileInfo.age}} лет,
-        {{profileInfo.sex}}
+        {{profileInfo.age}} лет {{profileInfo.sex}}
       </v-layout>
-      <v-btn color="blue lighten-2 ma-0"
-             v-if="!profileInfo.you_following && !profileInfo.owns"
-             class="follow med-16 border" style="height: 31px;" round depressed>Подписаться
+      <v-btn v-if="!profileInfo.you_following && !profileInfo.owns"
+             class="follow med-16 border textblue ma-0" style="height: 31px;" round depressed>
+        Подписаться
       </v-btn>
       <v-btn v-if="profileInfo.you_following && !profileInfo.owns"
-             class="following ma-0 med-16 border" style="height: 31px;"
-             color="light-green lighten-4" round depressed>Вы подписаны
+             class="following med-16 border blockgreen" style="height: 31px;"
+             round depressed>Вы подписаны
       </v-btn>
-      <v-btn v-if="profileInfo.owns" class="edit ma-0 med-16 border"
-             color="grey lighten-2" round depressed style="width: 100%; height: 31px;">Редактировать
+      <v-btn v-if="profileInfo.owns" class="edit ma-0 med-16 border blockgrey"
+             round depressed style="width: 100%; height: 31px;">Редактировать
       </v-btn>
       <v-btn v-if="!profileInfo.owns" class="blocklight options pa-0 ma-0 border" round depressed
-             icon flat><i class="material-icons">more_horiz</i>
+             icon flat>
+        <v-icon class="material-icons">more_horiz</v-icon>
       </v-btn>
-      <v-layout justify-center class="follows textgrey-text"
-                v-if="profileInfo.follows===true">
+      <v-layout class="follows textgrey-text ml-5" v-if="profileInfo.follows===true">
         Подписан(а) на вас
       </v-layout>
       <v-layout class="text-xs-left reg-14 textgrey-text">{{profileInfo.about}}
@@ -99,17 +98,17 @@
 
       switch (this.profileInfo.sex) {
         case "1":
-          this.profileInfo.sex = "М";
+          this.profileInfo.sex = ",М";
           break;
         case "2":
-          this.profileInfo.sex = "Ж";
+          this.profileInfo.sex = ",Ж";
           break;
         default:
           this.profileInfo.sex = "";
           break;
       }
-      this.profileInfo.follows = false;
-      this.profileInfo.you_following = true;
+      this.profileInfo.follows = true;
+      this.profileInfo.you_following = false;
       this.profileInfo.owns = false;
     }
 
