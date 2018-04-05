@@ -30,8 +30,7 @@
           </v-layout>
         </v-layout>
         <v-btn v-if="!profileInfo.owns" class="blocklight options pa-0 border ml-0" justify-center
-               style="height: 31px;" round depressed
-               icon flat>
+               style="height: 31px;" icon depressed>
           <v-icon class="material-icons">more_horiz</v-icon>
         </v-btn>
       </v-layout>
@@ -54,7 +53,7 @@
         Статистика
       </v-layout>
       <v-layout wrap row class="mb-2 px-1">
-        <v-layout style="width: 25%" v-for="(stat, index) in profileInfo.stats"
+        <v-layout style="width: 25%" v-for="(stat, index) in profileInfo.stats" :key="index"
                   align-center column class="border black--text pa-1 mb-2 mx-1">
           {{categories[index]}}
           <v-content>{{stat}}</v-content>
