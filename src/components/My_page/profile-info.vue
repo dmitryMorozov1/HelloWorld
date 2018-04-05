@@ -9,30 +9,34 @@
         <img v-bind:src="profileInfo.avatar" width="100%" class="pa-0 ma-0">
       </v-dialog>
       <v-content class="text-xs-left med-20">{{profileInfo.name}}</v-content>
-      <v-layout class="text-xs-left med-16 textgrey-text">
-        {{profileInfo.age}} лет {{profileInfo.sex}}
+      <v-layout class="text-xs-left med-16 black--text">
+        {{profileInfo.age}} лет{{profileInfo.sex}}
       </v-layout>
-      <v-btn v-if="!profileInfo.you_following && !profileInfo.owns"
-             class="follow med-16 border textblue ma-0" style="height: 31px;" round depressed>
-        Подписаться
-      </v-btn>
-      <v-btn v-if="profileInfo.you_following && !profileInfo.owns"
-             class="following med-16 border blockgreen" style="height: 31px;"
-             round depressed>Вы подписаны
-      </v-btn>
-      <v-btn v-if="profileInfo.owns" class="edit ma-0 med-16 border blockgrey"
-             round depressed style="width: 100%; height: 31px;">Редактировать
-      </v-btn>
-      <v-btn v-if="!profileInfo.owns" class="blocklight options pa-0 ma-0 border" round depressed
-             icon flat>
-        <v-icon class="material-icons">more_horiz</v-icon>
-      </v-btn>
-      <v-layout class="follows textgrey-text ml-5" v-if="profileInfo.follows===true">
-        Подписан(а) на вас
+      <v-layout row>
+      <v-layout justify-center column>
+          <v-btn v-if="!profileInfo.you_following && !profileInfo.owns"
+                 class="bigBtn med-16 border blockblue ma-0" style="height: 31px;" round depressed>
+            Подписаться
+          </v-btn>
+          <v-btn v-if="profileInfo.you_following && !profileInfo.owns"
+                 class="bigBtn med-16 border blockgreen mx-0" style="height: 31px;"
+                 round depressed>Вы подписаны
+          </v-btn>
+          <v-btn v-if="profileInfo.owns" class="bigBtn mx-0 med-16 border blockgrey"
+                 round depressed style="width: 100%; height: 31px;">Редактировать
+          </v-btn>
+          <v-layout justify-center class="textgrey-text thin-12" v-if="profileInfo.follows===true">
+            Подписан(а) на вас
+          </v-layout>
+        </v-layout>
+        <v-btn v-if="!profileInfo.owns" class="blocklight options pa-0 border ml-0"  justify-center style="height: 31px;" round depressed
+               icon flat>
+          <v-icon class="material-icons">more_horiz</v-icon>
+        </v-btn>
       </v-layout>
       <v-layout class="text-xs-left reg-14 textgrey-text">{{profileInfo.about}}
       </v-layout>
-      <v-flex right row class="links mb-0">
+      <v-flex right row class="mb-0">
         <v-tooltip bottom v-for="(link, index) in profileInfo.social" :key="link.url">
                <span slot="activator">
                   <a v-bind:href="link.url" target="_blank" class="link">
@@ -44,13 +48,13 @@
       </v-flex>
     </v-content>
 
-    <v-container fluid class="pb-0 pt-2 pr-2 pl-2 border mb-3 blocklight">
-      <v-layout class="statistics text-xs-left thin-18">
+    <v-container fluid class="pb-0 pt-2 px-0 border mb-3 blocklight">
+      <v-layout class="text-xs-left thin-18 ml-2 black-text">
         Статистика
       </v-layout>
-      <v-layout wrap row class="mb-2">
-        <v-layout style="width: 25%" v-for="(stat, index) in profileInfo.stats" :key="stat"
-                  align-center column class="border textgrey-text pa-1 mb-2 mr-2">
+      <v-layout wrap row class="mb-2 px-1">
+        <v-layout style="width: 25%" v-for="(stat, index) in profileInfo.stats"
+                  align-center column class="border black--text pa-1 mb-2 mx-1">
           {{categories[index]}}
           <v-content>{{stat}}</v-content>
         </v-layout>
@@ -58,9 +62,9 @@
     </v-container>
 
     <v-container fluid class="pt-2 border mb-2 pb-0 pl-2 blocklight">
-      <v-content class="text-xs-left thin-18" align="left">Достижения</v-content>
-      <v-flex class="achievements-wrapper left med-14">
-        <img v-for="(achievement, index) in profileInfo.achievements" class="ma-1 achievement"
+      <v-content class="text-xs-left thin-18 black-text" align="left">Достижения</v-content>
+      <v-flex class="left med-14">
+        <img v-for="achievement in profileInfo.achievements" class="ma-1 achievement"
              v-bind:src="achievement.url">
       </v-flex>
     </v-container>
@@ -98,17 +102,17 @@
 
       switch (this.profileInfo.sex) {
         case "1":
-          this.profileInfo.sex = ",М";
+          this.profileInfo.sex = ", М";
           break;
         case "2":
-          this.profileInfo.sex = ",Ж";
+          this.profileInfo.sex = ", Ж";
           break;
         default:
           this.profileInfo.sex = "";
           break;
       }
       this.profileInfo.follows = true;
-      this.profileInfo.you_following = false;
+      this.profileInfo.you_following = true;
       this.profileInfo.owns = false;
     }
 
@@ -134,7 +138,7 @@
     width: 43px;
   }
 
-  .edit, .follow, .following {
+  .bigBtn {
     text-transform: none;
     width: 200px;
   }
