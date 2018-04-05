@@ -13,7 +13,7 @@
         {{profileInfo.age}} лет{{profileInfo.sex}}
       </v-layout>
       <v-layout row>
-      <v-layout justify-center column>
+        <v-layout justify-center column>
           <v-btn v-if="!profileInfo.you_following && !profileInfo.owns"
                  class="bigBtn med-16 border blockblue ma-0" style="height: 31px;" round depressed>
             Подписаться
@@ -29,7 +29,8 @@
             Подписан(а) на вас
           </v-layout>
         </v-layout>
-        <v-btn v-if="!profileInfo.owns" class="blocklight options pa-0 border ml-0"  justify-center style="height: 31px;" round depressed
+        <v-btn v-if="!profileInfo.owns" class="blocklight options pa-0 border ml-0" justify-center
+               style="height: 31px;" round depressed
                icon flat>
           <v-icon class="material-icons">more_horiz</v-icon>
         </v-btn>
