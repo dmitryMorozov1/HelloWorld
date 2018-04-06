@@ -29,8 +29,8 @@
             Подписан(а) на вас
           </v-layout>
         </v-layout>
-        <v-btn v-if="!profileInfo.owns" class="blocklight options pa-0 border ml-0" justify-center
-               style="height: 31px;" icon depressed>
+        <v-btn v-if="!profileInfo.owns" class="blocklight options border ml-2 "
+               style="height: 31px; min-width: 43px;" round depressed>
           <v-icon class="material-icons">more_horiz</v-icon>
         </v-btn>
       </v-layout>
