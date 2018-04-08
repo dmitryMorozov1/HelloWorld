@@ -21,7 +21,7 @@
           v-for="(e, index) in el2" :key="index"
           :class="index === 0 || index === 3 ? 'blockblue' : 'blocklight'">
           <p :class="e + '-text'">
-            .{{ e }}
+            .{{ e }}-text
           </p>
         </v-flex>
       </v-expansion-panel-content>
@@ -37,7 +37,7 @@ export default {
            'med-14', 'med-16', 'med-17', 'med-18', 'med-20', 'med-24', 
            'bold-14', 'bold-22'],
       el2: ['blocklight', 'blockblue', 'textblue', 'blockgrey', 
-            'blocklightblue', 'blockgreen', 'textgrey']
+            'blocklightblue', 'blockgreen', 'textgrey', 'textdarkgrey']
     }
   },
   mounted() {
