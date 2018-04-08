@@ -17,7 +17,11 @@ import Followers from '@/components/My_page/followers'
 import Following from '@/components/My_page/following'
 import Questions from '@/components/My_page/questions'
 
-// 
+// Top
+import TopDay from '@/components/Top/pages/top-day'
+import TopWeek from '@/components/Top/pages/top-week'
+import TopMonth from '@/components/Top/pages/top-month'
+import TopAll from '@/components/Top/pages/top-all'
 
 
 Vue.use(Router)
@@ -80,8 +84,29 @@ export default new Router({
     },
     {
       path: '/top',
-      name: 'Top',
-      component: Top
+      component: Top,
+      children: [
+        {
+          path: '',
+          name: 'Top',
+          component: TopDay
+        },
+        {
+          path: '/week',
+          name: 'Top-week',
+          component: TopWeek
+        },
+        {
+          path: '/month',
+          name: 'Top-month',
+          component: TopMonth
+        },
+        {
+          path: '/all',
+          name: 'Top-all',
+          component: TopAll
+        }
+      ]
     },
     {
       path: '/*',
