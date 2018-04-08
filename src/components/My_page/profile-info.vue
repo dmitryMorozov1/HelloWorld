@@ -64,7 +64,8 @@
     <v-container fluid class="pt-2 border mb-2 pb-0 pl-2 blocklight">
       <v-content class="text-xs-left thin-18 black-text" align="left">Достижения</v-content>
       <v-flex class="left med-14">
-        <img v-for="achievement in profileInfo.achievements" class="ma-1 achievement"
+        <img v-for="(achievement,index) in profileInfo.achievements" class="ma-1 achievement"
+             :key="index"
              v-bind:src="achievement.url">
       </v-flex>
     </v-container>
