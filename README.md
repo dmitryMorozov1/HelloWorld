@@ -34,16 +34,16 @@ For a detailed explanation on how things work, check out the [guide](http://vuej
 > P.S. header of each part is component too
 
 ### Main 
-1. **Header**
+1. ~~Header~~
 2. Notifications
 3. Create question
-4. `Question component`
+4. **Question component**
 5. `Answer component`
 6. Comments
 
 ### Profile page
-1. `Profile info`
-2. `Mini-header`
+1. **Profile info**
+2. **Mini-header**
 
 ### News
 1. Best comment
