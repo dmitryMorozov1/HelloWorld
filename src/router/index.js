@@ -8,6 +8,7 @@ import MyPage from '@/components/My_page/My_page'
 import News from '@/components/News/News'
 import Top from '@/components/Top/Top'
 import Error404 from '@/components/Main/404'
+import SelectQuestion from '@/components/SelectQuestion/SelectQuestion'
 
 // My_page
 import Answers from '@/components/My_page/answers'
@@ -107,6 +108,11 @@ export default new Router({
           component: TopAll
         }
       ]
+    },
+    {
+      path: '/select_question',
+      name: 'SelectQuestion',
+      component: SelectQuestion
     },
     {
       path: '/*',
