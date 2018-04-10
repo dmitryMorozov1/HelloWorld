@@ -46,7 +46,7 @@ export default {
         { id: 'News', title: 'Новости' },
         { id: 'Favorites', title: 'Закладки' },
         { id: 'Top', title: 'Лучшее' },
-        { id: 'GetQuestion', title: 'Подобрать вопрос' }
+        { id: 'SelectQuestion', title: 'Подобрать вопрос' }
       ]
     }
   },

@@ -21,8 +21,36 @@
           v-for="(e, index) in el2" :key="index"
           :class="index === 0 || index === 3 ? 'blockblue' : 'blocklight'">
           <p :class="e + '-text'">
-            .{{ e }}
+            .{{ e }}-text
           </p>
+        </v-flex>
+      </v-expansion-panel-content>
+      <v-expansion-panel-content class="text-xs-center">
+        <div slot="header">Social text colors</div>
+        <v-flex 
+          mx-5
+          class="med-17" 
+          v-for="(e, index) in el3" :key="index"
+        >
+          <p :class="e + '-color-text'">
+            .{{ e }}-color-text
+          </p>
+        </v-flex>
+      </v-expansion-panel-content>
+      <v-expansion-panel-content class="text-xs-center">
+        <div slot="header">Social borders colors</div>
+        <v-flex 
+          mx-5
+          class="med-17" 
+          v-for="(e, index) in el3" :key="index"
+        >
+          <v-btn 
+            :class="e + '-color-border' + ' capitalize ' + e + '-color-text'"
+            round
+            depressed
+          >
+            .{{ e }}-color-borders .capitalize .{{ e }}-color-text
+          </v-btn>
         </v-flex>
       </v-expansion-panel-content>
     </v-expansion-panel>
@@ -37,7 +65,8 @@ export default {
            'med-14', 'med-16', 'med-17', 'med-18', 'med-20', 'med-24', 
            'bold-14', 'bold-22'],
       el2: ['blocklight', 'blockblue', 'textblue', 'blockgrey', 
-            'blocklightblue', 'blockgreen', 'textgrey']
+            'blocklightblue', 'blockgreen', 'textgrey', 'textdarkgrey'],
+      el3: ['facebook', 'vkontakte', 'twitter', 'googleplus', 'telegram', 'badoo']
     }
   },
   mounted() {

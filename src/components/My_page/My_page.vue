@@ -1,5 +1,5 @@
 <template>
-<v-container class="main-layout px-0">
+<v-container class="main-layout">
   <v-layout>
     <v-flex>              <!-- send all information for this component as abject 'profile'-->
       <profile-info class="profile-info mr-4" :profileInfo="profile"></profile-info>
@@ -103,6 +103,7 @@ export default {
       favorites: '332',
       comments: '23'
     }
+    this.$router.push({name: 'ProfileQuestions', params: {id: 1}});
   },
   components: {
     'profile-info' : profileInfo,
@@ -119,9 +120,5 @@ export default {
 .mini-header {
   width: 777px;
   max-width: 777px;
-}
-.main-layout {
-  width: 1076px;
-  max-width: 1076px;
 }
 </style>
