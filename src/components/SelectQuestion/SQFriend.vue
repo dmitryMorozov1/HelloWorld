@@ -8,8 +8,8 @@
 
 
       <v-list-tile-content>
-        <v-list-tile-title class="reg-15 black--text ml-2">
-          {{friend.name}}
+        <v-list-tile-title class="ml-2">
+          <a :href="friend.linkSocial" class="reg-15 black--text" target="_blank" style="text-decoration: none;">{{friend.name}}</a>
         </v-list-tile-title>
         <v-list-tile-sub-title v-if="friend.social===0 && !friend.following"
                                class="reg-15 textdarkgrey-text mb-0 ml-2">{{friend.commonFollowers}}
