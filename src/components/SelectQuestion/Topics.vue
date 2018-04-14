@@ -16,7 +16,7 @@
       </v-btn>
     </v-layout>
     <v-layout justify-center>
-      <v-btn class="blockblue border blocklight-text pb-0 mb-1 mx-4" block>Готово</v-btn>
+      <v-btn class="blockblue border blocklight-text pb-0 mb-1 mx-4" block v-on:click="getQuestionsByTags">Готово</v-btn>
     </v-layout>
     <v-layout justify-center>
       <a class="textdarkgrey-text reg-10">Пропустить</a>
@@ -30,11 +30,11 @@
       return {
         tags: [],
         choosenTags: [],
+        questions:[],
       }
     },
     mounted() {
       let headers = new Headers();
-
       let options = {
         method: 'GET',
         headers: headers,
@@ -55,6 +55,19 @@
         } else {
           this.choosenTags.push(tag)
         }
+      },
+      getQuestionsByTags(){
+        let headers = new Headers();
+        let options = {
+          method: 'POST',
+          headers: headers,
+          mode: 'cors',
+          cache: 'default',
+          body: this.tags,
+        };
+        fetch('https://siteurl.com', options).then(function (response) {
+          this.questions=response.body;
+        });
       }
     }
   }
