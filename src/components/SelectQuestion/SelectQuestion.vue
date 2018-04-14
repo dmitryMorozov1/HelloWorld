@@ -9,7 +9,7 @@
         <topics class="topics mr-0 mb-3 border blocklight"></topics>
         <v-layout class="recommended-friends mr-0 ml-4 border blocklight">
           <v-flex class="pt-2">
-            <v-layout justify-center class="reg-17 textdarkgrey-text mb-1">
+            <v-layout justify-center class="reg-17 textdarkgrey-text mb-3">
               ВОЗМОЖНЫЕ ДРУЗЬЯ
             </v-layout>
             <recommended-friend v-for="friend in friends" :key="friend.id"
@@ -205,13 +205,11 @@
   .questions {
     width: 777px;
     max-width: 777px;
-    height: 500px;
   }
 
   .topics {
     width: 275px;
     max-width: 275px;
-    height: 293px;
   }
 
   .recommended-friends {

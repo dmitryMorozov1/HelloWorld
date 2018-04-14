@@ -6,50 +6,14 @@
         <img :src="friend.avatar">
       </v-list-tile-avatar>
 
-
       <v-list-tile-content>
         <v-list-tile-title class="ml-2">
           <a :href="'profile/'+friend.id" class="reg-15 black--text" target="_blank"
              style="text-decoration: none;">{{friend.name}}</a>
         </v-list-tile-title>
-        <v-list-tile-sub-title v-if="friend.social===0 && !friend.following"
-                               class="reg-15 textdarkgrey-text mb-0 ml-2">{{friend.commonFollowers}}
-          {{getEnding(friend.commonFollowers)}}
+        <v-list-tile-sub-title class="reg-15 textdarkgrey-text mb-1 ml-2">
+          {{getSocialNetwork(friend)}}
         </v-list-tile-sub-title>
-        <v-list-tile-sub-title v-if="friend.social===1 && !friend.following"
-                               class="reg-15 textdarkgrey-text mb-0 ml-2">
-          <a :href="'https://'+friend.linkSocial" class="reg-15 textdarkgrey-text" target="_blank"
-             style="text-decoration: none;"> из Facebook </a>
-        </v-list-tile-sub-title>
-        <v-list-tile-sub-title v-if="friend.social===2 && !friend.following"
-                               class="reg-15 textdarkgrey-text mb-0 ml-2">
-          <a :href="'https://'+friend.linkSocial" class="reg-15 textdarkgrey-text" target="_blank"
-             style="text-decoration: none;">из Вконтакте </a>
-        </v-list-tile-sub-title>
-        <v-list-tile-sub-title v-if="friend.social===3 && !friend.following"
-                               class="reg-15 textdarkgrey-text mb-0 ml-2">
-          <a :href="'https://'+friend.linkSocial" class="reg-15 textdarkgrey-text" target="_blank"
-             style="text-decoration: none;">из Twitter </a>
-        </v-list-tile-sub-title>
-        <v-list-tile-sub-title v-if="friend.social===4 && !friend.following"
-                               class="reg-15 textdarkgrey-text mb-0 ml-2">
-          <a :href="'https://'+friend.linkSocial" class="reg-15 textdarkgrey-text" target="_blank"
-             style="text-decoration: none;">из Google+ </a>
-        </v-list-tile-sub-title>
-        <v-list-tile-sub-title v-if="friend.social===5 && !friend.following"
-                               class="reg-15 textdarkgrey-text mb-0 ml-2">
-          <a :href="'https://'+friend.linkSocial" class="reg-15 textdarkgrey-text" target="_blank"
-             style="text-decoration: none;">из Telegram </a>
-        </v-list-tile-sub-title>
-        <v-list-tile-sub-title v-if="friend.social===6 && !friend.following"
-                               class="reg-15 textdarkgrey-text mb-0 ml-2">
-          <a :href="'https://'+friend.linkSocial" class="reg-15 textdarkgrey-text" target="_blank"
-             style="text-decoration: none;">из Badoo </a>
-        </v-list-tile-sub-title>
-        <v-list-tile-sub-title v-if="friend.following" class="reg-15 textdarkgrey-text mb-1 ml-2">
-          подписан(а) на вас
-        </v-list-tile-sub-title>
-
 
       </v-list-tile-content>
       <v-icon class="pr-3" v-on:click="isAdded=!isAdded" style="cursor: pointer;" v-if="!isAdded">
@@ -79,25 +43,34 @@
 
     },
     methods: {
-      getEnding: (number) => {
-        if (10 <= number && number <= 20) {
-          return "общих друзей";
-        } else {
-          let lastDigit = number % 10;
-          switch (true) {
-            case lastDigit === 1:
-              return "общий друг";
-            case (2 <= lastDigit
-              && lastDigit <= 4):
-              return "общих друга";
-            case (5 <= lastDigit
-              && lastDigit <= 9):
-            case lastDigit === 0:
-              return "общих друзей";
-          }
+      getSocialNetwork:(friend) => {
+        if (friend.following) return "подписан(а) на вас";
+        switch (friend.social) {
+          case 0:
+            if (10 <= friend.commonFollowers && friend.commonFollowers <= 20){
+              return friend.commonFollowers+" общих друзей";
+            } else {
+              let lastDigit = friend.commonFollowers % 10;
+              switch (true) {
+                case lastDigit === 1:
+                  return friend.commonFollowers+" общий друг";
+                case (2 <= lastDigit
+                  && lastDigit <= 4):
+                  return friend.commonFollowers+" общих друга";
+                case (5 <= lastDigit
+                  && lastDigit <= 9):
+                case lastDigit === 0:
+                  return friend.commonFollowers+" общих друзей";
+              }
+            }
+          case 1: return "из Facebook";
+          case 2: return "из ВКонтакте";
+          case 3: return "из Twitter";
+          case 4: return "из Google+";
+          case 5: return "из Telegram";
+          case 6: return "из Badoo";
         }
-
-      },
+      }
     }
   }
 </script>
