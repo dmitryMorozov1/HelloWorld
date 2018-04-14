@@ -19,8 +19,6 @@
           </a>
           <v-layout v-else>{{getSocialNetwork(friend)}}</v-layout>
         </v-list-tile-sub-title>
-
-
       </v-list-tile-content>
 
       <v-icon v-on:click="isAdded=!isAdded;" :class="isAdded ? 'added' : ''"
@@ -39,7 +37,6 @@
       return {
         isAdded: false,
         iconStyle:{},
-        icon:"person_add",
       }
     },
 
