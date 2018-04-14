@@ -6,7 +6,6 @@
         <img :src="friend.avatar">
       </v-list-tile-avatar>
 
-
       <v-list-tile-content>
         <v-list-tile-title class="ml-2">
           <a :href="'profile/'+friend.id" class="reg-15 black--text" target="_blank"
@@ -23,12 +22,10 @@
 
 
       </v-list-tile-content>
-      <v-icon class="pr-3" v-on:click="isAdded=!isAdded" style="cursor: pointer;" v-if="!isAdded">
-        person_add
-      </v-icon>
-      <v-icon class="pr-3" v-on:click="isAdded=!isAdded"
-              style="cursor: pointer; color: #1A93F0; transform: translate(8%,0%)" v-if="isAdded">
-        person
+
+      <v-icon v-on:click="isAdded=!isAdded;" :class="isAdded ? 'added' : ''"
+              class="pr-3" style="cursor: pointer;">
+              {{this.isAdded ? 'person' : 'person_add'}}
       </v-icon>
     </v-layout>
 
@@ -41,8 +38,11 @@
     data() {
       return {
         isAdded: false,
+        iconStyle:{},
+        icon:"person_add",
       }
     },
+
     props: {
       friend: {}
     },
@@ -83,11 +83,14 @@
           case 6:
             return "из Badoo";
         }
-      }
+      },
     }
   }
 </script>
 
 <style scoped>
-
+ .added{
+   color: #1A93F0;
+   transform:translate(8%,0%);
+ }
 </style>
