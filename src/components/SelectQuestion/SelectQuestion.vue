@@ -8,13 +8,14 @@
       <v-flex>
         <topics class="topics mr-0 mb-3 border blocklight"></topics>
         <v-layout class="recommended-friends mr-0 ml-4 border blocklight">
-          <v-layout column>
-            <v-layout justify-center class="textdarkgrey-text reg-17 pt-2" style="height:20px;">
+          <v-flex class="pt-2">
+            <v-layout justify-center class="reg-17 textdarkgrey-text mb-1">
               ВОЗМОЖНЫЕ ДРУЗЬЯ
             </v-layout>
             <recommended-friend v-for="friend in friends" :key="friend.id"
-                                :friend="friend"></recommended-friend>
-          </v-layout>
+                                :friend="friend">
+            </recommended-friend>
+          </v-flex>
         </v-layout>
       </v-flex>
     </v-layout>
@@ -154,7 +155,7 @@
           name: 'Седова Елизавета',
           avatar: 'https://wallpaperbrowse.com/media/images/pictures-2.jpg',
           social: 0, // social id, 0 - no social, 1 - facebook, 2 - vkontakte, 3 - twitter, 4 - google+, 5 - telegram, 6 - badoo
-          linkSocial: '',
+          linkSocial: 'https://google.com',
           commonFollowers: 5, // only a number
           following: false // is following to you
         },
@@ -216,6 +217,5 @@
   .recommended-friends {
     width: 275px;
     max-width: 275px;
-    height: 345px;
   }
 </style>

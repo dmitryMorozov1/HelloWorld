@@ -9,7 +9,8 @@
 
       <v-list-tile-content>
         <v-list-tile-title class="ml-2">
-          <a :href="friend.linkSocial" class="reg-15 black--text" target="_blank" style="text-decoration: none;">{{friend.name}}</a>
+          <a :href="'profile/'+friend.id" class="reg-15 black--text" target="_blank"
+             style="text-decoration: none;">{{friend.name}}</a>
         </v-list-tile-title>
         <v-list-tile-sub-title v-if="friend.social===0 && !friend.following"
                                class="reg-15 textdarkgrey-text mb-0 ml-2">{{friend.commonFollowers}}
@@ -17,27 +18,33 @@
         </v-list-tile-sub-title>
         <v-list-tile-sub-title v-if="friend.social===1 && !friend.following"
                                class="reg-15 textdarkgrey-text mb-0 ml-2">
-          из Facebook
+          <a :href="'https://'+friend.linkSocial" class="reg-15 textdarkgrey-text" target="_blank"
+             style="text-decoration: none;"> из Facebook </a>
         </v-list-tile-sub-title>
         <v-list-tile-sub-title v-if="friend.social===2 && !friend.following"
                                class="reg-15 textdarkgrey-text mb-0 ml-2">
-          из Вконтакте
+          <a :href="'https://'+friend.linkSocial" class="reg-15 textdarkgrey-text" target="_blank"
+             style="text-decoration: none;">из Вконтакте </a>
         </v-list-tile-sub-title>
         <v-list-tile-sub-title v-if="friend.social===3 && !friend.following"
                                class="reg-15 textdarkgrey-text mb-0 ml-2">
-          из Twitter
+          <a :href="'https://'+friend.linkSocial" class="reg-15 textdarkgrey-text" target="_blank"
+             style="text-decoration: none;">из Twitter </a>
         </v-list-tile-sub-title>
         <v-list-tile-sub-title v-if="friend.social===4 && !friend.following"
                                class="reg-15 textdarkgrey-text mb-0 ml-2">
-          из Google+
+          <a :href="'https://'+friend.linkSocial" class="reg-15 textdarkgrey-text" target="_blank"
+             style="text-decoration: none;">из Google+ </a>
         </v-list-tile-sub-title>
         <v-list-tile-sub-title v-if="friend.social===5 && !friend.following"
                                class="reg-15 textdarkgrey-text mb-0 ml-2">
-          из Telegram
+          <a :href="'https://'+friend.linkSocial" class="reg-15 textdarkgrey-text" target="_blank"
+             style="text-decoration: none;">из Telegram </a>
         </v-list-tile-sub-title>
         <v-list-tile-sub-title v-if="friend.social===6 && !friend.following"
                                class="reg-15 textdarkgrey-text mb-0 ml-2">
-          из Badoo
+          <a :href="'https://'+friend.linkSocial" class="reg-15 textdarkgrey-text" target="_blank"
+             style="text-decoration: none;">из Badoo </a>
         </v-list-tile-sub-title>
         <v-list-tile-sub-title v-if="friend.following" class="reg-15 textdarkgrey-text mb-1 ml-2">
           подписан(а) на вас
