@@ -1,26 +1,14 @@
 <template>
   <v-container class="py-0">
-    <v-container
-      class="pa-0"
-      v-if="onlyNewQuestion">
-    <question 
-      v-for="question in questions" 
-      :key="question.id" 
-      :question="question"
-      v-if="question.answered === false"
-      >
-    </question>
-  </v-container>
-  <v-container
-      class="pa-0"
-      v-if="!onlyNewQuestion">
-    <question 
-      v-for="question in questions" 
-      :key="question.id" 
-      :question="question"
-      >
-    </question>
-  </v-container>
+    <v-container class="pa-0">
+      <question 
+        v-for="question in questions" 
+        :key="question.id" 
+        :question="question"
+        v-if="!question.answered || !onlyNewQuestion"
+        >
+      </question>
+    </v-container>
   </v-container>
 </template>
 
