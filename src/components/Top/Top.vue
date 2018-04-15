@@ -5,8 +5,13 @@
         <router-view :only-new-question="onlyNewQuestion"></router-view>
       </v-flex>
       <v-flex>
-        <top-menu  @showNewQuestions="showNewQuestions" class="top-menu mr-0 mb-3"></top-menu>
-        <top-popular class="top-popular mr-0"></top-popular>
+        <top-menu  
+          @showNewQuestions="showNewQuestions" 
+          class="top-menu mr-0 mb-3">
+        </top-menu>
+        <top-popular 
+          class="top-popular mr-0">
+        </top-popular>
       </v-flex>
     </v-layout>
   </v-container>
