@@ -32,8 +32,8 @@ export default {
     }
   },
   created () {
-    //if (this.$route.name === 'Top')
-    //this.$router.push({name: 'Top-day'});
+    if (this.$route.name === 'Top')
+    this.$router.push({name: 'Top-day'});
   }
 }
 </script>
