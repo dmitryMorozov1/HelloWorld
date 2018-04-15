@@ -9,7 +9,7 @@
           :key="item.title" 
           @click="go(item.id)">
             <v-list-tile-content 
-            small
+              small
               v-text="item.title.toUpperCase()" 
               class="med-17 textdarkgrey-text pl-4">
             </v-list-tile-content>
@@ -23,10 +23,10 @@
         </v-flex>
         <v-spacer></v-spacer>
         <v-flex class="pt-4">
-        <v-switch
-          v-model="tile"
-          @click="showNewQuestions(1)">
-        </v-switch>
+          <v-switch
+            v-model="tile"
+            @click="showNewQuestions(1)">
+          </v-switch>
         </v-flex>
       </v-layout>
     </v-flex>
@@ -38,11 +38,11 @@ export default {
   data() {
     return {
       items: [
-          { title: 'День', id: 'Top-day'},
-          { title: 'Неделя', id: 'Top-week'},
-          { title: 'Месяц', id: 'Top-month'},
-          { title: 'Всё время', id: 'Top-all'}
-        ],
+        { title: 'День', id: 'Top-day'},
+        { title: 'Неделя', id: 'Top-week'},
+        { title: 'Месяц', id: 'Top-month'},
+        { title: 'Всё время', id: 'Top-all'}
+      ],
       currentId: "",
       tile: false
     }
