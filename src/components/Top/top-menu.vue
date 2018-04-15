@@ -49,23 +49,11 @@ export default {
   },
   mounted () {
     this.currentId = this.$router.history.current.name || this.items[0].id;
-
-    // Это можно ввести, чтобы как то исправить положение,
-    // но это не решит все проблемы
-     if (this.currentId === 'Top') this.currentId = 'Top-day';
-    
-
     this.go(this.currentId);
   },
   methods: {
     go(id) {
-      // Можно сделать это вот это, но это не решит все проблемы
-       let thisName = id==='Top-day' ? 'Top' : id;
-      // и запихать в push вместо id 
-      this.$router.push({ name: thisName});
-
-      //больше я не знаю че сделать еще
-
+      this.$router.push({ name: id});
       document.getElementById(this.currentId).firstChild.classList.remove("textblue-text");
       document.getElementById(this.currentId).firstChild.classList.add("textdarkgrey-text");
       if (document.getElementById(id)) {
