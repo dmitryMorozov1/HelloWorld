@@ -1,17 +1,24 @@
 <template>
-  <v-toolbar dense fixed color="#fcffff">
-    <v-toolbar-title class="color-39F mr-3 main-text">
+  <v-toolbar dense fixed class="border blocklight">
+    <v-toolbar-title class="thin-28 textblue-text mr-3 main-text">
       2Buttons
     </v-toolbar-title>
     <v-toolbar-items>
-      <v-btn flat id="Profile" class="capitalize" @click="go('Profile')">Моя страница</v-btn>
-      <v-btn flat id="News" class="capitalize" @click="go('News')">Новости</v-btn>
-      <v-btn flat id="Favorites" class="capitalize" @click="go('Favorites')">Закладки</v-btn>
-      <v-btn flat id="Top" class="capitalize" @click="go('Top')">Лучшее</v-btn>
-      <v-btn flat id="" class="capitalize">Подобрать вопрос</v-btn>
+      <v-btn 
+        v-for="item in menuItems"
+        :key="item.id"
+        :ripple="false"
+        :id="item.id"
+        flat
+        class="capitalize med-17 textgrey-text" 
+        @click="go(item.id)"
+      > {{ item.title }} </v-btn>
     </v-toolbar-items>
     <v-spacer></v-spacer>
-    <v-btn class="body-1 create-question capitalize" depressed>Задать вопрос</v-btn>
+    <v-btn 
+      color="blockblue" 
+      class="med-16 create-question blocklight-text" 
+      round depressed>Задать вопрос</v-btn>
     <v-btn flat>
         <v-icon>notifications_none</v-icon>
       </v-btn>
@@ -23,7 +30,7 @@
         <v-icon>arrow_drop_down</v-icon>
       </v-toolbar-title>
       <v-list>
-
+        <!-- some links will be here in future -->
       </v-list>
     </v-menu>
   </v-toolbar>
@@ -33,24 +40,43 @@
 export default {
   data() {
     return {
-      currentName: ''
+      currentName: '',
+      menuItems: [
+        { id: 'Profile', title: 'Моя страница' },
+        { id: 'News', title: 'Новости' },
+        { id: 'Favorites', title: 'Закладки' },
+        { id: 'Top', title: 'Лучшее' },
+        { id: 'SelectQuestion', title: 'Подобрать вопрос' }
+      ]
     }
   },
-  props: [''],
   mounted () {
-    
+    // getting name of loading page 
+    if(document.getElementById((this.$router.history.current.matched[0].name))) {
+      this.currentName = this.$router.history.current.matched[0].name;
+      document.getElementById((this.$router.history.current.matched[0].name))
+                               .classList.add("current-page");
+    }
   },
   methods: {
     go(name) {
       if (document.getElementById(this.currentName)) {
         document.getElementById(this.currentName).classList.remove("current-page");
       }
+      // CRUTCH ! need to change
       if(name === "Profile") {
         this.$router.push({ name: name, params: { id: '1'} })
+      }
+      else if(name === "Top") 
+      {
+        this.$route.name.search( /Top-/i ) !== -1 ? 
+        this.$router.push({ name: this.$route.name }) :
+        this.$router.push({ name: name + '-day' });
       }
       else {
         this.$router.push({ name: name })
       }
+      // checking for right element name and adding class
       if (document.getElementById(name)) {
         document.getElementById(name).classList.add("current-page");
         this.currentName = name;
@@ -62,31 +88,21 @@ export default {
 
 <style scoped>
 .capitalize {
-  text-transform: capitalize;
+  text-transform: inherit;
 }
 .create-question {
-  background-color: #75bdff !important;
-  font-weight: 100;
-  font-size: 17px !important;
-  color: #fcffff;
-  border-radius: 6px;
-  width: 170px;
-}
-.color-39F {
-  color: #39F;
+  text-transform: inherit;
+  height: 31px;
+  width: 159px;
 }
 .current-page {
-  color: #39F;
-  border-bottom: 2px solid #39F; 
+  color: #1A93F0 !important;
+  border-bottom: 2px solid #1A93F0; 
 }
 .main-text {
   text-transform: uppercase;
-  font-weight: bold;
-  font-size: 30px;
-  font-family: 'Tw Cen MT';
 }
-.btn {
-  font-size: 18px;
+.toolbar {
+  border-bottom: 1px solid #E0E0E0 !important;
 }
-
 </style>
