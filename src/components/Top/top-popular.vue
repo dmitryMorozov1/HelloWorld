@@ -4,23 +4,24 @@
       ПОПУЛЯРНЫЕ ТЕМЫ
     </v-flex>
     <v-flex class="pt-2">
-    <v-flex class="pl-4" v-for="popularTopic in popularTopics" 
+      <v-flex class="pl-4" 
+        v-for="popularTopic in popularTopics" 
         :key="popularTopic.id">
-      <v-layout row class="top-popular-value">
-      <v-btn 
-        outline
-        small
-        :ripple="false"
-        color="grey darken-1"
-        class="top-popular-tag thin-12 textdarkgrey-text"
-        @click="getTopic(popularTopic.id)">
-          {{ popularTopic.name }}
-      </v-btn>
-      <v-flex class="med-17 textdarkgrey-text pt-2 pl-1">
-        {{ popularTopic.value }}
+        <v-layout row class="top-popular-value">
+          <v-btn 
+            outline
+            small
+            :ripple="false"
+            color="grey darken-1"
+            class="top-popular-tag thin-12 textdarkgrey-text"
+            @click="getTopic(popularTopic.id)">
+              {{ popularTopic.name }}
+          </v-btn>
+          <v-flex class="med-17 textdarkgrey-text pt-2 pl-1">
+            {{ popularTopic.value }}
+          </v-flex>
+        </v-layout>
       </v-flex>
-      </v-layout>
-    </v-flex>
     </v-flex>
   </v-container>
 </template>
