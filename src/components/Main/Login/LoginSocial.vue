@@ -1,5 +1,5 @@
 <template>
-  <v-card id="login-social-comp">
+  <v-card id="login-social-compp">
     <v-flex class="text-xs-center pt-2 med-24 textblue-text">
       Вход
     </v-flex>
@@ -27,7 +27,7 @@
         :ripple="false"
         flat
         class="mr-0 reg-12"
-        @click="callLoginEmailForm()"> У меня нет социальных сетей 
+        @click.native="callLoginEmailForm()"> У меня нет социальных сетей 
       </v-btn>
     </v-flex>
   </v-card>
@@ -41,8 +41,7 @@ export default {
     }
   },
   mounted () {
-    this.addButtons();
-    document.getElementById('login-social-comp').style.width = "20px";
+    this.addButtons;
   },
   computed: {
     addButtons() {

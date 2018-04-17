@@ -5,23 +5,17 @@
     </v-flex>
     <v-form 
       id="form-person-data-input-comp"
-      v-model="valid" 
       class="px-4">
         <v-text-field
           class="input"
-          label="Дата рождения"
-          v-model="name"
-          :rules="nameRules">
+          label="Дата рождения">
         </v-text-field>
         <v-text-field
           class="input"
-          label="Город"
-          v-model="name"
-          :rules="nameRules">
+          label="Город">
         </v-text-field>
         <v-radio-group 
-          row 
-          v-model="row">
+          row >
           <v-layout class="sex-label">
             <v-flex class="textdarkgrey-text reg-16">
               Пол

@@ -1,5 +1,5 @@
 <template>
-  <v-component>
+  <v-container>
     <v-dialog v-model="loginSocial" max-width="340px">
       <login-social @callLoginEmailForm="showloginemail"></login-social>
     </v-dialog>
@@ -12,7 +12,7 @@
     <v-dialog v-model="personData" max-width="340px">
       <person-data @wasRegistered="registered"></person-data>
     </v-dialog>
-  </v-component>
+  </v-container>
 </template>
 
 <script>

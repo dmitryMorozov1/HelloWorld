@@ -1,21 +1,18 @@
 <template>
   <v-card>
-    <v-flex class="text-xs-center py-3 med-24 textblue-text">
+    <v-flex class="text-xs-center py-2 med-24 textblue-text">
       Вход
     </v-flex>
     <v-form 
       id="form-login-input-comp" 
-      v-model="valid" 
       class="px-4">
         <v-text-field
-          label="Email или телефон"
-          v-model="name"
-          :rules="nameRules">
+          class="input"
+          label="Email или телефон">
         </v-text-field>
         <v-text-field
-          label="Пароль"
-          v-model="email"
-          :rules="emailRules">
+          class="input"
+          label="Пароль">
         </v-text-field>
     </v-form>
     <v-flex class="text-xs-right mr-3">
@@ -53,6 +50,7 @@
 </template>
 
 <script>
+const ENTER = 38;
 export default {
   data() {
     return { }
@@ -66,6 +64,12 @@ export default {
     },
     rememberPassword() {
       alert("ОКАЙ");
+    },
+    onKeydown(e) {
+      if (e.keyCode === ENTER) {
+        //document.getElementById('form-login-input-comp')
+          //  .firstElementChild.children[1].firstElementChild.focus();
+      }
     }
   },
   mounted () {
@@ -88,6 +92,9 @@ export default {
 .registration-btn {
   min-width: 190px;
   border: 1px solid #5DA3DA !important;
+}
+#form-login-input-comp .input {
+  color: #1A93F0 !important;
 }
 hr {
   border: none;

@@ -5,25 +5,18 @@
     </v-flex>
     <v-form 
       id="form-registration-input-comp" 
-      v-model="valid" 
       class="px-4">
         <v-text-field
           class="input"
-          label="Имя Фамилия"
-          v-model="name"
-          :rules="nameRules">
+          label="Имя Фамилия">
         </v-text-field>
         <v-text-field
           class="input"
-          label="Email или телефон"
-          v-model="name"
-          :rules="nameRules">
+          label="Email или телефон">
         </v-text-field>
         <v-text-field
           class="input"
-          label="Пароль"
-          v-model="email"
-          :rules="emailRules">
+          label="Пароль">
         </v-text-field>
     </v-form>
     <v-flex class="text-xs-center py-3">
