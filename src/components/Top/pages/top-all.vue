@@ -1,14 +1,12 @@
 <template>
-  <v-container class="py-0">
-    <v-container class="pa-0">
-      <question 
-        v-for="question in questions" 
-        :key="question.id" 
-        :question="question"
-        v-if="!question.answered || !onlyNewQuestion"
-        >
-      </question>
-    </v-container>
+  <v-container class="pa-0">
+    <question class="pb-4"
+      v-for="question in questions" 
+      :key="question.id" 
+      :question="question"
+      v-if="!question.answered || !onlyNewQuestion"
+      >
+    </question>
   </v-container>
 </template>
 
