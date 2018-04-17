@@ -19,9 +19,12 @@
       color="blockblue" 
       class="med-16 create-question blocklight-text" 
       round depressed>Задать вопрос</v-btn>
-    <v-btn flat>
+      
+    <v-btn flat @click.native.stop="callLoginMain()">
         <v-icon>notifications_none</v-icon>
-      </v-btn>
+    </v-btn>
+    <login-main v-if="loginMain" @closeLogin="closeLogin"></login-main>
+    
     <v-menu :nudge-width="100">
       <v-toolbar-title slot="activator">
         <v-avatar size="30px">
@@ -37,10 +40,12 @@
 </template>
 
 <script>
+import LoginMain from '@/components/Main/Login/LoginMain.vue'
 export default {
   data() {
     return {
       currentName: '',
+      loginMain: false,
       menuItems: [
         { id: 'Profile', title: 'Моя страница' },
         { id: 'News', title: 'Новости' },
@@ -49,6 +54,9 @@ export default {
         { id: 'SelectQuestion', title: 'Подобрать вопрос' }
       ]
     }
+  },
+  components: {
+    'login-main': LoginMain
   },
   mounted () {
     // getting name of loading page 
@@ -59,6 +67,12 @@ export default {
     }
   },
   methods: {
+    callLoginMain() {
+      this.loginMain = true;
+    },
+    closeLogin() {
+      this.loginMain = false;
+    },
     go(name) {
       if (document.getElementById(this.currentName)) {
         document.getElementById(this.currentName).classList.remove("current-page");
