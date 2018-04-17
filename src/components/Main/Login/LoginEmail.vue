@@ -7,10 +7,20 @@
       id="form-login-input-comp" 
       class="px-4">
         <v-text-field
+          v-model="login"
+          @keyup.enter="nextInput"
           class="input"
           label="Email или телефон">
         </v-text-field>
         <v-text-field
+          v-model="password"
+          :rules="passwordRules"
+          hint="Минимум 8 символов"
+          min="8"
+          :append-icon="e1 ? 'visibility' : 'visibility_off'"
+          :append-icon-cb="() => (e1 = !e1)"
+          :type="e1 ? 'password' : 'text'"
+          @keyup.enter="loginEmail"
           class="input"
           label="Пароль">
         </v-text-field>
@@ -29,7 +39,7 @@
         class="capitalize med-16 enter-btn blocklight-text blockblue"
         round
         depressed
-        @click.native="login()">
+        @click.native="loginEmail()">
           Войти
       </v-btn>
     </v-flex>
@@ -50,26 +60,33 @@
 </template>
 
 <script>
-const ENTER = 38;
 export default {
   data() {
-    return { }
+    return {
+      login: '',
+      password: '',
+      passwordRules: [
+        v => !!v || 'Введите пароль'
+      ],
+      e1: true
+     }
   },
   methods: {
     callRegistrationForm() {
       this.$emit('callRegistrationForm');
     },
-    login() {
+    loginEmail() {
       alert("log");
     },
     rememberPassword() {
-      alert("ОКАЙ");
+      alert("ОjllКАЙ");
+    },
+    nextInput() {
+      document.getElementById('form-login-input-comp')
+            .lastChild.children[1].firstChild.focus();
     },
     onKeydown(e) {
-      if (e.keyCode === ENTER) {
-        //document.getElementById('form-login-input-comp')
-          //  .firstElementChild.children[1].firstElementChild.focus();
-      }
+      alert(1);
     }
   },
   mounted () {
