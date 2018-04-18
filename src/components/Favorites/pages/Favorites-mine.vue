@@ -38,9 +38,6 @@ export default {
       }
     }
   },
-  updated() {
-    sortedList();
-  },
   created() {
     this.questions = [
       {
