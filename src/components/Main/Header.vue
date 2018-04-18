@@ -19,12 +19,12 @@
       color="blockblue" 
       class="med-16 create-question blocklight-text" 
       round depressed>Задать вопрос</v-btn>
-      
+
     <v-btn flat @click.native.stop="callLoginMain()">
         <v-icon>notifications_none</v-icon>
     </v-btn>
     <login-main v-if="loginMain" @closeLogin="closeLogin"></login-main>
-    
+
     <v-menu :nudge-width="100">
       <v-toolbar-title slot="activator">
         <v-avatar size="30px">
@@ -86,6 +86,12 @@ export default {
         this.$route.name.search( /Top-/i ) !== -1 ? 
         this.$router.push({ name: this.$route.name }) :
         this.$router.push({ name: name + '-day' });
+      }
+      else if(name === "Favorites") 
+      {
+        this.$route.name.search( /Favorites-/i ) !== -1 ? 
+        this.$router.push({ name: this.$route.name }) :
+        this.$router.push({ name: name + '-mine' });
       }
       else {
         this.$router.push({ name: name })
