@@ -48,6 +48,7 @@ export default {
     }
   },
   mounted () {
+    this.setStyles();
     this.currentId = this.$router.history.current.name || this.items[0].id;
     this.go(this.currentId);
   },
@@ -64,6 +65,12 @@ export default {
     },
     showNewQuestions() {
       this.$emit('showNewQuestions', { tile: !this.tile });
+    },
+    setStyles() {
+      for(let i = 0; i < 4; i++)
+        document.getElementById("top-menu-comp")
+                .firstElementChild.firstElementChild.children[i]
+                .firstElementChild.style.height = "36px";
     }
   }
 }
@@ -74,11 +81,11 @@ export default {
   border-radius: 2px;
 }
 .top-2 {
-  height: 45px;
+  height: 42px;
   border-radius: 2px;
 }
 .top-2-layout {
   align-items: center;
-  max-height: 45px;
+  max-height: 40px;
 }
 </style>
