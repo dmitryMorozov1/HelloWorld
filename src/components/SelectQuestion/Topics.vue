@@ -3,7 +3,7 @@
     <v-layout class="reg-17 textdarkgrey-text mb-1 text-xs-center">
       ВЫБЕРИТЕ НАИБОЛЕЕ ИНТЕРЕСНУЮ ТЕМУ:
     </v-layout>
-    <v-layout column style="align-items: center;" align="center" class="mb-0 pa-0 ">
+    <v-layout column class="mb-0 pa-0 center">
       <v-btn
         small
         class="thin-12 border ma-1 textdarkgrey-text"
@@ -91,5 +91,8 @@
 
   .btn {
     min-width: 0 !important;
+  }
+  .center{
+    align-items: center;
   }
 </style>

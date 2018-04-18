@@ -8,13 +8,13 @@
 
       <v-list-tile-content>
         <v-list-tile-title class="ml-2">
-          <a :href="'profile/'+friend.id" class="reg-15 black--text" target="_blank"
-             style="text-decoration: none;">{{friend.name}}</a>
+          <a :href="'profile/'+friend.id" class="reg-15 black--text no-text-decoration"
+             target="_blank">{{friend.name}}</a>
         </v-list-tile-title>
 
         <v-list-tile-sub-title class="reg-15 textdarkgrey-text mb-1 ml-2">
           <a v-if="friend.social!==0 && !friend.following" :href="'https://'+friend.linkSocial"
-             class="reg-15 textdarkgrey-text" target="_blank" style="text-decoration: none;">
+             class="reg-15 textdarkgrey-text no-text-decoration" target="_blank">
              {{getSocialNetwork(friend)}}
           </a>
           <v-layout v-else>{{getSocialNetwork(friend)}}</v-layout>
@@ -22,7 +22,7 @@
       </v-list-tile-content>
 
       <v-icon v-on:click="isAdded=!isAdded;" :class="isAdded ? 'added' : ''"
-              class="pr-3" style="cursor: pointer;">
+              class="pr-3 pointer">
               {{this.isAdded ? 'person' : 'person_add'}}
       </v-icon>
     </v-layout>
@@ -35,8 +35,7 @@
   export default {
     data() {
       return {
-        isAdded: false,
-        iconStyle:{},
+        isAdded: false
       }
     },
 
@@ -90,4 +89,10 @@
    color: #1A93F0;
    transform:translate(8%,0%);
  }
+  .pointer{
+    cursor: pointer;
+  }
+  .no-text-decoration{
+    text-decoration: none;
+  }
 </style>
