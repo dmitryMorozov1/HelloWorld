@@ -25,7 +25,7 @@
         <v-flex class="pt-4">
           <v-switch
             v-model="tile"
-            @click="showNewQuestions(1)">
+            @click="showNewQuestions()">
           </v-switch>
         </v-flex>
       </v-layout>
@@ -62,7 +62,7 @@ export default {
         this.currentId = id;
       }
     },
-    showNewQuestions(id) {
+    showNewQuestions() {
       this.$emit('showNewQuestions', { tile: !this.tile });
     }
   }
