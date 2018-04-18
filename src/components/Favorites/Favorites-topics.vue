@@ -1,5 +1,5 @@
 <template>
-  <v-container class="border top-1 blocklight">
+  <v-container class="border top-1 blocklight" id="favorites-topics-comp">
     <v-flex class="textdarkgrey-text text-xs-center reg-17">
       ЛЮБИМЫЕ ТЕМЫ
     </v-flex>
@@ -55,6 +55,7 @@ export default {
     }
   },
   mounted () {
+    this.setStyles();
     this.getAmounts();
   },
   methods: {
@@ -66,7 +67,8 @@ export default {
           { id: '3', name: 'Имя', value: 45},
           { id: '5', name: 'Политика', value: 23},
           { id: '6', name: 'Религия', value: 12},
-          { id: '7', name: 'Государство', value: 4}
+          { id: '7', name: 'Государство', value: 4},
+          { id: '121', name: 'eeee', value: 1}
         ],
         answers: [
           { id: '6', name: 'Религия', value: 99},
@@ -79,6 +81,11 @@ export default {
     },
     getTopic(id) {
       alert(id);
+    },
+    setStyles() {
+      document.getElementById("favorites-topics-comp")
+              .children[1].firstElementChild.firstElementChild
+              .firstElementChild.style.height = "36px";
     }
   }
 }
@@ -103,6 +110,7 @@ export default {
   width: 50%;
 }
 .topic-tab-item {
-  min-height: 260px;
+  min-height: 288px;
 }
+
 </style>
