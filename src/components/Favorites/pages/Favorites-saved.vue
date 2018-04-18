@@ -1,7 +1,7 @@
 <template>
   <v-container class="pa-0">
     <question class="pb-4"
-      v-for="question in questions" 
+      v-for="question in sortedList" 
       :key="question.id" 
       :question="question"
       >
@@ -19,6 +19,25 @@ export default {
     }
   },
   props: ['questionSort'],
+  computed: {
+    sortedList () {
+      switch(this.questionSort){
+        case 'rating': return this.questions.sort (
+          function(d1, d2) {
+            return (d1.likes-d1.dislikes) < (d2.likes-d2.dislikes)
+          });
+        case 'watches': return this.questions.sort (
+          function(d1, d2) {
+            return d1.watches < d2.watches
+          });
+        case 'date': return this.questions.sort (
+          function(d1, d2) {
+            return Date.parse(d1.date) < Date.parse(d2.date)
+          });
+        default: return this.questions;
+      }
+    }
+  },
   created() {
     this.questions = [
       {
@@ -31,7 +50,7 @@ export default {
         like: 1,
         favorite: false,
         answered: false, // is answered
-        watches: 920,
+        watches: 93420,
         likes: 456,
         dislikes: 118,
         tags: ['меняет', 'смена', 'фамилия', 'имя', 'судьба'],
@@ -80,8 +99,8 @@ export default {
         like: 1,
         answered: true, // is answered
         favorite: false,
-        watches: 920,
-        likes: 456,
+        watches: 9320,
+        likes: 4563,
         dislikes: 118,
         tags: ['меняет', 'смена', 'фамилия', 'имя', 'судьба'],
         answers: [

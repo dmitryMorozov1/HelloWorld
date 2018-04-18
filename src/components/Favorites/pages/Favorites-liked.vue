@@ -1,7 +1,7 @@
 <template>
   <v-container class="pa-0">
     <question class="pb-4"
-      v-for="question in questions" 
+      v-for="question in sortedList" 
       :key="question.id" 
       :question="question"
       v-if="question.like === 1"
@@ -20,6 +20,25 @@ export default {
     }
   },
   props: ['questionSort'],
+  computed: {
+    sortedList () {
+      switch(this.questionSort){
+        case 'rating': return this.questions.sort (
+          function(d1, d2) {
+            return (d1.likes-d1.dislikes) < (d2.likes-d2.dislikes)
+          });
+        case 'watches': return this.questions.sort (
+          function(d1, d2) {
+            return d1.watches < d2.watches
+          });
+        case 'date': return this.questions.sort (
+          function(d1, d2) {
+            return Date.parse(d1.date) < Date.parse(d2.date)
+          });
+        default: return this.questions;
+      }
+    }
+  },
   created() {
     this.questions = [
       {
@@ -72,7 +91,7 @@ export default {
         ]
       },
       {
-        id: 4,
+        id: 5,
         ownerName: 'Елизавета Седова',
         avatar: 'https://pp.userapi.com/c622120/v622120519/2607c/k0wPW3Pp__k.jpg',
         background: 'https://media.tvzvezda.ru/news/vstrane_i_mire/content/201708160620-7kh1.htm/1.jpg',
@@ -121,7 +140,7 @@ export default {
         ]
       },
       {
-        id: 4,
+        id: 6,
         ownerName: 'Елизавета Седова',
         avatar: 'https://pp.userapi.com/c622120/v622120519/2607c/k0wPW3Pp__k.jpg',
         background: 'https://media.tvzvezda.ru/news/vstrane_i_mire/content/201708160620-7kh1.htm/1.jpg',
