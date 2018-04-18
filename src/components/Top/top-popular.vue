@@ -1,6 +1,6 @@
 <template>
   <v-container class="border top-1 blocklight">
-    <v-flex class="textdarkgrey-text text-xs-center reg-15">
+    <v-flex class="textdarkgrey-text text-xs-center reg-17">
       ПОПУЛЯРНЫЕ ТЕМЫ
     </v-flex>
     <v-flex class="pt-2">
