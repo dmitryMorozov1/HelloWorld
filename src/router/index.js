@@ -24,6 +24,10 @@ import TopWeek from '@/components/Top/pages/top-week'
 import TopMonth from '@/components/Top/pages/top-month'
 import TopAll from '@/components/Top/pages/top-all'
 
+// Favorites
+import FavoritesMine from '@/components/Favorites/pages/Favorites-mine'
+import FavoritesLiked from '@/components/Favorites/pages/Favorites-liked'
+import FavoritesSaved from '@/components/Favorites/pages/Favorites-saved'
 
 Vue.use(Router)
 
@@ -38,7 +42,24 @@ export default new Router({
     {
       path: '/favorites',
       name: 'Favorites',
-      component: Favorites
+      component: Favorites,
+      children: [
+        {
+          path: 'mine',
+          name: 'Favorites-mine',
+          component: FavoritesMine
+        },
+        {
+          path: 'liked',
+          name: 'Favorites-liked',
+          component: FavoritesLiked
+        },
+        {
+          path: 'saved',
+          name: 'Favorites-saved',
+          component: FavoritesSaved
+        }
+      ]
     },
     {
       path: '/profile/:id',
