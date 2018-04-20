@@ -25,8 +25,7 @@
 
         <v-list-tile-action>
           <v-btn v-on:click="isAdded=!isAdded;" :ripple="false" icon>
-            <v-icon
-                    :color="isAdded ? 'blue lighten-1' : 'blue-grey lighten-2'">
+            <v-icon :class="isAdded? 'textblue-text':'textgrey-text'">
                     {{this.isAdded ? 'person' : 'person_add'}}
             </v-icon>
           </v-btn>
