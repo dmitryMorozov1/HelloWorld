@@ -1,34 +1,39 @@
 <template>
-  <v-list two-line class="py-0 mb-2 blocklight">
+    <v-list dense two-line class="pa-0 mb-0 blocklight">
 
-    <v-layout row>
-      <v-list-tile-avatar class="pa-1 ml-2">
-        <img :src="friend.avatar">
-      </v-list-tile-avatar>
+      <v-list-tile>
+        <a :href="'profile/'+friend.id" target="_blank">
+          <v-list-tile-avatar >
+            <img :src="friend.avatar">
+          </v-list-tile-avatar>
+        </a>
 
-      <v-list-tile-content>
-        <v-list-tile-title class="ml-2">
-          <a :href="'profile/'+friend.id" class="reg-15 black--text no-text-decoration"
-             target="_blank">{{friend.name}}</a>
-        </v-list-tile-title>
+        <v-list-tile-content>
+          <v-list-tile-title>
+            <a :href="'profile/'+friend.id" class="reg-15 black--text no-text-decoration"
+               target="_blank">{{friend.name}}</a>
+          </v-list-tile-title>
 
-        <v-list-tile-sub-title class="reg-15 textdarkgrey-text mb-1 ml-2">
-          <a v-if="friend.social!==0 && !friend.following" :href="'https://'+friend.linkSocial"
-             class="reg-15 textdarkgrey-text no-text-decoration" target="_blank">
-             {{getSocialNetwork(friend)}}
-          </a>
-          <v-layout v-else>{{getSocialNetwork(friend)}}</v-layout>
-        </v-list-tile-sub-title>
-      </v-list-tile-content>
+          <v-list-tile-sub-title class="reg-15 textdarkgrey-text mb-1">
+            <a v-if="friend.social!==0 && !friend.following" :href="'https://'+friend.linkSocial"
+               class="reg-15 textdarkgrey-text no-text-decoration" target="_blank">
+               {{getSocialNetwork(friend)}}
+            </a>
+            <v-layout v-else>{{getSocialNetwork(friend)}}</v-layout>
+          </v-list-tile-sub-title>
+        </v-list-tile-content>
 
-      <v-icon v-on:click="isAdded=!isAdded;" :class="isAdded ? 'added' : ''"
-              class="pr-3 pointer">
-              {{this.isAdded ? 'person' : 'person_add'}}
-      </v-icon>
-    </v-layout>
+        <v-list-tile-action>
+          <v-btn v-on:click="isAdded=!isAdded;" :ripple="false" icon>
+            <v-icon
+                    :color="isAdded ? 'blue lighten-1' : 'blue-grey lighten-2'">
+                    {{this.isAdded ? 'person' : 'person_add'}}
+            </v-icon>
+          </v-btn>
+        </v-list-tile-action>
+      </v-list-tile>
 
-  </v-list>
-
+    </v-list>
 </template>
 
 <script>
@@ -85,13 +90,7 @@
 </script>
 
 <style scoped>
- .added{
-   color: #1A93F0;
-   transform:translate(8%,0%);
- }
-  .pointer{
-    cursor: pointer;
-  }
+
   .no-text-decoration{
     text-decoration: none;
   }
