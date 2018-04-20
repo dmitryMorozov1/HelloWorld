@@ -24,7 +24,7 @@ import topics from './favorites-topics'
 export default {
   data() {
     return {
-      questionSort: false
+      questionSort: "rating"
     }
   },
   components: {
@@ -33,8 +33,7 @@ export default {
   },
   methods: {
     onChangeSorting(input) {
-      alert(1);
-      this.questionSort = input.tile;
+      this.questionSort = input.sortBy;
     }
   },
   created () {
