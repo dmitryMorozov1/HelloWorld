@@ -15,7 +15,7 @@ import question from '@/components/Main/question/question'
 export default {
   data() {
     return {
-      
+      questions: []
     }
   },
   props: ['questionSort'],

@@ -1,17 +1,16 @@
 <template>
-  <v-container class="border top-1 blocklight" id="favorites-topics-comp">
+  <v-container class="border favorites-topics blocklight" id="favorites-topics-comp">
     <v-flex class="textdarkgrey-text text-xs-center reg-17">
       ЛЮБИМЫЕ ТЕМЫ
     </v-flex>
-
-    <v-tabs v-model="active">
+    <v-tabs grow v-model="active">
       <v-layout class="text-xs-center blocklight">
-      <v-tab :ripple="false" class="reg-12 topic-tab">
-        Мои вопросы
-      </v-tab>
-      <v-tab :ripple="false" class="reg-12 topic-tab">
-        Мои ответы
-      </v-tab>
+        <v-tab :ripple="false" class="reg-12">
+          Мои вопросы
+        </v-tab>
+        <v-tab :ripple="false" class="reg-12">
+          Мои ответы
+        </v-tab>
       </v-layout>
       <v-tab-item
         class="topic-tab-item"
@@ -39,9 +38,6 @@
         </v-flex>
       </v-tab-item>
     </v-tabs>
-
-
-    
   </v-container>
 </template>
 
@@ -92,22 +88,14 @@ export default {
 </script>
 
 <style scoped>
-.top-1 {
-  min-height: 360px;
+.favorites-topics {
   border-radius: 2px;
-}
-.top-favorites-layout {
-  text-align: center;
 }
 .top-favorites-tag {
   border-radius: 5px;
 }
 .btn {
   min-width: 0;
-}
-.topic-tab {
-  height: 100%;
-  width: 50%;
 }
 .topic-tab-item {
   min-height: 288px;

@@ -1,6 +1,6 @@
 <template>
   <v-container pa-0 id="favorites-menu-comp">
-    <v-flex mb-3 class="favorites-1 border blocklight">
+    <v-flex mb-3 class="favorites-menu border blocklight">
       <v-list>
         <v-list-tile 
           v-for="item in items" 
@@ -16,7 +16,7 @@
         </v-list-tile>
       </v-list>
     </v-flex>
-    <v-flex class="favorites-2 border blocklight">
+    <v-flex class="favorites-menu border blocklight">
       <v-menu offset-y v-model="menuIcon" class="menubar">
         <v-btn 
           class="my-0 reg-17 textdarkgrey-text" 
@@ -126,10 +126,7 @@ export default {
 </script>
 
 <style scoped>
-.favorites-1 {
-  border-radius: 2px;
-}
-.favorites-2 {
+.favorites-menu {
   border-radius: 2px;
 }
 #favorites-menu-comp .input {
@@ -137,7 +134,6 @@ export default {
 }
 .menubar {
   width: 100%;
-  height: 40px;
 }
 .btn {
   height: 40px;
