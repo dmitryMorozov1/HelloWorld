@@ -63,7 +63,8 @@ export default {
   },
   methods: {
     next() {
-      this.$emit('callPersonDataForm');
+      if(!!this.name && !!this.login && !!this.password)
+        this.$emit('callPersonDataForm');
     },
     nextInput(n) {
       document.getElementById('form-registration-input-comp')

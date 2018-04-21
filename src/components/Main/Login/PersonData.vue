@@ -8,13 +8,15 @@
       class="px-4">
         <v-text-field
           v-model="date"
-          @keyup.enter="nextInput(1)"
+          @keyup.enter="seccondInput()"
+          @keyup.down="seccondInput()" 
           class="input"
           label="Дата рождения">
         </v-text-field>
         <v-select
           :items="cities"
           v-model="city"
+          no-data-text="Город не найден"
           item-text="name"
           class="input"
           label="Город"
@@ -31,6 +33,8 @@
           <v-layout >
             <v-flex 
               @keyup.right="changeSex('2')" 
+              @keyup.up="seccondInput()"
+              @click="changeSex('1')"
               class="pl-4">
                 <v-radio 
                   class="sex input"
@@ -40,6 +44,8 @@
             </v-flex>
             <v-flex 
               @keyup.left="changeSex('1')" 
+              @keyup.up="seccondInput()" 
+              @click="changeSex('2')"
               class="pl-4">
                 <v-radio 
                   class="sex input"
@@ -77,17 +83,16 @@ export default {
   },
   methods: {
     registration() {
-      this.$emit('wasRegistered');
+      if(!!this.sex && !!this.city && !!this.date)
+        this.$emit('wasRegistered');
     },
-    nextInput(n) {
+    seccondInput() {
       document.getElementById('form-person-data-input-comp')
-              .children[n].children[1].children[0].children[0].focus();
-      /*else {
-        document.getElementById('form-person-data-input-comp')
-                .children[n].children[0].children[2]
-                .children[0].children[0].focus();
-        this.radioGroup = "1";
-      }*/
+              .children[1].children[1].children[0].lastElementChild.focus();
+    },
+    firstInput() {
+      document.getElementById('form-person-data-input-comp')
+              .children[0].children[1].children[0].focus();
     },
     changeSex(n) {
       document.getElementById('form-person-data-input-comp')

@@ -1,32 +1,34 @@
 <template>
-  <v-card id="login-social-compp">
+  <v-card id="login-social-comp">
     <v-flex class="text-xs-center pt-2 med-24 textblue-text">
       Вход
     </v-flex>
     <v-flex 
-      class="mx-4 pt-1" 
+      class="mx-4" 
       v-for="(button, index) in buttons" 
       :key="index">
         <v-btn 
           block
           :class="button.name + '-color-border ' + 
                  'capitalize ' + 
-                 button.name + '-color-text med-16'"
+                 button.name + '-color-text med-16 social-btn'"
           round
           depressed
           @click.native="loginSocial(button.name)">
-            <v-avatar size="30px" class="qqq">
+            <v-avatar size="30px" class="ml-1">
               <img :src="button.logo">
             </v-avatar>
-            {{ button.title }}
+            <v-layout class="pl-4">
+              {{ button.title }}
+            </v-layout>
         </v-btn>
     </v-flex>
-    <v-flex class="text-xs-center pb-1">
+    <v-flex class="text-xs-center pb-2">
       <v-btn 
         small
         :ripple="false"
         flat
-        class="mr-0 reg-12"
+        class="ma-0 reg-12"
         @click.native="callLoginEmailForm()"> У меня нет социальных сетей 
       </v-btn>
     </v-flex>
@@ -40,8 +42,11 @@ export default {
       buttons: []
     }
   },
-  mounted () {
+  beforeMount () {
     this.addButtons;
+  },
+  mounted () {
+    this.setStyles();
   },
   computed: {
     addButtons() {
@@ -61,6 +66,17 @@ export default {
     },
     callLoginEmailForm() {
       this.$emit('callLoginEmailForm');
+    },
+    setStyles() {
+      for(let i = 1; i <= 6; i++)
+      {
+        document.getElementById("login-social-comp")
+                .children[i].firstElementChild
+                .firstElementChild.style.padding="0";
+        document.getElementById("login-social-comp")
+                .children[i].firstElementChild
+                .firstElementChild.style.height="100%";
+      }
     }
   }
 }
@@ -68,6 +84,9 @@ export default {
 
 <style scoped>
 .btn {
-  text-transform: inherit;
+  height: 38px
+}
+.social-btn {
+  margin: 10px 0;
 }
 </style>

@@ -15,8 +15,6 @@
         <v-text-field
           v-model="password"
           :rules="passwordRules"
-          hint="Минимум 8 символов"
-          min="8"
           :append-icon="e1 ? 'visibility' : 'visibility_off'"
           :append-icon-cb="() => (e1 = !e1)"
           :type="e1 ? 'password' : 'text'"
@@ -66,7 +64,7 @@ export default {
       login: '',
       password: '',
       passwordRules: [
-        v => !!v || 'Введите пароль'
+        //v => !!v || 'Введите пароль'
       ],
       e1: true
      }
@@ -76,7 +74,8 @@ export default {
       this.$emit('callRegistrationForm');
     },
     loginEmail() {
-      alert("log");
+      if(!!this.login && !!this.password)
+        alert("log");
     },
     rememberPassword() {
       alert("ОjllКАЙ");
