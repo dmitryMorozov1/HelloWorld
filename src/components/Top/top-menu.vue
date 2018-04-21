@@ -16,20 +16,16 @@
         </v-list-tile>
       </v-list>
     </v-flex>
-    <v-flex class="top-2 border blocklight">
-      <v-layout row class="top-2-layout">
-        <v-flex class="textdarkgrey-text pl-3 reg-15">
-          Показывать только новые
-        </v-flex>
-        <v-spacer></v-spacer>
-        <v-flex class="pt-4">
-          <v-switch
-            v-model="tile"
-            @click="showNewQuestions()">
-          </v-switch>
-        </v-flex>
-      </v-layout>
-    </v-flex>
+    <v-layout class="top-2 border blocklight py-1">
+      <v-flex class="textdarkgrey-text pl-3 reg-15">
+        Показывать только новые
+      </v-flex>
+      <v-switch class="pr-3" 
+        hide-details
+        v-model="tile"
+        @click="showNewQuestions()">
+      </v-switch>
+    </v-layout>
   </v-container>
 </template>
 
@@ -81,11 +77,6 @@ export default {
   border-radius: 2px;
 }
 .top-2 {
-  height: 42px;
-  border-radius: 2px;
-}
-.top-2-layout {
   align-items: center;
-  max-height: 40px;
 }
 </style>

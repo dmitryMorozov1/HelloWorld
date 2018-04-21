@@ -6,7 +6,7 @@
       </v-flex>
       <v-flex>
         <top-menu  
-          @showNewQuestions="showNewQuestions" 
+          @showNewQuestions="onShowNewQuestions" 
           class="top-menu mr-0 mb-3">
         </top-menu>
         <top-popular 
@@ -32,7 +32,7 @@ export default {
     'top-popular' : popular
   },
   methods: {
-    showNewQuestions(input) {
+    onShowNewQuestions(input) {
       this.onlyNewQuestion = input.tile;
     }
   },
