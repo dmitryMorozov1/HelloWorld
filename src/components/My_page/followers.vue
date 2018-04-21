@@ -1,5 +1,5 @@
 <template>
-<v-container px-0 py-0 id="followers-comp">
+<v-container px-0 py-0>
   <search @inputsearch="inputsearch"></search>
   <v-container px-0 py-0 mb-2 
     v-for="person in filteredList"
@@ -26,8 +26,7 @@ export default {
     return {
       followers: [],
       search: "",
-      copy_name: [],
-      cur_copy_name: []
+      copyNames: []
     }
   },
   components: {
@@ -36,9 +35,6 @@ export default {
   },
   mounted () {
     this.addfollowers;
-  },
-  updated () {
-    this.coloringSearch();     
   },
   computed: {
     addfollowers() {
@@ -53,19 +49,24 @@ export default {
       ];
     },
     filteredList() {
-      this.cur_copy_name = this.copy_name.filter(post => {
-        let str = this.search.trim();
-        return post.toLowerCase().includes(str.toLowerCase());
-      });
-      return this.followers.filter(post => {
-        if(post.sig) {
-          let str = this.search.trim();
-          return post.name.toLowerCase().includes(str.toLowerCase());
-        }
-        else {
-          return false;
-        }
-      });
+      let search = this.search.trim();
+      let searchWords = search.split(/\s+/g);
+      let followingList = this.followers;
+      for (let n = 0; n < searchWords.length; n++) {
+        followingList = followingList.filter(follower => {
+          return follower.name.toLowerCase().includes(searchWords[n].toLowerCase());
+        });
+      }
+      this.copyNames = [];
+      for (let n = 0; n < followingList.length; n++) {
+        this.copyNames[n] = followingList[n].name;
+      } 
+      return followingList;
+    }
+  },
+  watch: {
+    copyNames: function () {
+      this.coloringSearch();
     }
   },
   methods: {
@@ -73,26 +74,23 @@ export default {
       this.search = input.search;
     },
     coloringSearch() {
-      let list = document.getElementsByClassName("follower-fild-title");
-      for (let i = 0; i < list.length; i++) {
-        if(!!!this.copy_name[i]){
-          this.copy_name[i] = list[i].innerHTML;
+      let folowerNames = document.getElementsByClassName("follower-fild-title");
+      let searchWords = this.search.trim().split(/\s+/g);
+      for (let i = 0; i < folowerNames.length; i++) {
+        if(this.copyNames[i]) {
+          folowerNames[i].innerHTML = this.copyNames[i];
         }
-        if(!!this.cur_copy_name[i])
-          list[i].innerHTML = this.cur_copy_name[i];
-        else 
-          this.cur_copy_name[i] = list[i].innerHTML;
-        let str = this.search.trim();
-        str = list[i].innerHTML.match(new RegExp(str,"i"));
-
-        let result = list[i].innerHTML.match(new RegExp(str,"gi"));
-        result = result.filter(function(item, pos) {
-          return result.indexOf(item) == pos;
-        });
-        for (let k = 0; k < result.length; k++) {
-          list[i].innerHTML = 
-          list[i].innerHTML.replace(eval("/" + result[k] + "/g"),
-            "<span style='background:#c7dae8'>" + result[k] + "</span>"); 
+        else {
+          this.copyNames[i] = folowerNames[i].innerHTML;
+        }
+        if (!!this.search.trim())
+        {
+          let reg = "/" + searchWords[0];
+          for ( let n = 1; n < searchWords.length; n++)
+            reg += "|" + searchWords[n];
+          reg += "/ig";
+          folowerNames[i].innerHTML = folowerNames[i].innerHTML.replace (
+            eval(reg), "<span style='background:rgba(113,186,242,0.35)'>$&</span>"); 
         }
       }
     }

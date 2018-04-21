@@ -26,8 +26,7 @@ export default {
     return {
       following: [],
       search: "",
-      copy_name: [],
-      cur_copy_name: []
+      copyNames: []
     }
   },
   components: {
@@ -37,35 +36,37 @@ export default {
   mounted () {
     this.addfollowing;
   },
-  updated () {
-    this.coloringSearch();     
-  },
   computed: {
     addfollowing() {
       this.following = [
-        { id: '1', name: 'Петя Говядко', link: '/Володя', sub: true, sig: true, img: "http://memesmix.net/media/created/m6tnhm.jpg"},
-        { id: '2', name: 'Петя Говядко', link: '/Петя', sub: true, sig: false, img: "https://i.ytimg.com/vi/3v3tRVmgcZU/hqdefault.jpg"},
-        { id: '3', name: 'Костя Говядко', link: '/Костя', sub: false, sig: false, img: "http://www.ovsyanko.ru/kosta/myself.jpg"},
-        { id: '4', name: 'Лиза Говядко', link: '/Лиза', sub: true, sig: true, img: "http://www.ivoirebusiness.net/sites/default/files/poutine%20vladi_0.jpg"},
+        { id: '1', name: 'Петяов Говядко', link: '/Володя', sub: true, sig: true, img: "http://memesmix.net/media/created/m6tnhm.jpg"},
+        { id: '2', name: 'Петя Бовядко', link: '/Петя', sub: true, sig: false, img: "https://i.ytimg.com/vi/3v3tRVmgcZU/hqdefault.jpg"},
+        { id: '3', name: 'Кос0я Говядко', link: '/Костя', sub: true, sig: false, img: "http://www.ovsyanko.ru/kosta/myself.jpg"},
+        { id: '4', name: 'Лизгоа Говядко', link: '/Лиза', sub: true, sig: true, img: "http://www.ivoirebusiness.net/sites/default/files/poutine%20vladi_0.jpg"},
         { id: '5', name: 'Отдых Говядко', link: '/Отдых', sub: true, sig: false, img: "https://files.adme.ru/files/news/part_88/880410/14451510-2363018019-600-e95273f1dc-1484580123.jpg"},
-        { id: '6', name: 'Прапор Говядко', link: '/Прапор', sub: false, sig: true, img: "http://fans.mybspn.com/files/2012/07/2029_show_image_NpAdvSinglePhotophp_1.jpg"},
+        { id: '6', name: 'Прапор Говядко', link: '/Прапор', sub: true, sig: true, img: "http://fans.mybspn.com/files/2012/07/2029_show_image_NpAdvSinglePhotophp_1.jpg"},
         { id: '7', name: 'Петя Говядко', link: '/Петя', sub: true, sig: true, img: "https://i.ytimg.com/vi/3v3tRVmgcZU/hqdefault.jpg"}
       ];
     },
     filteredList() {
-      this.cur_copy_name = this.copy_name.filter(post => {
-        let str = this.search.trim();
-        return post.toLowerCase().includes(str.toLowerCase());
-      });
-      return this.following.filter(post => {
-        if(post.sub) {
-          let str = this.search.trim();
-          return post.name.toLowerCase().includes(this.search.toLowerCase());
-        }
-        else {
-          return false;
-        }
-      });
+      let search = this.search.trim();
+      let searchWords = search.split(/\s+/g);
+      let followingList = this.following;
+      for (let n = 0; n < searchWords.length; n++) {
+        followingList = followingList.filter(follower => {
+          return follower.name.toLowerCase().includes(searchWords[n].toLowerCase());
+        });
+      }
+      this.copyNames = [];
+      for (let n = 0; n < followingList.length; n++) {
+        this.copyNames[n] = followingList[n].name;
+      } 
+      return followingList;
+    }
+  },
+  watch: {
+    copyNames: function () {
+      this.coloringSearch();
     }
   },
   methods: {
@@ -73,26 +74,23 @@ export default {
       this.search = input.search;
     },
     coloringSearch() {
-      let list = document.getElementsByClassName("follower-fild-title");
-      for (let i = 0; i < list.length; i++) {
-        if(!!!this.copy_name[i]){
-          this.copy_name[i] = list[i].innerHTML;
+      let folowerNames = document.getElementsByClassName("follower-fild-title");
+      let searchWords = this.search.trim().split(/\s+/g);
+      for (let i = 0; i < folowerNames.length; i++) {
+        if(this.copyNames[i]) {
+          folowerNames[i].innerHTML = this.copyNames[i];
         }
-        if(!!this.cur_copy_name[i])
-          list[i].innerHTML = this.cur_copy_name[i];
-        else 
-          this.cur_copy_name[i] = list[i].innerHTML;
-        let str = this.search.trim();
-        str = list[i].innerHTML.match(new RegExp(str,"i"));
-
-        let result = list[i].innerHTML.match(new RegExp(str,"gi"));
-        result = result.filter(function(item, pos) {
-          return result.indexOf(item) == pos;
-        });
-        for (let k = 0; k < result.length; k++) {
-          list[i].innerHTML = 
-          list[i].innerHTML.replace(eval("/" + result[k] + "/g"),
-            "<span style='background:#c7dae8'>" + result[k] + "</span>"); 
+        else {
+          this.copyNames[i] = folowerNames[i].innerHTML;
+        }
+        if (!!this.search.trim())
+        {
+          let reg = "/" + searchWords[0];
+          for ( let n = 1; n < searchWords.length; n++)
+            reg += "|" + searchWords[n];
+          reg += "/ig";
+          folowerNames[i].innerHTML = folowerNames[i].innerHTML.replace (
+            eval(reg), "<span style='background:rgba(113,186,242,0.35)'>$&</span>"); 
         }
       }
     }
