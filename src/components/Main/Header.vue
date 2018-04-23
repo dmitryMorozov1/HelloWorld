@@ -1,5 +1,5 @@
 <template>
-  <v-toolbar dense fixed class="border blocklight">
+  <v-toolbar dense fixed class="border blocklight"  v-scroll="onScroll">
     <v-toolbar-title class="thin-28 textblue-text mr-3 main-text">
       2Buttons
     </v-toolbar-title>
@@ -19,11 +19,37 @@
       color="blockblue" 
       class="med-16 create-question blocklight-text" 
       round depressed>Задать вопрос</v-btn>
-
-    <v-btn flat @click.native.stop="callLoginMain()">
-        <v-icon>notifications_none</v-icon>
-    </v-btn>
-    <login-main v-if="loginMain" @closeLogin="closeLogin"></login-main>
+      
+    <v-menu 
+      max-height="426px"
+      :close-on-content-click="false"
+      :nudge-bottom="46"
+      :nudge-left="216"
+      v-model="notificationsAreOpen"
+      transition="slide-y-transition">
+      <v-btn 
+        flat 
+        :ripple="false"
+        slot="activator"
+        @click="openNotification">
+        <v-icon 
+          v-if="notificationsAreOpen" 
+          class="textblue-text">
+          notifications
+        </v-icon>
+        <v-icon 
+          v-else-if="hasNotification" 
+          class="textblue-text">
+          notifications_active
+        </v-icon>
+        <v-icon 
+          v-else
+          class="textdarkgrey-text">
+          notifications_none
+        </v-icon>
+      </v-btn>
+      <notifications></notifications>
+    </v-menu>
 
     <v-menu :nudge-width="100">
       <v-toolbar-title slot="activator">
@@ -40,23 +66,24 @@
 </template>
 
 <script>
-import LoginMain from '@/components/Main/Login/LoginMain.vue'
+import Notifications from '@/components/Main/notifications/notifications.vue';
 export default {
   data() {
     return {
       currentName: '',
-      loginMain: false,
       menuItems: [
         { id: 'Profile', title: 'Моя страница' },
         { id: 'News', title: 'Новости' },
         { id: 'Favorites', title: 'Закладки' },
         { id: 'Top', title: 'Лучшее' },
         { id: 'SelectQuestion', title: 'Подобрать вопрос' }
-      ]
+      ],
+      hasNotification: false,
+      notificationsAreOpen: false
     }
   },
   components: {
-    'login-main': LoginMain
+    'notifications': Notifications
   },
   mounted () {
     // getting name of loading page 
@@ -67,12 +94,6 @@ export default {
     }
   },
   methods: {
-    callLoginMain() {
-      this.loginMain = true;
-    },
-    closeLogin() {
-      this.loginMain = false;
-    },
     go(name) {
       if (document.getElementById(this.currentName)) {
         document.getElementById(this.currentName).classList.remove("current-page");
@@ -101,6 +122,16 @@ export default {
         document.getElementById(name).classList.add("current-page");
         this.currentName = name;
       }
+    },
+    onNotification() {
+      // if notification has been received now
+      this.hasNotification = true;
+    },
+    openNotification() {
+      this.hasNotification = false;
+    },
+    onScroll () {
+      this.notificationsAreOpen = false;
     }
   }
 }
