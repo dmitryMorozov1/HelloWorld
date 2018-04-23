@@ -5,11 +5,11 @@
     </v-avatar>
     <div class="follower-fild-title"> {{ personData.name }} </div>
     <v-spacer></v-spacer>
-    <v-btn round disabled class="sig med-16 border"
+    <v-btn :ripple="false" round disabled class="sig med-16 border"
       v-if="personData.sig"> Подписан на вас </v-btn>
-    <v-btn round class="mr-0 med-16 blockgreen border"
+    <v-btn :ripple="false" round class="mr-0 med-16 blockgreen border"
       v-if="sub" @click="unfollow"> Вы подписаны </v-btn>
-    <v-btn round class="mr-0 med-16 blocklight-text blockblue border"
+    <v-btn :ripple="false" round class="mr-0 med-16 blocklight-text blockblue border"
       v-else @click="follow"> Подписаться </v-btn>
   </v-layout>
 </template>
