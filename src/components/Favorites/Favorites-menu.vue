@@ -17,7 +17,11 @@
       </v-list>
     </v-flex>
     <v-flex class="favorites-menu border blocklight">
-      <v-menu offset-y v-model="menuIcon" class="menubar">
+      <v-menu 
+        offset-y 
+        z-index=1
+        v-model="menuIcon" 
+        class="menubar">
         <v-btn 
           class="my-0 reg-17 textdarkgrey-text" 
           color="white"
