@@ -17,7 +17,8 @@
     </v-layout>
     <v-layout justify-center>
       <v-btn class="blockblue border blocklight-text pb-0 mb-1 mx-4" block
-             v-on:click="getQuestionsByTags">Готово
+             v-on:click="getQuestionsByTags"
+             :ripple="false">Готово
       </v-btn>
     </v-layout>
     <v-layout justify-center>
