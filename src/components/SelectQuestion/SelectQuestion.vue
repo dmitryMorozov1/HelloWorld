@@ -1,25 +1,25 @@
 <template>
-  <v-container class="main-layout">
-    <v-layout>
-      <v-layout column>
-        <question v-for="question in questions" :key="question.id" class="py-0 mb-4"
-                  :question="question"></question>
-      </v-layout>
-      <v-flex>
-        <topics class="topics mr-0 mb-3 border blocklight"></topics>
-        <v-layout class="mr-0 ml-4 border blocklight">
-          <v-flex  class="pt-2">
-            <v-layout justify-center class="reg-17 textdarkgrey-text mb-3">
-              ВОЗМОЖНЫЕ ДРУЗЬЯ
-            </v-layout>
-            <recommended-friend v-for="friend in friends" :key="friend.id"
-                                :friend="friend">
-            </recommended-friend>
-          </v-flex>
+    <v-container class="main-layout page">
+      <v-layout>
+        <v-layout column class="questions">
+          <question v-for="question in questions" :key="question.id" class="py-0 mb-4"
+                    :question="question"></question>
         </v-layout>
-      </v-flex>
-    </v-layout>
-  </v-container>
+        <v-flex>
+          <topics class="topics mr-0 mb-3 border blocklight"></topics>
+          <v-layout class="mr-0 ml-4 border blocklight friends">
+            <v-flex  class="pt-2 ">
+              <v-layout justify-center class="reg-17 textdarkgrey-text mb-3">
+                ВОЗМОЖНЫЕ ДРУЗЬЯ
+              </v-layout>
+              <recommended-friend v-for="friend in friends" :key="friend.id"
+                                  :friend="friend">
+              </recommended-friend>
+            </v-flex>
+          </v-layout>
+        </v-flex>
+      </v-layout>
+    </v-container>
 </template>
 
 <script>
@@ -206,7 +206,22 @@
   .topics {
     width: 275px;
     max-width: 275px;
+    height: 293px;
   }
 
+  .questions{
+    width:777px;
+    max-width: 777px;
+  }
+
+  .friends{
+    width:275px;
+    max-width: 275px;
+    height: 345px;
+  }
+
+  .page{
+    padding-top: 35px;
+  }
 
 </style>

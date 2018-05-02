@@ -1,9 +1,8 @@
 <template>
     <v-list dense two-line class="pa-0 mb-0 blocklight">
-
-      <v-list-tile>
+      <v-list-tile class="friend">
         <a :href="'profile/'+friend.id" target="_blank">
-          <v-list-tile-avatar >
+          <v-list-tile-avatar>
             <img :src="friend.avatar">
           </v-list-tile-avatar>
         </a>
@@ -23,7 +22,7 @@
           </v-list-tile-sub-title>
         </v-list-tile-content>
 
-        <v-list-tile-action>
+        <v-list-tile-action class="action">
           <v-btn v-on:click="isAdded=!isAdded;" :ripple="false" icon>
             <v-icon :class="isAdded? 'textblue-text':'textgrey-text'">
                     {{this.isAdded ? 'person' : 'person_add'}}
@@ -31,7 +30,6 @@
           </v-btn>
         </v-list-tile-action>
       </v-list-tile>
-
     </v-list>
 </template>
 
@@ -92,5 +90,14 @@
 
   .no-text-decoration{
     text-decoration: none;
+  }
+
+  .friend{
+    max-width: 273px;
+    max-height: 58px;
+  }
+
+  .action{
+    min-width: 36px;
   }
 </style>
