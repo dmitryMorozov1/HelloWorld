@@ -1,11 +1,13 @@
 <template>
   <v-container class="pa-0">
-    <question class="pb-4"
+    <question 
       v-for="question in sortedList" 
       :key="question.id" 
-      :question="question"
       v-if="question.like === 1"
-      >
+      class="pb-4"
+      :question="question"
+      @callQuestionRecommendation="callQuestionRecommendation"
+      @callComplain="callComplain">
     </question>
   </v-container>
 </template>
@@ -47,7 +49,7 @@ export default {
         avatar: 'https://pp.userapi.com/c622120/v622120519/2607c/k0wPW3Pp__k.jpg',
         background: 'https://media.tvzvezda.ru/news/vstrane_i_mire/content/201708160620-7kh1.htm/1.jpg',
         date: '29.03.2018 15:00:00',
-        title: 'Меняет ли смена фамилии/имени судьбу человека?',
+        title: 'Меняет ли смена фёмилии/имеёи судьбу чёловека?',
         like: 1,
         favorite: false,
         answered: true, // is answered
@@ -77,7 +79,7 @@ export default {
             ]     
           },
           {
-            text: ` Я вообще хз, что тут написать, левый вариант 
+            text: ` Я вообё хз, что тёт написать, левый вариант 
                     ответа я скопировала из интернета :)`,
             replies: 1,
             chosen: false,
@@ -189,6 +191,16 @@ export default {
         ]
       }
     ]
+  },
+  methods: {
+    callQuestionRecommendation() {
+      // Передать сюда id текущего вопроса!
+      this.$emit('callQuestionRecommendation');
+    },
+    callComplain() {
+      // Передать сюда id текущего вопроса!
+      this.$emit('callComplain');
+    }
   },
   components: {
     'question' : question

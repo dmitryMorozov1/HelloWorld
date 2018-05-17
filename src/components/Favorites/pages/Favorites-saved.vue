@@ -1,10 +1,12 @@
 <template>
   <v-container class="pa-0">
-    <question class="pb-4"
+    <question 
       v-for="question in sortedList" 
       :key="question.id" 
+      class="pb-4"
       :question="question"
-      >
+      @callQuestionRecommendation="callQuestionRecommendation"
+      @callComplain="callComplain">
     </question>
   </v-container>
 </template>
@@ -188,6 +190,16 @@ export default {
         ]
       }
     ]
+  },
+  methods: {
+    callQuestionRecommendation() {
+      // Передать сюда id текущего вопроса!
+      this.$emit('callQuestionRecommendation');
+    },
+    callComplain() {
+      // Передать сюда id текущего вопроса!
+      this.$emit('callComplain');
+    }
   },
   components: {
     'question' : question

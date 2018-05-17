@@ -1,56 +1,58 @@
 <template>
-  <v-container pa-0 id="favorites-menu-comp">
-    <v-flex mb-3 class="favorites-menu border blocklight">
+  <v-container class="pa-0">
+    <v-flex class="mb-3 favorites-menu blocklight border">
       <v-list>
         <v-list-tile 
           v-for="item in items" 
-          class="favorites-menu-btn" 
-          :id="item.id" 
           :key="item.title" 
+          :id="item.id" 
+          class="favorites-menu-btn" 
           @click="go(item.id)">
-            <v-list-tile-content 
-              small
-              v-text="item.title.toUpperCase()" 
-              class="med-17 textdarkgrey-text pl-4">
-            </v-list-tile-content>
+          <v-list-tile-content 
+            small
+            class="pl-4 med-17 textdarkgrey-text"
+            v-text="item.title.toUpperCase()" >
+          </v-list-tile-content>
         </v-list-tile>
       </v-list>
     </v-flex>
-    <v-flex class="favorites-menu border blocklight">
+    <v-flex class="favorites-menu blocklight border">
       <v-menu 
         offset-y 
-        z-index=1
-        v-model="menuIcon" 
-        class="menubar">
+        class="menubar"
+        z-index="1"
+        v-model="menuIcon">
         <v-btn 
-          class="my-0 reg-17 textdarkgrey-text" 
-          color="white"
           block
           depressed
-          :ripple="false"
-          slot="activator">
-            <v-layout class="pl-4">
-              СОРТИРОВКА
-            </v-layout>
-            <i 
-              v-if="!menuIcon"
-              class="material-icons pr-3">
-                keyboard_arrow_down
-            </i>
-            <i 
-              v-else
-              class="material-icons pr-3">
-                keyboard_arrow_up
-            </i>
+          class="my-0 reg-17 textdarkgrey-text" 
+          color="white"
+          slot="activator"
+          :ripple="false">
+          <v-layout class="pl-4">
+            СОРТИРОВКА
+          </v-layout>
+          <v-icon 
+            v-if="!menuIcon"
+            class="pr-3">
+              keyboard_arrow_down
+          </v-icon>
+          <v-icon 
+            v-else
+            class="pr-3">
+              keyboard_arrow_up
+          </v-icon>
         </v-btn>
         <v-list>
           <v-list-tile 
-            class="reg-15 textdarkgrey-text" 
             v-for="sort in sorts" 
             :key="sort.sortBy" 
             :id="'favorites-'+sort.sortBy+'-id'"
+            class="sort-menu reg-15 textdarkgrey-text" 
             @click="selectSort(sort.sortBy)">
-            <v-list-tile-title class="pl-4" >{{ sort.text }}</v-list-tile-title>
+            <v-list-tile-title class="pl-4">
+              {{ sort.text }}
+            </v-list-tile-title>
           </v-list-tile>
         </v-list>
       </v-menu>
@@ -62,68 +64,66 @@
 export default {
   data() {
     return {
-      menuIcon: false,
-      items: [
+      items: [],
+      currentId: "",
+      currentSortId: "",
+      sorts: [],
+      menuIcon: false
+    }
+  },
+  beforeMount() {
+    this.addItems;
+    this.addSorts;
+  },
+  mounted () {
+    this.addCurrentId;
+    this.addCurrentSortId;
+  },
+  computed: {
+    addItems() {
+      this.items = [
         { title: 'Моё', id: 'Favorites-mine'},
         { title: 'Понравилось', id: 'Favorites-liked'},
         { title: 'Сохранено', id: 'Favorites-saved'}
-      ],
-      currentId: "",
-      currentSortId: "",
-      sortSelect: [],
-      sorts: [
-        {
-          sortBy: 'rating',
-          text: 'ПО РЕЙТИНГУ'
-        },
-        {
-          sortBy: 'watches',
-          text: 'ПО ПОКАЗАМ'
-        },
-        {
-          sortBy: 'date',
-          text: 'ПО ДАТЕ'
-        }
-      ]
+      ];
+    },
+    addSorts() {
+      this.sorts = [
+        { sortBy: 'rating', text: 'ПО РЕЙТИНГУ' },
+        { sortBy: 'watches', text: 'ПО ПОКАЗАМ' },
+        { sortBy: 'date', text: 'ПО ДАТЕ' }
+      ];
+    },
+    addCurrentId() {
+      this.currentId = this.$router.history.current.name || this.items[0].id;
+      this.go(this.currentId);
+    },
+    addCurrentSortId() {
+      this.currentSortId = "favorites-rating-id";
+      this.dyeElement(this.currentSortId, this.currentSortId)
     }
-  },
-  mounted () {
-    this.setStyles();
-    this.currentId = this.$router.history.current.name || this.items[0].id;
-    this.go(this.currentId);
-    this.currentSortId = "favorites-rating-id",
-    this.paintOverElement(this.currentSortId, this.currentSortId)
   },
   methods: {
     go(id) {
       this.$router.push({ name: id});
-      this.paintOverElement(id, this.currentId);
+      this.dyeElement(id, this.currentId);
       this.currentId = id;
     },
-    paintOverElement(newId, currentId) {
+    selectSort(sortBy) {
+      if ("favorites-"+sortBy+"-id" !== this.currentSortId)
+      {
+        this.$emit('changeSorting', { sortBy: sortBy });
+        this.dyeElement("favorites-"+sortBy+"-id", this.currentSortId);
+        this.currentSortId = "favorites-"+sortBy+"-id";
+      }
+    },
+    dyeElement(newId, currentId) {
       document.getElementById(currentId).firstChild.classList.remove("textblue-text");
       document.getElementById(currentId).firstChild.classList.add("textdarkgrey-text");
       if (document.getElementById(newId)) {
         document.getElementById(newId).firstChild.classList.add("textblue-text");
         document.getElementById(newId).firstChild.classList.remove("textdarkgrey-text");
       }
-    },
-    selectSort(sortBy) {
-      if ("favorites-"+sortBy+"-id" !== this.currentSortId)
-      {
-        this.$emit('changeSorting', { sortBy: sortBy });
-        this.paintOverElement("favorites-"+sortBy+"-id", this.currentSortId);
-        this.currentSortId = "favorites-"+sortBy+"-id";
-      }
-    },
-    setStyles() {
-      for(let i = 0; i < 3; i++)
-        document.getElementById("favorites-menu-comp")
-                .firstElementChild.firstElementChild.children[i]
-                .firstElementChild.style.height = "36px";
-      document.getElementById("favorites-rating-id").style.height = "36px";
-      document.getElementById("favorites-watches-id").style.height = "36px";
-      document.getElementById("favorites-date-id").style.height = "36px";
     }
   }
 }
@@ -133,7 +133,7 @@ export default {
 .favorites-menu {
   border-radius: 2px;
 }
-#favorites-menu-comp .input {
+.input {
   color: #1A93F0 !important;
 }
 .menubar {
@@ -141,5 +141,11 @@ export default {
 }
 .btn {
   height: 40px;
+}
+.favorites-menu-btn :nth-child(1) {
+  height: 36px;
+}
+.sort-menu :nth-child(1) {
+  max-height: 36px;
 }
 </style>

@@ -1,36 +1,42 @@
 <template>
-  <v-container class="border favorites-topics blocklight" id="favorites-topics-comp">
-    <v-flex class="textdarkgrey-text text-xs-center reg-17">
+  <v-container class="favorites-topics blocklight border">
+    <v-flex class="text-xs-center reg-17 textdarkgrey-text">
       ЛЮБИМЫЕ ТЕМЫ
     </v-flex>
-    <v-tabs grow v-model="active">
+    <v-tabs 
+      grow 
+      v-model="active">
       <v-layout class="text-xs-center blocklight">
-        <v-tab :ripple="false" class="reg-12">
-          Мои вопросы
+        <v-tab 
+          class="reg-12"
+          :ripple="false" >
+            Мои вопросы
         </v-tab>
-        <v-tab :ripple="false" class="reg-12">
-          Мои ответы
+        <v-tab  
+          class="reg-12"
+          :ripple="false">
+            Мои ответы
         </v-tab>
       </v-layout>
       <v-tab-item
-        class="topic-tab-item"
-        v-for="n in tabItemNames"
-        :key="n">
+        v-for="name in tabItemNames"
+        :key="name"
+        class="topic-tab-item">
         <v-flex class="pt-2">
           <v-flex class="pl-4" 
-            v-for="favoritesTopic in favoritesTopics[n]" 
+            v-for="favoritesTopic in favoritesTopics[name]" 
             :key="favoritesTopic.id">
-            <v-layout row class="top-favorites-value">
+            <v-layout class="top-favorites-value">
               <v-btn 
                 outline
                 small
-                :ripple="false"
-                color="grey darken-1"
                 class="top-favorites-tag thin-12 textdarkgrey-text"
+                color="grey darken-1"
+                :ripple="false"
                 @click="getTopic(favoritesTopic.id)">
                   {{ favoritesTopic.name }}
               </v-btn>
-              <v-flex class="med-17 textdarkgrey-text pt-2 pl-1">
+              <v-flex class="pt-2 pl-1 med-17 textdarkgrey-text">
                 {{ favoritesTopic.value }}
               </v-flex>
             </v-layout>
@@ -50,12 +56,12 @@ export default {
       tabItemNames: []
     }
   },
-  mounted () {
-    this.setStyles();
-    this.getAmounts();
+  beforeMount() {
+    this.addFavoritesTopics;
+    this.addTabItemNames;
   },
-  methods: {
-    getAmounts() {
+  computed: {
+    addFavoritesTopics() {
       this.favoritesTopics = { 
         questions: [
           { id: '1', name: 'Судьба', value: 97},
@@ -73,15 +79,14 @@ export default {
           { id: '5', name: 'Политика', value: 23}
         ]
       };
-      this.tabItemNames = ['questions', 'answers'];
     },
+    addTabItemNames() {
+      this.tabItemNames = ['questions', 'answers'];
+    }
+  },
+  methods: {
     getTopic(id) {
       alert(id);
-    },
-    setStyles() {
-      document.getElementById("favorites-topics-comp")
-              .children[1].firstElementChild.firstElementChild
-              .firstElementChild.style.height = "36px";
     }
   }
 }
@@ -100,5 +105,7 @@ export default {
 .topic-tab-item {
   min-height: 288px;
 }
-
+.tabs :nth-child(1) {
+  max-height: 36px;
+}
 </style>
