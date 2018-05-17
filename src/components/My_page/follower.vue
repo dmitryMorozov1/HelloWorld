@@ -1,16 +1,38 @@
 <template>
-  <v-layout px-2 my-0 class="border blocklight med-16" id="follower-comp">
+  <v-layout 
+    id="follower-comp"
+    class="px-2 my-0 med-16 blocklight border">
     <v-avatar class="mr-3">
-      <img :src="personData.img" alt="avatar">
+      <img :src="person.img" alt="avatar">
     </v-avatar>
-    <div class="follower-fild-title"> {{ personData.name }} </div>
+    <div class="follower-fild-title"> 
+      {{ person.name }} 
+    </div>
     <v-spacer></v-spacer>
-    <v-btn :ripple="false" round disabled class="sig med-16 border"
-      v-if="personData.sig"> Подписан на вас </v-btn>
-    <v-btn :ripple="false" round class="mr-0 med-16 blockgreen border"
-      v-if="sub" @click="unfollow"> Вы подписаны </v-btn>
-    <v-btn :ripple="false" round class="mr-0 med-16 blocklight-text blockblue border"
-      v-else @click="follow"> Подписаться </v-btn>
+    <v-btn 
+      v-if="person.follower"
+      round 
+      disabled 
+      class="follower med-16 border"
+      :ripple="false"> 
+        Подписан на вас 
+    </v-btn>
+    <v-btn 
+      v-if="following" 
+      round 
+      class="mr-0 med-16 blockgreen border"
+      :ripple="false"
+      @click="unfollow"> 
+        Вы подписаны 
+    </v-btn>
+    <v-btn 
+      v-else 
+      round 
+      class="mr-0 med-16 blocklight-text blockblue border"
+      :ripple="false"
+      @click="follow"> 
+        Подписаться 
+    </v-btn>
   </v-layout>
 </template>
 
@@ -18,19 +40,19 @@
 export default {
   data() {
     return {
-      sub: false
+      following: false
     }
   },
-  props: ['personData'],
-  mounted () {
-    this.sub = this.personData.sub;
+  props: ['person'],
+  beforeMount () {
+    this.following = this.person.following;
   },
   methods: {
     follow() {
-      this.sub=!this.sub;
+      this.following=!this.following;
     },
     unfollow() {
-      this.sub=!this.sub;
+      this.following=!this.following;
     }
   }
 }
@@ -43,16 +65,16 @@ export default {
   width: 100%;
   min-height: 58px;
 }
-#follower-comp .avatar {
+.avatar {
   height: 47px !important;
   width: 47px !important;
 }
-#follower-comp .btn {
+.btn {
   text-transform: inherit;
   height: 31px;
   width: 158px;
 }
-#follower-comp  .sig {
+#follower-comp .follower {
   background-color: #fdfdfd !important;
   color: #000 !important;
 }

@@ -1,18 +1,24 @@
 <template>
-  <v-toolbar height="54px" class="border blocklight" id="mini-header-comp">
-    <v-toolbar-items class="mini-toolbar">
+  <v-toolbar 
+    class="mini-header-comp blocklight border"
+    height="54px">
+    <v-toolbar-items>
       <v-btn
-        flat 
         v-for="item in menuItems"
         :key="item.id" 
         :id="item.id"
+        flat 
+        class="mini-header-btn med-16" 
         :ripple="false"
-        class="mini-header-btn med-16 " 
         @click="go(item.id)">
-          <v-layout row wrap>
-            <v-flex xs12>{{ item.title }}</v-flex>
-            <v-flex xs12>{{ item.count }} </v-flex>
-          </v-layout>
+        <v-layout row wrap>
+          <v-flex xs12>
+            {{ item.title }}
+          </v-flex>
+          <v-flex xs12>
+            {{ item.count }} 
+          </v-flex>
+        </v-layout>
         </v-btn>
     </v-toolbar-items>
   </v-toolbar>
@@ -23,21 +29,31 @@ export default {
   props: ['amounts'],
   data() {
     return {
-      menuItems: [
-        { id: 'ProfileQuestions', title: 'Вопросы', count: ""},
-        { id: 'ProfileAnswers', title: 'Ответы', count: ""},
-        { id: 'ProfileFollowers', title: 'Подписчики', count: ""},
-        { id: 'ProfileFollowing', title: 'Подписки', count: ""},
-        { id: 'ProfileFavorites', title: 'Избранное', count: ""},
-        { id: 'ProfileComments', title: 'Комментарии', count: ""}
-      ],
+      menuItems: [],
       currentId: ""
     }
   },
+  beforeMount() {
+    this.addMenuItems;
+  },
   mounted () {
-    this.getAmounts();
-    this.currentId = this.$router.history.current.name || this.menuItems[0].id;
-    this.go(this.currentId);
+    this.addCurrentId;
+  },
+  computed: {
+    addMenuItems() {
+      this.menuItems = [
+        { id: 'ProfileQuestions', title: 'Вопросы', count: this.amounts.questions},
+        { id: 'ProfileAnswers', title: 'Ответы', count: this.amounts.answers},
+        { id: 'ProfileFollowers', title: 'Подписчики', count: this.amounts.followers},
+        { id: 'ProfileFollowing', title: 'Подписки', count: this.amounts.following},
+        { id: 'ProfileFavorites', title: 'Избранное', count: this.amounts.favorites},
+        { id: 'ProfileComments', title: 'Комментарии', count: this.amounts.comments}
+      ];
+    },
+    addCurrentId() {
+      this.currentId = this.$router.history.current.name || this.menuItems[0].id;
+      this.go(this.currentId);
+    }
   },
   methods: {
     go(id) {
@@ -47,27 +63,16 @@ export default {
         document.getElementById(id).classList.add("textblue-text");
         this.currentId = id;
       }
-    },
-    getAmounts(){
-      this.menuItems[0].count = this.amounts.questions;
-      this.menuItems[1].count = this.amounts.answers;
-      this.menuItems[2].count = this.amounts.followers;
-      this.menuItems[3].count = this.amounts.following;
-      this.menuItems[4].count = this.amounts.favorites;
-      this.menuItems[5].count = this.amounts.comments;
     }
   }
 }
 </script>
 
 <style scoped>
-#mini-header-comp {
+.mini-header-comp {
   border-radius: 2px;
 }
-#mini-header-comp .mini-toolbar {
-  width: 100%;
-}
-#mini-header-comp .mini-header-btn {
+.mini-header-btn {
   text-transform: capitalize;
   width: 100%;
 }

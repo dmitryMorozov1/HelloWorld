@@ -1,18 +1,20 @@
 <template>
-<v-container px-0 py-0>
+<v-container class="pa-0">
   <search @inputsearch="inputsearch"></search>
-  <v-container px-0 py-0 mb-2 
+  <v-container
     v-for="person in filteredList"
     :key="person.id" 
-    class="following">
-      <follower :person-data="person"></follower>
+    class="pa-0 mb-2 following">
+      <follower :person="person"></follower>
   </v-container>
-  <v-container px-0 py-0 mb-2 
-    v-if="!!!filteredList.length">
-      <v-layout px-2 my-0
-        class="following border blocklight med-16">
-          Ни одной подписки не найдено.
-      </v-layout>
+  <v-container
+    v-if="!!!filteredList.length"
+    class="pa-0 mb-2">
+    <v-layout 
+      align-center
+      class="px-2 my-0 following border blocklight med-16">
+        Ни одной подписки не найдено
+    </v-layout>
   </v-container>
 </v-container>
 </template>
@@ -29,23 +31,24 @@ export default {
       copyNames: []
     }
   },
-  components: {
-    'follower': follower,
-    'search': search
+  watch: {
+    copyNames: function () {
+      this.coloringSearch();
+    }
   },
-  mounted () {
+  beforeMount() {
     this.addfollowing;
   },
   computed: {
     addfollowing() {
       this.following = [
-        { id: '1', name: 'Петяов Говядко', link: '/Володя', sub: true, sig: true, img: "http://memesmix.net/media/created/m6tnhm.jpg"},
-        { id: '2', name: 'Петя Бовядко', link: '/Петя', sub: true, sig: false, img: "https://i.ytimg.com/vi/3v3tRVmgcZU/hqdefault.jpg"},
-        { id: '3', name: 'Кос0я Говядко', link: '/Костя', sub: true, sig: false, img: "http://www.ovsyanko.ru/kosta/myself.jpg"},
-        { id: '4', name: 'Лизгоа Говядко', link: '/Лиза', sub: true, sig: true, img: "http://www.ivoirebusiness.net/sites/default/files/poutine%20vladi_0.jpg"},
-        { id: '5', name: 'Отдых Говядко', link: '/Отдых', sub: true, sig: false, img: "https://files.adme.ru/files/news/part_88/880410/14451510-2363018019-600-e95273f1dc-1484580123.jpg"},
-        { id: '6', name: 'Прапор Говядко', link: '/Прапор', sub: true, sig: true, img: "http://fans.mybspn.com/files/2012/07/2029_show_image_NpAdvSinglePhotophp_1.jpg"},
-        { id: '7', name: 'Петя Говядко', link: '/Петя', sub: true, sig: true, img: "https://i.ytimg.com/vi/3v3tRVmgcZU/hqdefault.jpg"}
+        { id: '1', name: 'Петяов Говядко', link: '/Володя', following: true, follower: true, img: "http://memesmix.net/media/created/m6tnhm.jpg"},
+        { id: '2', name: 'Петя Бовядко', link: '/Петя', following: true, follower: false, img: "https://i.ytimg.com/vi/3v3tRVmgcZU/hqdefault.jpg"},
+        { id: '3', name: 'Кос0я Говядко', link: '/Костя', following: true, follower: false, img: "http://www.ovsyanko.ru/kosta/myself.jpg"},
+        { id: '4', name: 'Лизгоа Говядко', link: '/Лиза', following: true, follower: true, img: "http://www.ivoirebusiness.net/sites/default/files/poutine%20vladi_0.jpg"},
+        { id: '5', name: 'Отдых Говядко', link: '/Отдых', following: true, follower: false, img: "https://files.adme.ru/files/news/part_88/880410/14451510-2363018019-600-e95273f1dc-1484580123.jpg"},
+        { id: '6', name: 'Прапор Говядко', link: '/Прапор', following: true, follower: true, img: "http://fans.mybspn.com/files/2012/07/2029_show_image_NpAdvSinglePhotophp_1.jpg"},
+        { id: '7', name: 'Петя Говядко', link: '/Петя', following: true, follower: true, img: "https://i.ytimg.com/vi/3v3tRVmgcZU/hqdefault.jpg"}
       ];
     },
     filteredList() {
@@ -62,11 +65,6 @@ export default {
         this.copyNames[n] = followingList[n].name;
       } 
       return followingList;
-    }
-  },
-  watch: {
-    copyNames: function () {
-      this.coloringSearch();
     }
   },
   methods: {
@@ -94,6 +92,10 @@ export default {
         }
       }
     }
+  },
+  components: {
+    'follower': follower,
+    'search': search
   }
 }
 </script>
@@ -101,6 +103,5 @@ export default {
 <style scoped>
 .following {
   height: 58px;
-  align-items: center;
 }
 </style>

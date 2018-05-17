@@ -1,10 +1,10 @@
 <template>
-  <v-container px-0 py-0 id="search-comp">
+  <v-container class="pa-0" id="my-page-search-comp">
     <v-text-field
+      single-line
       class="search-line"
       label="Поиск"
       prepend-icon="search"
-      single-line
       v-model="search"
       @focus="focusOnSearch"
       @blur="unFocusOnSearch"
@@ -22,10 +22,6 @@ export default {
   watch: {
     search: function() {
       this.$emit('inputsearch', { search: this.search });}
-  },
-  mounted () {
-    document.getElementById('search-comp').firstChild.lastChild.style.maxWidth = "100%";
-    document.getElementById('search-comp').firstChild.childNodes[1].lastChild.classList.add("med-18");
   },
   methods: {
     focusOnSearch() {
@@ -45,16 +41,16 @@ export default {
           list[i].children[k].classList.add("blocklight");
         }
       }
-    },
+    }
   }
 }
 </script>
 
 <style scoped>
-#search-comp {
-  width: 100%;
-}
-#search-comp .search-line {
+.search-line {
   color: #1A93F0 !important;
+}
+.search-line :nth-last-child(1) {
+  max-width: 100%;
 }
 </style>
