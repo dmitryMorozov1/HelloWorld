@@ -1,5 +1,5 @@
 <template>
-  <v-card class="blocklight" id="qqq11">
+  <v-card class="blocklight">
     <v-btn 
       absolute
       right
