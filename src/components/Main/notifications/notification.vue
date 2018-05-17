@@ -2,23 +2,35 @@
   <div>
     <hr class="my-2 mx-3">
     <v-list-tile class="notification-list-tile">
-      <a :href="'profile/' + 1" target="_blank">
+      <!-- *** HREF *** -->
+      <a 
+        target="_blank"
+        :href="'profile/' + 1">
         <v-list-tile-avatar class="pt-1">
           <img :src="notification.img">
         </v-list-tile-avatar>
       </a>
       <v-list-tile-content>
         <v-list-tile-title>
-          <a href="" class="reg-14 textblue-text"
-             target="_blank">{{ notification.name }}</a>
+          <!-- *** HREF *** -->
+          <a 
+            class="reg-14 textblue-text"
+            href="" 
+            target="_blank">
+              {{ notification.name }}
+          </a>
         </v-list-tile-title>
-        <v-list-tile-sub-title 
-          class="reg-14 textdarkgrey-text notification-content">
+        <v-list-tile-sub-title class="notification-content reg-14 textdarkgrey-text">
           {{ notification.label }} 
-          <a href="" class="reg-14 textblue-text"
-             target="_blank">{{ notification.object }}</a>
+          <!-- *** HREF *** -->
+          <a 
+            class="reg-14 textblue-text"
+            href="" 
+            target="_blank">
+              {{ notification.object }}
+          </a>
         </v-list-tile-sub-title>
-        <v-list-tile-title class="reg-14 textgrey-text pt-1">
+        <v-list-tile-title class="pt-1 reg-14 textgrey-text">
           {{ dateStr }}
         </v-list-tile-title>
       </v-list-tile-content>
@@ -37,9 +49,6 @@ export default {
   props: ['notification'],
   beforeMount () {
     this.addDate;
-  },
-  mounted() {
-    this.setStyles();
   },
   computed: {
     addDate() {
@@ -80,16 +89,6 @@ export default {
                      " " + this.date.month + 
                      " " + this.date.year + " г.";
     }
-  },
-  methods: {
-    setStyles() {
-      let listTile = document.getElementsByClassName("notification-list-tile");
-      for(let i = 0; i < listTile.length; i++) {
-        listTile[i].firstElementChild.style.height = "auto";
-        listTile[i].firstElementChild.style.display = "-webkit-inline-box";
-        listTile[i].firstElementChild.style["-webkit-box-align"] = "start";
-      }
-    }
   }
 }
 </script>
@@ -106,5 +105,10 @@ a {
 .notification-content {
   white-space: normal;
   line-height: 1.3;
+}
+.notification-list-tile :nth-child(1) {
+  height: inherit;
+  display: -webkit-inline-box;
+  -webkit-box-align: start;
 }
 </style>

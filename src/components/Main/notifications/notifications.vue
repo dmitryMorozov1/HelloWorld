@@ -1,25 +1,31 @@
 <template>
   <v-container 
-    class="blocklight border notifications-comp px-0 pt-0 pb-2">
-    <v-layout 
-      justify-center 
-      class="reg-16 textdarkgrey-text pt-2">
-      Уведомления
-    </v-layout>
-    <v-list
-      class="pa-0 mb-2 blocklight">
-      <notification 
-        v-for="notification in notifications" 
-        :key="notification.id"
-        :notification="notification">
-      </notification>
-    </v-list>
-    <v-container class=" px-0 pt-0 mb-2" 
-    v-if="!!!notifications.length">
-      <v-layout justify-center  
-        class="pa-2 my-0 med-16">
-          У вас пока нет уведомлений.
+    class="pa-0 notifications-comp blocklight border">
+    <v-container 
+      id="notifications-comp"
+      class="pa-0"
+      v-scroll:#notifications-comp="onScroll">
+      <v-layout 
+        justify-center 
+        class="pt-2 reg-16 textdarkgrey-text">
+        Уведомления
       </v-layout>
+      <v-list
+        class="pa-0 mb-2 blocklight">
+        <notification 
+          v-for="notification in notifications" 
+          :key="notification.id"
+          :notification="notification">
+        </notification>
+      </v-list>
+      <v-container class="px-0 pt-0 mb-2" 
+        v-if="!notifications.length">
+        <v-layout 
+          justify-center  
+          class="pa-2 my-0 med-16">
+            У вас пока нет уведомлений
+        </v-layout>
+      </v-container>
     </v-container>
   </v-container>
 </template>
@@ -31,9 +37,6 @@ export default {
     return {
       notifications: []
     }
-  },
-  components: {
-    'notification': Notification
   },
   beforeMount () {
     this.addNotifications;
@@ -56,14 +59,33 @@ export default {
         { id: '13', name: 'Петя Говядко', label: 'Съел', object: 'Бутер', date: '2010-03-29T15:00:00Z', img: "https://i.ytimg.com/vi/3v3tRVmgcZU/hqdefault.jpg"}
       ];
     }
+  },
+  methods: {
+    /* don't scroll window */
+    onScroll(e) {
+      let area = e.target;
+      if (area.scrollTop == 0) {
+        area.scrollTop++;
+      }
+      else if (area.scrollHeight - area.clientHeight - area.scrollTop <= 1) {
+        area.scrollTop--;
+      }
+    }
+  },
+  components: {
+    'notification': Notification
   }
 }
 </script>
 
 <style scoped>
 .notifications-comp {
+  overflow: hidden;
   width: 306px;
   border-radius: 2px;
 }
-
+#notifications-comp {
+  overflow-y: auto;
+  max-height: 426px;
+}
 </style>
