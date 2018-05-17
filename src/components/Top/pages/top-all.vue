@@ -3,9 +3,10 @@
     <question class="pb-4"
       v-for="question in questions" 
       :key="question.id" 
-      :question="question"
       v-if="!question.answered || !onlyNewQuestion"
-      >
+      :question="question"
+      @callQuestionRecommendation="callQuestionRecommendation"
+      @callComplain="callComplain">
     </question>
   </v-container>
 </template>
@@ -222,6 +223,16 @@ export default {
         ]
       }
     ]
+  },
+  methods: {
+    callQuestionRecommendation() {
+      // Передать сюда id текущего вопроса!
+      this.$emit('callQuestionRecommendation');
+    },
+    callComplain() {
+      // Передать сюда id текущего вопроса!
+      this.$emit('callComplain');
+    }
   },
   components: {
     'question' : question

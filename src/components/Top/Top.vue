@@ -2,43 +2,84 @@
   <v-container class="main-layout">
     <v-layout>
       <v-flex class="top">
-        <router-view :only-new-question="onlyNewQuestion"></router-view>
+        <router-view 
+          :only-new-question="onlyNewQuestion"
+          @callQuestionRecommendation="callQuestionRecommendation"
+          @callComplain="callComplain">
+        </router-view>
       </v-flex>
       <v-flex>
         <top-menu  
-          @showNewQuestions="onShowNewQuestions" 
-          class="top-menu mr-0 mb-3">
+          class="mr-0 mb-3 top-menu"
+          @showNewQuestions="onShowNewQuestions" >
         </top-menu>
         <top-popular 
-          class="top-popular mr-0">
+          class="mr-0 top-popular">
         </top-popular>
       </v-flex>
     </v-layout>
+    
+    <v-dialog 
+      v-model="questionRecommendation" 
+      max-width="340px">
+      <question-recommendation 
+        :dialogIsOpen="questionRecommendation"  
+        @closeComponent="closeQuestionRecommendation">
+      </question-recommendation>
+    </v-dialog>
+
+    <v-dialog 
+      v-model="complain" 
+      max-width="340px">
+      <complain
+        :dialogIsOpen="complain"  
+        @closeComponent="closeComplain">
+      </complain>
+    </v-dialog>
+
   </v-container>
 </template>
 
 <script>
-import menu from './top-menu'
-import popular from './top-popular'
+import menu from './top-menu';
+import popular from './top-popular';
+import QuestionRecommendation from '@/components/Main/question/questionRecommendation';
+import Complain from '@/components/Main/question/complain.vue';
 
 export default {
   data() {
     return {
-      onlyNewQuestion: false
-    }
-  },
-  components: {
-    'top-menu' : menu,
-    'top-popular' : popular
-  },
-  methods: {
-    onShowNewQuestions(input) {
-      this.onlyNewQuestion = input.tile;
+      onlyNewQuestion: false,
+      questionRecommendation: false,
+      complain: false
     }
   },
   created () {
     if (this.$route.name === 'Top')
     this.$router.push({name: 'Top-day'});
+  },
+  methods: {
+    onShowNewQuestions(input) {
+      this.onlyNewQuestion = input.tile;
+    },
+    callQuestionRecommendation() {
+      this.questionRecommendation = true;
+    },
+    closeQuestionRecommendation() {
+      this.questionRecommendation = false;
+    },
+    callComplain() {
+      this.complain = true;
+    },
+    closeComplain() {
+      this.complain = false;
+    }
+  },
+  components: {
+    'top-menu' : menu,
+    'top-popular' : popular,
+    'question-recommendation' : QuestionRecommendation,
+    'complain': Complain
   }
 }
 </script>

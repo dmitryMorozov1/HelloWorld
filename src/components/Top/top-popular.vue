@@ -1,23 +1,23 @@
 <template>
-  <v-container class="border top-1 blocklight">
-    <v-flex class="textdarkgrey-text text-xs-center reg-17">
+  <v-container class="top-1 blocklight border">
+    <v-flex class="text-xs-center reg-17 textdarkgrey-text">
       ПОПУЛЯРНЫЕ ТЕМЫ
     </v-flex>
     <v-flex class="pt-2">
       <v-flex class="pl-4" 
         v-for="popularTopic in popularTopics" 
         :key="popularTopic.id">
-        <v-layout row class="top-popular-value">
+        <v-layout class="top-popular-value">
           <v-btn 
             outline
             small
-            :ripple="false"
-            color="grey darken-1"
             class="top-popular-tag thin-12 textdarkgrey-text"
+            color="grey darken-1"
+            :ripple="false"
             @click="getTopic(popularTopic.id)">
               {{ popularTopic.name }}
           </v-btn>
-          <v-flex class="med-17 textdarkgrey-text pt-2 pl-1">
+          <v-flex class="pt-2 pl-1 med-17 textdarkgrey-text">
             {{ popularTopic.value }}
           </v-flex>
         </v-layout>
@@ -33,11 +33,11 @@ export default {
       popularTopics: []
     }
   },
-  mounted () {
-    this.getAmounts();
+  beforeMount() {
+    this.addPopularTopics;
   },
-  methods: {
-    getAmounts() {
+  computed: {
+    addPopularTopics() {
       this.popularTopics = [
         { id: '1', name: 'Судьба', value: 97},
         { id: '2', name: 'Фамилия', value: 65},
@@ -47,7 +47,9 @@ export default {
         { id: '6', name: 'Религия', value: 12},
         { id: '7', name: 'Государство', value: 4}
       ];
-    },
+    }
+  },
+  methods: {
     getTopic(id) {
       alert(id);
     }
@@ -58,9 +60,6 @@ export default {
 <style scoped>
 .top-1 {
   border-radius: 2px;
-}
-.top-popular-layout {
-  text-align: center;
 }
 .top-popular-tag {
   border-radius: 5px;
