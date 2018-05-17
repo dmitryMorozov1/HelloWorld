@@ -1,111 +1,112 @@
 <template>
   <v-card class="px-4 question-recommendation-comp">
-    <v-flex class="text-xs-center pt-3 reg-18 textblue-text">
+    <v-flex class="pt-3 text-xs-center reg-18 textblue-text">
       Порекомендовать вопрос
     </v-flex>
     <search 
+      :element="'question-rec-person-tile-title'"
       :label="'Введите имя'"
       :searchStr="search"   
       @inputsearch="inputsearch">
     </search>
-    <v-container 
-      class="scroll-y pa-0 border people-list">
+    <v-container class="pa-0 scroll-y people-list border">
       <v-list class="py-0">
         <v-list-tile 
-          :class="choosenPeopleId.indexOf(person.id) === -1 &&
-                  tile === false ? 
-                 'blocklight' : 'blocklightblue'"
-          avatar 
           v-for="person in filteredList" 
           :key="person.title" 
-          @click="selectPerson(person.id)">
+          avatar 
+          :class="choosenPeople.indexOf(person) === -1 &&
+                  tile === false ? 
+                 'blocklight' : 'blocklightblue'"
+          @click="selectPerson(person)">
           <v-list-tile-avatar>
             <img :src="person.img">
           </v-list-tile-avatar>
           <v-list-tile-content>
-            <div class="med-16 rec-person-tile-title">
+            <div class="question-rec-person-tile-title med-16">
               {{ person.name }}
             </div>
           </v-list-tile-content>
         </v-list-tile>
       </v-list>
       <v-layout  
-        v-if="!!!people.length"
-        class="blocklight notfound">
+        v-if="!people.length"
+        fill-height
+        align-center
+        class="blocklight">
         <v-flex  class="text-xs-center med-16">
-          Пока некому рекомендовать
+          У вас пока нет подписчиков
         </v-flex>
       </v-layout>
       <v-layout  
-        v-else-if="!!!filteredList.length"
-        class="blocklight notfound">
+        v-else-if="!filteredList.length"
+        fill-height
+        align-center
+        class="blocklight">
         <v-flex  class="text-xs-center med-16">
-          Ваш запрос не дал результатов.
+          Список пуст
         </v-flex>
       </v-layout>
     </v-container>
-    <v-layout class="select-switch pt-2 pb-1">
-      <div class="textdarkgrey-text px-3 reg-16">
+    <v-layout 
+      align-center
+      class="pt-2 pb-1">
+      <div class="px-3 reg-16 textdarkgrey-text">
         Выбрать всех
       </div>
       <v-switch 
-        class="ml-3"
         hide-details
+        class="ml-3"
         v-model="tile"
         @click="selectAll()">
       </v-switch>
     </v-layout>
-    <v-layout class="text-xs-center pb-3">
+    <v-layout class="pb-3 text-xs-center">
       <v-btn 
-        class="capitalize med-16 cancel-btn textblue-text mx-0"
         round
         depressed
+        class="mx-0 capitalize cancel-btn med-16 textblue-text"
         @click.native="closeComponent()">
           Отмена
       </v-btn>
       <v-spacer></v-spacer>
       <v-btn 
-        class="capitalize med-16 ready-btn blocklight-text blockblue mx-0"
         round
         depressed
+        class="mx-0 capitalize ready-btn med-16 blocklight-text blockblue "
         @click.native="toRecommend()">
           Готово
       </v-btn>
     </v-layout>
-    
   </v-card>
 </template>
 
 <script>
-import search from './search.vue'
+import search from '@/components/Main/search/search'
 export default {
   data() {
     return {
       people: [],
-      choosenPeopleId: [],
+      choosenPeople: [],
       search: '',
       tile: false,
       copyNames: []
     }
   },
-  // to watch the dialog closure 
   props: ['dialogIsOpen'],
   watch: {
     dialogIsOpen: function (yes) {
       if(yes)
       {
-        this.tile = false;
+        this.choosenPeople = [];
         this.search = '';
-        this.choosenPeopleId = [];
+        this.tile = false;
         this.copyNames = [];
       }
     },
     copyNames: function () {
       this.coloringSearch();
     }
-  },
-  components: {
-    'search': search
   },
   beforeMount () {
     this.addPeople;
@@ -144,23 +145,23 @@ export default {
     }
   },
   methods: {
-    inputsearch(input) {
-      this.search = input.search;
-    },
-    toRecommend(people) {
-      alert(this.choosenPeopleId);
-      this.$emit('closeComponent');
-    },
     closeComponent() {
       this.$emit('closeComponent');
     },
-    selectPerson(personId) {
+    toRecommend() {
+      //this.$emit('addRecommendation', this.choosenPeople);
+      this.$emit('closeComponent');
+    },
+    inputsearch(input) {
+      this.search = input.search;
+    },
+    selectPerson(person) {
       if (this.tile === true) this.tile = false;
-      let n = this.choosenPeopleId.indexOf(personId);
+      let n = this.choosenPeople.indexOf(person);
       if (n !== -1) {
-        this.choosenPeopleId.splice(n, 1);
+        this.choosenPeople.splice(n, 1);
       } else {
-        this.choosenPeopleId.push(personId)
+        this.choosenPeople.push(person)
       }
     },
     selectAll() {
@@ -168,16 +169,18 @@ export default {
       // GET request - to get all people id
       // and assign to a choosenPeopleId[]
       // may be. Now it is done so
-      this.choosenPeopleId = [];
-      if (!!!this.tile) {
+      this.choosenPeople = [];
+      if (!this.tile) {
         for (let n = 0; n < this.people.length; n++) {
-          this.choosenPeopleId[n] = this.people[n].id;
+          this.choosenPeople[n] = this.people[n];
         } 
         this.search = '';
       }
     },
     coloringSearch() {
-      let peopleNames = document.getElementsByClassName("rec-person-tile-title");
+      let peopleNames = document.getElementsByClassName(
+                        "question-rec-person-tile-title"
+                        );
       let searchWords = this.search.trim().split(/\s+/g);
       for (let i = 0; i < peopleNames.length; i++) {
         if(this.copyNames[i]) {
@@ -197,6 +200,9 @@ export default {
         }
       }
     }
+  },
+  components: {
+    'search': search
   }
 }
 </script>
@@ -215,15 +221,8 @@ export default {
 .cancel-btn {
   min-width: 106px;
 }
-.select-switch {
-  align-items: center;
-}
 .people-list {
   border-radius: 2px;
   height: 280px !important;
-}
-.notfound {
-  height: 56px;
-  align-items: center;
 }
 </style>

@@ -1,40 +1,39 @@
 <template>
   <v-card class="px-4 complain-comp">
-    <v-flex class="text-xs-center py-3 reg-18 textblue-text">
+    <v-flex class="py-3 text-xs-center reg-18 textblue-text">
       Выберите причину жалобы
     </v-flex>
     <v-container 
-      class="scroll-y pr-0 py-0 border radio-group-container">
+      class="pr-0 py-0 scroll-y radio-group-container border">
       <v-radio-group 
-        class="complain-radio-group"
+        class="py-3 complain-radio-group"
         v-model="radio">
         <v-radio
-          color="blue accent-2"
           v-for="radio in radioGroup"
           :key="radio.value"
+          color="blue accent-2"
           :label="radio.description"
           :value="radio.value">
         </v-radio>
       </v-radio-group>
     </v-container>
-    <v-layout class="text-xs-center py-3">
+    <v-layout class="py-3 text-xs-center">
       <v-btn 
-        class="capitalize med-16 cancel-btn textblue-text mx-0"
         round
         depressed
+        class="mx-0 capitalize cancel-btn med-16 textblue-text"
         @click.native="closeComponent()">
           Отмена
       </v-btn>
       <v-spacer></v-spacer>
       <v-btn 
-        class="capitalize med-16 ready-btn blocklight-text blockblue mx-0"
         round
         depressed
+        class="mx-0 capitalize ready-btn med-16 blocklight-text blockblue"
         @click.native="toComplain()">
           Готово
       </v-btn>
     </v-layout>
-    
   </v-card>
 </template>
 
@@ -74,18 +73,15 @@ export default {
   },
   methods: {
     toComplain() {
-      alert(this.radio);
+      /* to do smthng */
       this.$emit('closeComponent');
     },
     closeComponent() {
       this.$emit('closeComponent');
     },
     setStyles() {
-      let radioGroup = document.getElementsByClassName("complain-radio-group");
-      radioGroup[0].children[1].style.minHeight = "18px";
-      for(let i = 0; i < 4; i++) {
-        radioGroup[0].children[0].children[i].firstElementChild.style.maxWidth = "85%";
-      }
+      document.getElementsByClassName("complain-radio-group")[0]
+              .children[1].style.minHeight="0";
     }
   }
 }
@@ -104,5 +100,8 @@ export default {
 }
 .radio-group-container {
   border-radius: 2px;
+}
+.complain-radio-group :nth-child(1) {
+  padding-left: 0;
 }
 </style>
