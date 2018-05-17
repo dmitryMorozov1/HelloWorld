@@ -1,72 +1,87 @@
 <template>
-  <v-toolbar dense fixed class="border blocklight"  v-scroll="onScroll">
-    <v-toolbar-title class="thin-28 textblue-text mr-3 main-text">
-      2Buttons
-    </v-toolbar-title>
-    <v-toolbar-items>
-      <v-btn 
-        v-for="item in menuItems"
-        :key="item.id"
-        :ripple="false"
-        :id="item.id"
-        flat
-        class="capitalize med-17 textgrey-text" 
-        @click="go(item.id)"
-      > {{ item.title }} </v-btn>
-    </v-toolbar-items>
-    <v-spacer></v-spacer>
-    <v-btn 
-      color="blockblue" 
-      class="med-16 create-question blocklight-text" 
-      round depressed>Задать вопрос</v-btn>
-      
-    <v-menu 
-      max-height="426px"
-      :close-on-content-click="false"
-      :nudge-bottom="46"
-      :nudge-left="216"
-      v-model="notificationsAreOpen"
-      transition="slide-y-transition">
-      <v-btn 
-        flat 
-        :ripple="false"
-        slot="activator"
-        @click="openNotification">
-        <v-icon 
-          v-if="notificationsAreOpen" 
-          class="textblue-text">
-          notifications
-        </v-icon>
-        <v-icon 
-          v-else-if="hasNotification" 
-          class="textblue-text">
-          notifications_active
-        </v-icon>
-        <v-icon 
-          v-else
-          class="textdarkgrey-text">
-          notifications_none
-        </v-icon>
-      </v-btn>
-      <notifications></notifications>
-    </v-menu>
-
-    <v-menu :nudge-width="100">
-      <v-toolbar-title slot="activator">
-        <v-avatar size="30px">
-          <img src="" alt="">
-        </v-avatar>
-        <v-icon>arrow_drop_down</v-icon>
+  <v-container class="pa-0 header-comp">
+    <v-toolbar dense fixed class="header-toolbar border blocklight"  v-scroll="onScroll">
+      <v-toolbar-title class="thin-28 textblue-text mr-3 main-text">
+        2Buttons
       </v-toolbar-title>
-      <v-list>
-        <!-- some links will be here in future -->
-      </v-list>
-    </v-menu>
-  </v-toolbar>
+      <v-toolbar-items>
+        <v-btn 
+          v-for="item in menuItems"
+          :key="item.id"
+          :ripple="false"
+          :id="item.id"
+          flat
+          class="capitalize med-17 textgrey-text" 
+          @click="go(item.id)"
+        > {{ item.title }} </v-btn>
+      </v-toolbar-items>
+      <v-spacer></v-spacer>
+      <v-btn 
+        color="blockblue" 
+        class="med-16 create-question blocklight-text" 
+        round 
+        depressed
+        @click="openAskQuestion">
+        Задать вопрос
+      </v-btn>
+
+
+      <v-menu 
+        :close-on-content-click="false"
+        :nudge-bottom="46"
+        :nudge-left="216"
+        v-model="notificationsAreOpen"
+        transition="slide-y-transition">
+        <v-btn 
+          flat 
+          :ripple="false"
+          slot="activator"
+          @click="openNotification">
+          <v-icon 
+            v-if="notificationsAreOpen" 
+            class="textblue-text">
+            notifications
+          </v-icon>
+          <v-icon 
+            v-else-if="hasNotification" 
+            class="textblue-text">
+            notifications_active
+          </v-icon>
+          <v-icon 
+            v-else
+            class="textdarkgrey-text">
+            notifications_none
+          </v-icon>
+        </v-btn>
+        <notifications></notifications>
+      </v-menu>
+
+      <v-menu 
+        class="right-menu-btn"
+        :nudge-bottom="46"
+        transition="slide-y-transition"
+        v-model="dropMenuAreOpen">
+        <v-toolbar-title slot="activator">
+          <v-avatar size="30px">
+            <img src="" alt="">
+          </v-avatar>
+          <v-icon>arrow_drop_down</v-icon>
+        </v-toolbar-title>
+        <account-drop-menu
+          @logout="openLogin">
+        </account-drop-menu>
+      </v-menu>
+    </v-toolbar>
+    <ask-question :openDialog="askQuestion" @closeDialog="closeAskQuestion"></ask-question>
+    <login v-if="login" @closeComponent="closeLogin"></login>
+  </v-container>
 </template>
 
 <script>
 import Notifications from '@/components/Main/notifications/notifications.vue';
+import AccountDropMenu from '@/components/Main/accountDropMenu/accountDropMenu.vue';
+import AskQuestion from '@/components/Main/AskQuestion/AskQuestionMain.vue';
+import Login from '@/components/Main/Login/LoginMain.vue';
 export default {
   data() {
     return {
@@ -79,11 +94,17 @@ export default {
         { id: 'SelectQuestion', title: 'Подобрать вопрос' }
       ],
       hasNotification: false,
-      notificationsAreOpen: false
+      notificationsAreOpen: false,
+      dropMenuAreOpen: false,
+      askQuestion: false,
+      login: false
     }
   },
   components: {
-    'notifications': Notifications
+    'notifications': Notifications,
+    'ask-question': AskQuestion,
+    'login': Login,
+    'account-drop-menu': AccountDropMenu
   },
   mounted () {
     // getting name of loading page 
@@ -132,12 +153,32 @@ export default {
     },
     onScroll () {
       this.notificationsAreOpen = false;
+      this.dropMenuAreOpen = false;
+    },
+    openAskQuestion() {
+      this.askQuestion = true;
+    },
+    closeAskQuestion() {
+      this.askQuestion = false;
+    },
+    openLogin() {
+      this.login = true;
+    },
+    closeLogin() {
+      this.login = false;
     }
   }
 }
 </script>
 
 <style scoped>
+.header-toolbar {
+  width:100vw;
+}
+.right-menu-btn {
+  /*тут надо бы сделать ширину прокрутки лучше*/
+  padding-right: 16px;
+}
 .capitalize {
   text-transform: inherit;
 }
