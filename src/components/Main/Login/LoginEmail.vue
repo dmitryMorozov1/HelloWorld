@@ -1,29 +1,46 @@
 <template>
   <v-card>
-    <v-flex class="text-xs-center py-2 med-24 textblue-text">
+    <v-btn 
+      absolute
+      icon 
+      flat  
+      class="mx-3 my-2 textblue-text"
+      :ripple="false"
+      @click="callPreviousDialog()">
+      <v-icon>
+        arrow_back
+      </v-icon>
+    </v-btn>
+    <v-flex class="py-2 text-xs-center med-24 textblue-text">
       Вход
     </v-flex>
     <v-form 
       id="form-login-input-comp" 
-      class="px-4">
-        <v-text-field
-          v-model="login"
-          @keyup.enter="nextInput"
-          class="input"
-          label="Email или телефон">
-        </v-text-field>
-        <v-text-field
-          v-model="password"
-          :rules="passwordRules"
-          :append-icon="e1 ? 'visibility' : 'visibility_off'"
-          :append-icon-cb="() => (e1 = !e1)"
-          :type="e1 ? 'password' : 'text'"
-          @keyup.enter="loginEmail"
-          class="input"
-          label="Пароль">
-        </v-text-field>
+      class="px-4"
+      ref="form">
+      <v-text-field
+        label="Email или телефон"
+        v-model="login"
+        :class="loginError ? '' : 'input'"
+        :rules="loginRules"
+        @keyup.enter="nextInput"
+        @focus="focusOn('login')"
+        @blur="unFocusOn('login')">
+      </v-text-field>
+      <v-text-field
+        label="Пароль"
+        v-model="password"
+        :class="passwordError ? '' : 'input'"
+        :rules="passwordRules"
+        :append-icon="hidePassword ? 'visibility' : 'visibility_off'"
+        :append-icon-cb="() => (hidePassword = !hidePassword)"
+        :type="hidePassword ? 'password' : 'text'"
+        @keyup.enter="loginEmail"
+        @focus="focusOn('password')"
+        @blur="unFocusOn('password')">
+      </v-text-field>
     </v-form>
-    <v-flex class="text-xs-right mr-3">
+    <v-flex class="mr-3 text-xs-right">
       <v-btn 
         small
         flat
@@ -34,22 +51,22 @@
     </v-flex>
     <v-flex class="text-xs-center">
       <v-btn 
-        class="capitalize med-16 enter-btn blocklight-text blockblue"
         round
         depressed
+        class="capitalize enter-btn med-16 blocklight-text blockblue"
         @click.native="loginEmail()">
           Войти
       </v-btn>
     </v-flex>
-    <hr class="mx-auto mt-2 mb-3 mx-4">
+    <hr class="mt-2 mb-3 mx-4 mx-auto">
     <v-flex class="text-xs-center reg-16">
       Еще не зарегистрированы?
     </v-flex>
-    <v-flex class="text-xs-center py-3">
+    <v-flex class="py-3 text-xs-center">
       <v-btn 
-        class="capitalize med-16 registration-btn textblue-text"
         round
         depressed
+        class="capitalize registration-btn med-16 textblue-text"
         @click.native="callRegistrationForm()">
           Зарегистрироваться
       </v-btn>
@@ -63,41 +80,75 @@ export default {
     return {
       login: '',
       password: '',
+      loginError: false,
+      passwordError: false,
       passwordRules: [
-        //v => !!v || 'Введите пароль'
+        v => !!v || 'Введите пароль'
       ],
-      e1: true
+      loginRules: [
+        v => !!v || 'Введите email или телефон'
+      ],
+      hidePassword: true
      }
   },
   methods: {
     callRegistrationForm() {
       this.$emit('callRegistrationForm');
     },
+    callPreviousDialog() {
+      this.$emit('callPreviousDialog');
+    },
     loginEmail() {
-      if(!!this.login && !!this.password)
+      if (this.$refs.form.validate()) {
         alert("log");
+      }
+      else {
+        this.loginError = true;
+        this.passwordError = true;
+      }
     },
     rememberPassword() {
-      alert("ОjllКАЙ");
+      this.$emit('callRememberPassword');
     },
     nextInput() {
       document.getElementById('form-login-input-comp')
-            .lastChild.children[1].firstChild.focus();
+              .lastChild.children[1].firstChild.focus();
     },
     onKeydown(e) {
       alert(1);
+    },
+    focusOn(element) {
+      switch (element) {
+        case 'login': 
+          this.loginError = false;
+          break;
+        case 'password': 
+          this.passwordError = false;
+          break;
+      }
+    },
+    unFocusOn(element) {
+      switch (element) {
+        case 'login': 
+          if(this.login === '') 
+            this.loginError = true;
+          break;
+        case 'password': 
+          if(this.password === '') 
+            this.passwordError = true;
+          break;
+      }
     }
-  },
-  mounted () {
-    document.getElementById('form-login-input-comp')
-            .firstChild.lastChild.style.minHeight = "12px";
-    document.getElementById('form-login-input-comp')
-            .lastChild.lastChild.style.minHeight = "6px";
   }
 }
 </script>
 
 <style scoped>
+hr {
+  border: none;
+  background-color: rgba(0,0,0,.42); 
+  height: 1px; 
+}
 .btn {
   text-transform: inherit;
 }
@@ -109,12 +160,7 @@ export default {
   min-width: 190px;
   border: 1px solid #5DA3DA !important;
 }
-#form-login-input-comp .input {
+.input {
   color: #1A93F0 !important;
-}
-hr {
-  border: none;
-  background-color: rgba(0,0,0,.42); 
-  height: 1px; 
 }
 </style>

@@ -1,16 +1,29 @@
 <template>
-  <v-container>
+  <v-container class="pa-0">
     <v-dialog v-model="loginSocial" max-width="340px">
-      <login-social @callLoginEmailForm="showloginemail"></login-social>
+      <login-social @callLoginEmailForm="callLoginEmail"></login-social>
     </v-dialog>
     <v-dialog v-model="loginEmail" max-width="340px">
-      <login-email @callRegistrationForm="showregistration"></login-email>
+      <login-email 
+        @callPreviousDialog="callLoginSocial"
+        @callRememberPassword="callRememberPassword"
+        @callRegistrationForm="callRegistration">
+      </login-email>
     </v-dialog>
     <v-dialog v-model="registration" max-width="340px">
-      <registration @callPersonDataForm="showpersondata"></registration>
+      <registration 
+        @callPreviousDialog="callLoginEmail"
+        @callPersonDataForm="callPersonData">
+      </registration>
     </v-dialog>
     <v-dialog v-model="personData" max-width="340px">
-      <person-data @wasRegistered="registered"></person-data>
+      <person-data 
+        @callPreviousDialog="callRegistration"
+        @wasRegistered="registered">
+      </person-data>
+    </v-dialog>
+    <v-dialog v-model="rememberPassword" max-width="450px">
+      <remember-password @callLoginEmailForm="callLoginEmail"></remember-password>
     </v-dialog>
   </v-container>
 </template>
@@ -20,55 +33,69 @@ import LoginSocial from '@/components/Main/Login/LoginSocial.vue'
 import LoginEmail from '@/components/Main/Login/LoginEmail.vue'
 import Registration from '@/components/Main/Login/Registration.vue'
 import PersonData from '@/components/Main/Login/PersonData.vue'
+import RememberPassword from '@/components/Main/Login/RememberPassword.vue'
 export default {
   data() {
     return {
       loginSocial: false,
       loginEmail: false,
       registration: false,
-      personData: false
+      personData: false,
+      rememberPassword: false
     }
   },
-  mounted () {
+  beforeMount () {
      this.loginSocial = true;
-  },
-  components: {
-    'login-social': LoginSocial,
-    'login-email': LoginEmail,
-    'registration': Registration,
-    'person-data': PersonData
   },
   updated () {
     // Tell the parent that all dialogs are closed
     if(!this.loginSocial &&
        !this.loginEmail &&
        !this.registration &&
-       !this.personData)
+       !this.personData &&
+       !this.rememberPassword)
     {
-      this.closeLogin();
+      this.closeComponent();
     }
   },
   methods: {
-    // 4 transitions between components
-    showloginemail() {
+    callLoginSocial() {
+      this.loginEmail=false;
+      this.loginSocial=true;
+    },
+    callLoginEmail() {
       this.loginSocial=false;
+      this.rememberPassword=false;
+      this.registration=false;
       this.loginEmail=true;
     },
-    showregistration() {
+    callRememberPassword() {
       this.loginEmail=false;
+      this.rememberPassword=true;
+    },
+    callRegistration() {
+      this.loginEmail=false;
+      this.personData=false;
       this.registration=true;
     },
-    showpersondata() {
+    callPersonData() {
       this.registration=false;
       this.personData=true;
     },
     registered() {
       this.personData=false;
-      this.closeLogin();
+      this.closeComponent();
     },
-    closeLogin() {
-      this.$emit('closeLogin');
+    closeComponent() {
+      this.$emit('closeComponent');
     }
+  },
+  components: {
+    'login-social': LoginSocial,
+    'login-email': LoginEmail,
+    'registration': Registration,
+    'person-data': PersonData,
+    'remember-password': RememberPassword
   }
 }
 </script>

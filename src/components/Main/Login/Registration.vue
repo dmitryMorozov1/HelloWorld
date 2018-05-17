@@ -1,43 +1,61 @@
 <template>
   <v-card>
-    <v-flex class="text-xs-center py-2 med-24 textblue-text">
+    <v-btn 
+      absolute
+      icon 
+      flat  
+      class="mx-3 my-2 textblue-text"
+      :ripple="false"
+      @click="callPreviousDialog()">
+      <v-icon>
+        arrow_back
+      </v-icon>
+    </v-btn>
+    <v-flex class="py-2 text-xs-center med-24 textblue-text">
       Регистрация
     </v-flex>
     <v-form 
       id="form-registration-input-comp" 
-      class="px-4">
+      class="px-4"
+      ref="form">
         <v-text-field
+          label="Имя Фамилия"
           v-model="name"
+          :class="nameError ? '' : 'input'"
           :rules="nameRules"
           @keyup.enter="nextInput(1)"
-          class="input"
-          label="Имя Фамилия">
+          @focus="focusOn('name')"
+          @blur="unFocusOn('name')">
         </v-text-field>
         <v-text-field
+          label="Email или телефон"
           v-model="login"
+          :class="loginError ? '' : 'input'"
+          :rules="loginRules"
           @keyup.enter="nextInput(2)"
-          class="input"
-          label="Email или телефон">
+          @focus="focusOn('login')"
+          @blur="unFocusOn('login')">
         </v-text-field>
         <v-text-field
-          v-model="password"
-          :rules="passwordRules"
-          hint="Минимум 8 символов"
+          label="Пароль"
           min="8"
-          :append-icon="e1 ? 'visibility' : 'visibility_off'"
-          :append-icon-cb="() => (e1 = !e1)"
-          :type="e1 ? 'password' : 'text'"
+          v-model="password"
+          :class="passwordError ? '' : 'input'"
+          :rules="passwordRules"
+          :append-icon="hidePassword ? 'visibility' : 'visibility_off'"
+          :append-icon-cb="() => (hidePassword = !hidePassword)"
+          :type="hidePassword ? 'password' : 'text'"
           @keyup.enter="next"
-          class="input"
-          label="Пароль">
+          @focus="focusOn('password')"
+          @blur="unFocusOn('password')">
         </v-text-field>
     </v-form>
-    <v-flex class="text-xs-center py-3">
+    <v-flex class="py-3 text-xs-center">
       <v-btn 
-        color="white"
-        class="capitalize med-16 next-btn"
         round
         depressed
+        class="capitalize next-btn med-16"
+        color="white"
         @click.native="next()">
           Далее
       </v-btn>
@@ -53,22 +71,67 @@ export default {
       nameRules: [
         v => !!v || 'Введите имя и фамилию'
       ],
+      nameError: false,
       login: '',
+      loginRules: [
+        v => !!v || 'Введите email или телефон'
+      ],
+      loginError: false,
       password: '',
       passwordRules: [
-        v => !!v || 'Введите пароль'
+        v => !!v || 'Введите пароль',
+        v => v.length >= 8 || 'Минимум 8 символов'
       ],
-      e1: true
+      passwordError: false,
+      hidePassword: true
      }
   },
   methods: {
     next() {
-      if(!!this.name && !!this.login && !!this.password)
+      if (this.$refs.form.validate()) {
         this.$emit('callPersonDataForm');
+      }
+      else {
+        this.nameError = true;
+        this.loginError = true;
+        this.passwordError = true;
+      }
+    },
+    callPreviousDialog() {
+      this.$emit('callPreviousDialog');
     },
     nextInput(n) {
       document.getElementById('form-registration-input-comp')
             .children[n].children[1].firstChild.focus();
+    },
+    focusOn(element) {
+      switch (element) {
+        case 'name': 
+          this.nameError = false;
+          break;
+        case 'login': 
+          this.loginError = false;
+          break;
+        case 'password': 
+          this.passwordError = false;
+          break;
+      }
+    },
+    unFocusOn(element) {
+      switch (element) {
+        case 'name': 
+          if(this.name === '') 
+            this.nameError = true;
+          break;
+        case 'login': 
+          if(this.login === '') 
+            this.loginError = true;
+          break;
+        case 'password': 
+          if(this.password === '' || this.password.length < 8) 
+            this.passwordError = true;
+          break;
+      }
     }
   }
 }
@@ -79,7 +142,7 @@ export default {
   min-width: 190px;
   border: 1px solid #CACACA !important;
 }
-#form-registration-input-comp .input {
+.input {
   color: #1A93F0 !important;
 }
 </style>
