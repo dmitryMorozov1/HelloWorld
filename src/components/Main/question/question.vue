@@ -119,21 +119,11 @@
         class="answer"
       ></answer>
     </v-layout>
-
-    <v-dialog 
-      max-width="820px"
-      v-model="openQuestion">
-      <open-question
-        @closeComponent="closeOpenQuestion"
-        :question="question">
-      </open-question>
-    </v-dialog>
   </v-container>
 </template>
 
 <script>
 import answer from './answer'
-import OpenQuestion from '@/components/Main/question/openQuestion/openQuestion'
 
 export default {
   data() {
@@ -154,8 +144,7 @@ export default {
           active: false
         }
       ],
-      date: '',
-      openQuestion: false
+      date: ''
     }
   },
   props: ['question'],
@@ -181,10 +170,7 @@ export default {
   },
   methods: {
     callOpenQuestion() {
-      this.openQuestion = true;
-    },
-    closeOpenQuestion() {
-      this.openQuestion = false;
+      this.$emit('callOpenQuestion', {question: this.question});
     },
     callQuestionRecommendation() {
       // Передать сюда id текущего вопроса!
@@ -229,8 +215,7 @@ export default {
     }
   },
   components: {
-    'answer' : answer,
-    'open-question' : OpenQuestion
+    'answer' : answer
   }
 }
 </script>
