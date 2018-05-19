@@ -27,8 +27,10 @@ export default {
     }
   },
   props: ['question'],
-  beforeMount () {
-    this.addDate;
+  watch: {
+    question: function() {
+      this.addDate;
+    }
   },
   computed: {
     addDate() {

@@ -111,40 +111,50 @@ export default {
       bottom_left: [
         {
           icon: 'visibility',
-          count: this.question.watches
+          count: 0
         },
         {
           icon: 'thumb_up',
-          count: this.question.likes,
+          count: 0,
           active: false
         },
         {
           icon: 'thumb_down',
-          count: this.question.dislikes,
+          count: 0,
           active: false
         }
       ]
     }
   },
   props: ['question'],
-  mounted() {
-    switch(this.question.like) {
-      case 1: {
-        this.bottom_left[1].active = true;
-        this.bottom_left[2].active = false;
-        break;
-      }
-      case -1: {
-        this.bottom_left[1].active = false;
-        this.bottom_left[2].active = true;
-        break;
-      }
-      case 0: {
-        this.bottom_left[1].active = false;
-        this.bottom_left[2].active = false;
-        break;
-      }
-    };
+  watch: {
+    question: function() {
+      this.addLikes;
+    }
+  },
+  computed: {
+    addLikes() {
+      switch(this.question.like) {
+        case 1: {
+          this.bottom_left[1].active = true;
+          this.bottom_left[2].active = false;
+          break;
+        }
+        case -1: {
+          this.bottom_left[1].active = false;
+          this.bottom_left[2].active = true;
+          break;
+        }
+        case 0: {
+          this.bottom_left[1].active = false;
+          this.bottom_left[2].active = false;
+          break;
+        }
+      };
+      this.bottom_left[0].count = this.question.watches;
+      this.bottom_left[1].count = this.question.likes;
+      this.bottom_left[2].count = this.question.dislikes;
+    }
   },
   methods: {
     tag_show(tag) {

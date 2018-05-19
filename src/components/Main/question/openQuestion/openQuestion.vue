@@ -119,6 +119,14 @@ export default {
   beforeMount () {
     this.addComments;
   },
+  mounted() {
+    this.formatComments();
+  },
+  updated() {
+    //придумать по другому
+    if(this.newComment === "")
+      this.formatComments();
+  },
   computed: {
     addComments() {
       this.comments = [
@@ -127,7 +135,7 @@ export default {
           like: 1, 
           likes: '1', 
           dislikes: '0', 
-          label: 'Ответил на ваш', 
+          label: 'Ответи\n\nл на ва\nш', 
           date: '2018-04-22T23:33:00Z', 
           img: "http://memesmix.net/media/created/m6tnhm.jpg",
           comments: [{
@@ -319,6 +327,17 @@ export default {
     clearReply() {
       this.replyId = '';
       this.replyName = '';
+    },
+    formatComments() {
+      let comments = document.getElementsByClassName("open-question-comment-content");
+      let reg1 = "/\\n\\n+/g";
+      let reg2 = "/\\n/g";
+      for (let i = 0; i < comments.length; i++) {
+        comments[i].innerHTML = comments[i].innerHTML.replace (
+        eval(reg1), "<br><br>");
+        comments[i].innerHTML = comments[i].innerHTML.replace (
+        eval(reg2), "<br>");
+      }
     }
   },
   components: {

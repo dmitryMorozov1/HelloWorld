@@ -17,9 +17,9 @@
               {{ comment.name }}
           </a>
         </v-list-tile-title>
-        <v-list-tile-sub-title class="comment-content reg-15 textdarkgrey-text">
-          {{ comment.label }} 
-        </v-list-tile-sub-title>
+        <v-list-tile-sub-title 
+          class="reg-15 textdarkgrey-text open-question-comment-content"
+        > {{ comment.label }} </v-list-tile-sub-title>
         <v-list-tile-title class="pt-1 textgrey-text">
           <v-layout class="comment-footer reg-13">
             <v-flex class="comment-date textgrey-text">
@@ -219,7 +219,7 @@ export default {
 a { 
   text-decoration: none;
 } 
-.comment-content {
+.open-question-comment-content {
   white-space: normal;
   line-height: 1.3;
 }
