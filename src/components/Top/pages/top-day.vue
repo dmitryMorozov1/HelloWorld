@@ -7,7 +7,7 @@
       :question="question"
       @callQuestionRecommendation="callQuestionRecommendation"
       @callComplain="callComplain"
-      >
+      @callOpenQuestion="callOpenQuestion">
     </question>
   </v-container>
 </template>
@@ -29,7 +29,7 @@ export default {
         ownerName: 'Елизавета Седова',
         avatar: 'https://pp.userapi.com/c622120/v622120519/2607c/k0wPW3Pp__k.jpg',
         background: 'https://media.tvzvezda.ru/news/vstrane_i_mire/content/201708160620-7kh1.htm/1.jpg',
-        date: '29.03.2018 15:00:00',
+        date: '2018-04-21T20:37:00Z',
         title: 'Меняет ли смена фамилии/имени судьбу человека?',
         like: 1,
         favorite: false,
@@ -79,6 +79,10 @@ export default {
     callQuestionRecommendation() {
       // Передать сюда id текущего вопроса!
       this.$emit('callQuestionRecommendation');
+    },
+    callOpenQuestion(args) {
+      // Передать сюда id текущего вопроса!
+      this.$emit('callOpenQuestion', {question: args.question});
     },
     callComplain() {
       // Передать сюда id текущего вопроса!

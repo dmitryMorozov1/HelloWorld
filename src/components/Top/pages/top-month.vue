@@ -7,7 +7,7 @@
       :question="question"
       @callQuestionRecommendation="callQuestionRecommendation"
       @callComplain="callComplain"
-      >
+      @callOpenQuestion="callOpenQuestion">
     </question>
   </v-container>
 </template>
@@ -177,6 +177,10 @@ export default {
     callQuestionRecommendation() {
       // Передать сюда id текущего вопроса!
       this.$emit('callQuestionRecommendation');
+    },
+    callOpenQuestion(args) {
+      // Передать сюда id текущего вопроса!
+      this.$emit('callOpenQuestion', {question: args.question});
     },
     callComplain() {
       // Передать сюда id текущего вопроса!

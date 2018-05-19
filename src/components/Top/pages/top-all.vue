@@ -6,7 +6,8 @@
       v-if="!question.answered || !onlyNewQuestion"
       :question="question"
       @callQuestionRecommendation="callQuestionRecommendation"
-      @callComplain="callComplain">
+      @callComplain="callComplain"
+      @callOpenQuestion="callOpenQuestion">
     </question>
   </v-container>
 </template>
@@ -37,7 +38,7 @@ export default {
         answered: true, // is answered
         watches: 920,
         replies: 4,
-        likes: 456,
+        likes: 4563,
         dislikes: 118,
         tags: ['меняет', 'смена', 'фамилия', 'имя', 'судьба'],
         answers: [
@@ -84,10 +85,10 @@ export default {
         title: 'Меняет ли смена фамилии/имени судьбу человека?',
         like: 1,
         favorite: false,
-        watches: 920,
+        watches: 9220,
         answered: false, // is answered
         likes: 456,
-        dislikes: 118,
+        dislikes: 2118,
         tags: ['меняет', 'смена', 'фамилия', 'имя', 'судьба'],
         answers: [
           {
@@ -228,6 +229,10 @@ export default {
     callQuestionRecommendation() {
       // Передать сюда id текущего вопроса!
       this.$emit('callQuestionRecommendation');
+    },
+    callOpenQuestion(args) {
+      // Передать сюда id текущего вопроса!
+      this.$emit('callOpenQuestion', {question: args.question});
     },
     callComplain() {
       // Передать сюда id текущего вопроса!

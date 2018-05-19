@@ -5,7 +5,8 @@
         <router-view 
           :only-new-question="onlyNewQuestion"
           @callQuestionRecommendation="callQuestionRecommendation"
-          @callComplain="callComplain">
+          @callComplain="callComplain"
+          @callOpenQuestion="callOpenQuestion">
         </router-view>
       </v-flex>
       <v-flex>
@@ -37,6 +38,14 @@
       </complain>
     </v-dialog>
 
+    <v-dialog 
+      max-width="820px"
+      v-model="openQuestion">
+      <open-question
+        @closeComponent="closeOpenQuestion"
+        :question="question">
+      </open-question>
+    </v-dialog>
   </v-container>
 </template>
 
@@ -45,13 +54,16 @@ import menu from './top-menu';
 import popular from './top-popular';
 import QuestionRecommendation from '@/components/Main/question/questionRecommendation';
 import Complain from '@/components/Main/question/complain.vue';
+import OpenQuestion from '@/components/Main/question/openQuestion/openQuestion';
 
 export default {
   data() {
     return {
       onlyNewQuestion: false,
       questionRecommendation: false,
-      complain: false
+      complain: false,
+      openQuestion: false,
+      question: {}
     }
   },
   created () {
@@ -73,13 +85,21 @@ export default {
     },
     closeComplain() {
       this.complain = false;
+    },
+    callOpenQuestion(args) {
+      this.question = args.question;
+      this.openQuestion = true;
+    },
+    closeOpenQuestion() {
+      this.openQuestion = false;
     }
   },
   components: {
     'top-menu' : menu,
     'top-popular' : popular,
     'question-recommendation' : QuestionRecommendation,
-    'complain': Complain
+    'complain': Complain,
+    'open-question' : OpenQuestion
   }
 }
 </script>
