@@ -11,14 +11,14 @@
       <v-list-tile-content>
         <v-list-tile-title>
           <a 
-            class="reg-16 black--text"
+            class="comment-person-name reg-16 black--text"
             href="" 
             target="_blank">
               {{ comment.name }}
           </a>
         </v-list-tile-title>
         <v-list-tile-sub-title 
-          class="reg-15 textdarkgrey-text open-question-comment-content"
+          class="open-question-comment-content reg-15 textdarkgrey-text"
         > {{ comment.label }} </v-list-tile-sub-title>
         <v-list-tile-title class="pt-1 textgrey-text">
           <v-layout class="comment-footer reg-13">
@@ -222,6 +222,10 @@ a {
 .open-question-comment-content {
   white-space: normal;
   line-height: 1.3;
+  user-select: text;
+}
+.comment-person-name {
+  user-select: text;
 }
 .comment-footer .flex {
   flex: 0 1 auto;
