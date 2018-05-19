@@ -66,7 +66,7 @@
     <comment 
       v-for="(comment, index) in comments" 
       :key="index"
-      class="ml-5"
+      class="ml-6"
       :index="index"
       :last="index===comments.length-1 && last"
       :comment="comment"
@@ -241,5 +241,8 @@ a {
 }
 .qw {
   width: 160px;
+}
+.ml-6 {
+  margin-left: 56px!important;
 }
 </style>
