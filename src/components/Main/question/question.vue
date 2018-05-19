@@ -1,7 +1,6 @@
 <template>
   <v-container class="pa-0">
-    <!-- IN FUTURE ↓ change on function, that will open question (or add link) -->
-    <v-flex @click="a">
+    <v-flex @click="callOpenQuestion">
       <v-card class="pointer">
 <!-- question background image -->
         <v-card-media
@@ -120,11 +119,21 @@
         class="answer"
       ></answer>
     </v-layout>
+
+    <v-dialog 
+      max-width="820px"
+      v-model="openQuestion">
+      <open-question
+        @closeComponent="closeOpenQuestion"
+        :question="question">
+      </open-question>
+    </v-dialog>
   </v-container>
 </template>
 
 <script>
 import answer from './answer'
+import OpenQuestion from '@/components/Main/question/openQuestion/openQuestion'
 
 export default {
   data() {
@@ -145,7 +154,8 @@ export default {
           active: false
         }
       ],
-      date: ''
+      date: '',
+      openQuestion: false
     }
   },
   props: ['question'],
@@ -170,8 +180,11 @@ export default {
     this.date = this.question.date;
   },
   methods: {
-    a() {
-      // this.$router.push({ name: 'Top'})
+    callOpenQuestion() {
+      this.openQuestion = true;
+    },
+    closeOpenQuestion() {
+      this.openQuestion = false;
     },
     callQuestionRecommendation() {
       // Передать сюда id текущего вопроса!
@@ -216,7 +229,8 @@ export default {
     }
   },
   components: {
-    'answer' : answer
+    'answer' : answer,
+    'open-question' : OpenQuestion
   }
 }
 </script>
