@@ -8,12 +8,37 @@
       <follower :person="person"></follower>
   </v-container>
   <v-container 
-    v-if="!filteredList.length"
+    v-if="!followers.length"
+    class="pa-0 mb-2">
+    <v-layout 
+      row
+      wrap
+      align-center
+      class="px-2 my-0 empty-comp med-20 blocklight border">
+        <v-flex 
+          xs12 
+          class="text-xs-center"> 
+          <v-layout d-block>
+            <v-flex class="pb-3">
+              <img 
+                class="empty-img" 
+                src="https://dic.academic.ru/pictures/wiki/files/50/250px-Patrick_Star.svg.png"
+              >
+            </v-flex>
+            <v-flex class="pb-4">
+              Здесь будут отображаться ваши подписчики
+            </v-flex>
+          </v-layout>
+        </v-flex>
+    </v-layout>
+  </v-container>
+  <v-container 
+    v-else-if="!filteredList.length"
     class="pa-0 mb-2">
     <v-layout 
       align-center
       class="px-2 my-0 followers med-16 blocklight border">
-        Ни одного подписчика не найдено.
+        Ни одного подписчика не найдено
     </v-layout>
   </v-container>
 </v-container>
@@ -41,15 +66,7 @@ export default {
   },
   computed: {
     addfollowers() {
-      this.followers = [
-        { id: '1', name: 'Петя Говядко', link: '/Володя', following: true, follower: true, img: "http://memesmix.net/media/created/m6tnhm.jpg"},
-        { id: '2', name: 'Петя Говядко', link: '/Петя', following: true, follower: false, img: "https://i.ytimg.com/vi/3v3tRVmgcZU/hqdefault.jpg"},
-        { id: '3', name: 'Костя Говядко', link: '/Костя', following: false, follower: false, img: "http://www.ovsyanko.ru/kosta/myself.jpg"},
-        { id: '4', name: 'Лизгоа Говядко', link: '/Лиза', following: true, follower: true, img: "http://www.ivoirebusiness.net/sites/default/files/poutine%20vladi_0.jpg"},
-        { id: '5', name: 'Отдых Говядко', link: '/Отдых', following: true, follower: false, img: "https://files.adme.ru/files/news/part_88/880410/14451510-2363018019-600-e95273f1dc-1484580123.jpg"},
-        { id: '6', name: 'Прапор Говядко', link: '/Прапор', following: false, follower: true, img: "http://fans.mybspn.com/files/2012/07/2029_show_image_NpAdvSinglePhotophp_1.jpg"},
-        { id: '7', name: 'Петя Говядко', link: '/Петя', following: true, follower: true, img: "https://i.ytimg.com/vi/3v3tRVmgcZU/hqdefault.jpg"}
-      ];
+      this.followers = [];
     },
     filteredList() {
       let search = this.search.trim();
@@ -103,5 +120,12 @@ export default {
 <style scoped>
 .followers {
   height: 58px;
+}
+.empty-comp {
+  border-radius: 2px;
+  height: 440px;
+}
+.empty-img {
+  height: 200px;
 }
 </style>
