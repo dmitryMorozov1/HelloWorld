@@ -21,9 +21,25 @@
       <v-container class="px-0 pt-0 mb-2" 
         v-if="!notifications.length">
         <v-layout 
-          justify-center  
-          class="pa-2 my-0 med-16">
-            У вас пока нет уведомлений
+          row
+          wrap
+          align-center
+          class="px-2 pt-3 my-0 med-18 blocklight black--text">
+            <v-flex 
+              xs12 
+              class="text-xs-center"> 
+              <v-layout d-block>
+                <v-flex class="pb-3">
+                  <img 
+                    class="empty-img" 
+                    src="https://cs8.pikabu.ru/images/previews_comm/2017-12_2/151259131615249038.png"
+                  >
+                </v-flex>
+                <v-flex>
+                  У вас пока нет уведомлений
+                </v-flex>
+              </v-layout>
+            </v-flex>
         </v-layout>
       </v-container>
     </v-container>
@@ -43,21 +59,7 @@ export default {
   },
   computed: {
     addNotifications() {
-      this.notifications = [
-        { id: '1', name: 'Петя Говядко', label: 'Ответил на ваш', object: 'Комментарий', date: '2018-04-22T23:33:00Z', img: "http://memesmix.net/media/created/m6tnhm.jpg"},
-        { id: '2', name: 'Петя Говядко', label: 'Прокомментировала ла-ла-ла-ла-ла вам', object: 'Вопрос', date: '2018-04-23T15:00:00Z', img: "https://i.ytimg.com/vi/3v3tRVmgcZU/hqdefault.jpg"},
-        { id: '3', name: 'Костя Говядко', label: 'Подписался на вас', object: '', date: '2018-04-21T20:37:00Z', img: "http://www.ovsyanko.ru/kosta/myself.jpg"},
-        { id: '4', name: 'Петя Говядко', label: 'Ответил на ваш', object: 'Комментарий', date: '2018-04-22T23:33:00Z', img: "http://memesmix.net/media/created/m6tnhm.jpg"},
-        { id: '5', name: 'Петя Говядко', label: 'Прокомментировала вам', object: 'Вопрос', date: '2018-04-23T15:00:00Z', img: "https://i.ytimg.com/vi/3v3tRVmgcZU/hqdefault.jpg"},
-        { id: '6', name: 'Костя Говядко', label: 'Подписалась на вас', object: '', date: '2018-04-21T20:37:00Z', img: "http://www.ovsyanko.ru/kosta/myself.jpg"},
-        { id: '7', name: 'Петя Говядко', label: 'Можно вставить большой текст и прокомментировать конечно этот', object: 'Комментарий', date: '2018-04-22T23:33:00Z', img: "http://memesmix.net/media/created/m6tnhm.jpg"},
-        { id: '8', name: 'Петя Говядко', label: 'Прокомментировала вам', object: 'Вопрос', date: '2018-04-23T15:00:00Z', img: "https://i.ytimg.com/vi/3v3tRVmgcZU/hqdefault.jpg"},
-        { id: '9', name: 'Костя Говядко', label: 'Подписалась на вас', object: '', date: '2018-04-21T20:37:00Z', img: "http://www.ovsyanko.ru/kosta/myself.jpg"},
-        { id: '10', name: 'Петя Говядко', label: 'Ответил на ваш', object: 'Комментарий', date: '2018-04-22T23:33:00Z', img: "http://memesmix.net/media/created/m6tnhm.jpg"},
-        { id: '11', name: 'Петя Говядко', label: 'Прокомментировала вам', object: 'Вопрос', date: '2018-04-23T15:00:00Z', img: "https://i.ytimg.com/vi/3v3tRVmgcZU/hqdefault.jpg"},
-        { id: '12', name: 'Костя Говядко', label: 'Подписалась на вас', object: '', date: '2018-04-21T20:37:00Z', img: "http://www.ovsyanko.ru/kosta/myself.jpg"},
-        { id: '13', name: 'Петя Говядко', label: 'Съел', object: 'Бутер', date: '2010-03-29T15:00:00Z', img: "https://i.ytimg.com/vi/3v3tRVmgcZU/hqdefault.jpg"}
-      ];
+      this.notifications = [];
     }
   },
   methods: {
@@ -87,5 +89,9 @@ export default {
 #notifications-comp {
   overflow-y: auto;
   max-height: 426px;
+}
+
+.empty-img {
+  height: 160px;
 }
 </style>
