@@ -3,7 +3,8 @@
   <question 
     :question="question"
     @callQuestionRecommendation="callQuestionRecommendation"
-    @callComplain="callComplain">
+    @callComplain="callComplain"
+    @callOpenQuestion="callOpenQuestion">
   </question>
   <comment 
     :index="index"
@@ -28,6 +29,9 @@ export default {
     },
     callComplain() {
       this.$emit('callComplain');
+    },
+    callOpenQuestion(args) {
+      this.$emit('callOpenQuestion', {question: args.question});
     }
   },
   components: {

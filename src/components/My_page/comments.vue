@@ -8,7 +8,8 @@
     :question="question"
     :comment="question.comment"
     @callQuestionRecommendation="callQuestionRecommendation"
-    @callComplain="callComplain">
+    @callComplain="callComplain"
+    @callOpenQuestion="callOpenQuestion">
   </question>
   
   <v-dialog 
@@ -29,6 +30,15 @@
     </complain>
   </v-dialog>
 
+    <v-dialog 
+      max-width="820px"
+      v-model="openQuestion">
+      <open-question
+        :question="question"
+        @closeComponent="closeOpenQuestion">
+      </open-question>
+    </v-dialog>
+
 </v-flex>
 </template>
 
@@ -37,12 +47,15 @@ import Question from './questionWithComment.vue';
 import Comment from './comment.vue';
 import QuestionRecommendation from '@/components/Main/question/questionRecommendation';
 import Complain from '@/components/Main/question/complain.vue';
+import OpenQuestion from '@/components/Main/question/openQuestion/openQuestion';
 
 export default {
   data() {
     return {
       questionRecommendation: false,
       complain: false,
+      openQuestion: false,
+      question: {},
       questions: []
     }
   },
@@ -294,13 +307,21 @@ export default {
     },
     closeComplain() {
       this.complain = false;
+    },
+    callOpenQuestion(args) {
+      this.question = args.question;
+      this.openQuestion = true;
+    },
+    closeOpenQuestion() {
+      this.openQuestion = false;
     }
   },
   components: {
     'question' : Question,
     'question-recommendation' : QuestionRecommendation,
     'complain': Complain,
-    'comment' : Comment
+    'comment' : Comment,
+    'open-question' : OpenQuestion
   }
 }
 </script>
