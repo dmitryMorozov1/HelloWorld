@@ -17,7 +17,7 @@ import ProfileFavorites from '@/components/My_page/favorites'
 import Followers from '@/components/My_page/followers'
 import Following from '@/components/My_page/following'
 import Questions from '@/components/My_page/questions'
-
+import EditProfile from '@/components/My_page/editProfile/editProfile'
 // Top
 import TopDay from '@/components/Top/pages/top-day'
 import TopWeek from '@/components/Top/pages/top-week'
@@ -45,7 +45,7 @@ export default new Router({
       component: Favorites,
       children: [
         {
-          path: 'mine',
+          path: '',
           name: 'Favorites-mine',
           component: FavoritesMine
         },
@@ -96,8 +96,12 @@ export default new Router({
           name: 'ProfileQuestions',
           component: Questions
         }
-        
       ]
+    },
+    {
+      path: '/profile/:id/edit',
+      name: 'EditProfile',
+      component: EditProfile
     },
     {
       path: '/news',
