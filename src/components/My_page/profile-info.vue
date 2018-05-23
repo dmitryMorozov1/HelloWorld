@@ -20,7 +20,8 @@
           </v-btn>
           <v-btn v-if="profileInfo.you_following && !profileInfo.owns"
                  class="bigBtn med-16 border blockgreen mx-0" style="height: 31px;"
-                 round depressed>Вы подписаны
+                 round depressed
+                 @click="callEditProfile">Вы подписаны
           </v-btn>
           <v-btn v-if="profileInfo.owns" class="bigBtn mx-0 med-16 border blockgrey"
                  round depressed style="width: 100%; height: 31px;">Редактировать
@@ -115,6 +116,11 @@
       this.profileInfo.follows = true;
       this.profileInfo.you_following = true;
       this.profileInfo.owns = false;
+    },
+    methods: {
+      callEditProfile () {
+        this.$router.push({ name: "EditProfile", params: { id: '1'} });
+      }
     }
 
   }
