@@ -2,85 +2,19 @@
   <v-container class="main-layout page">
     <v-layout>
       <v-flex column class="questions">
-        <v-layout column v-for="question in questions">
+        <v-layout column v-for="question in questions" :key="question.id">
           <v-layout class="blocklight label textdarkgrey-text border pl-2">Сообщение по типу "25
             пользователям понравился вопрос"
           </v-layout>
-          <question :key="question.id" class="py-0 mb-4"
-                    :question="question"></question>
+          <question class="py-0 mb-4" :question="question"></question>
         </v-layout>
       </v-flex>
       <v-flex>
-        <v-flex class="mr-0 ml-4 border blocklight best-questions right-block mb-3">
-          <v-flex class="pt-2 ">
-            <v-layout justify-center column class="reg-17 textdarkgrey-text mb-3 text-xs-center">
-              ЛУЧШИЕ ВОПРОСЫ
-              <v-layout column justify-center>
-                <v-list v-for="person in persons" dense class="pa-0 mb-0 blocklight">
-                  <v-divider class="ml-4 divider"></v-divider>
-                  <v-list-tile class="person mt-1 mb-2">
-                    <a :href="'profile/'+person.id" target="_blank">
-                      <v-list-tile-avatar>
-                        <img :src="person.avatar">
-                      </v-list-tile-avatar>
-                    </a>
-                    <v-list-tile-content>
-                      <v-layout class="reg-14 black--text">Here could be your amazing question</v-layout>
-                    </v-list-tile-content>
-                  </v-list-tile>
-                </v-list>
-              </v-layout>
-            </v-layout>
-          </v-flex>
-        </v-flex>
+        <best-questions :persons="persons"></best-questions>
 
-        <v-flex class="mr-0 ml-4 border blocklight best-comments right-block mb-3">
-          <v-flex class="pt-2 ">
-            <v-layout justify-center column class="reg-17 textdarkgrey-text mb-3 text-xs-center">
-              ЛУЧШИЕ КОММЕНТАРИИ
-              <v-layout column justify-center>
-                <v-list v-for="person in persons" dense class="pa-0 mb-0 blocklight">
-                  <v-divider class="ml-4 divider"></v-divider>
-                  <v-list-tile class="person mt-1 mb-2">
-                    <a :href="'profile/'+person.id" target="_blank">
-                      <v-list-tile-avatar>
-                        <img :src="person.avatar">
-                      </v-list-tile-avatar>
-                    </a>
-                    <v-list-tile-content>
-                      <v-layout class="reg-14 black--text">Here could be your amazing comment or so</v-layout>
-                    </v-list-tile-content>
-                  </v-list-tile>
-                </v-list>
-              </v-layout>
-            </v-layout>
-          </v-flex>
-        </v-flex>
+        <best-comments :persons="persons"></best-comments>
 
-        <v-flex class="mr-0 ml-4 border blocklight most-active right-block mb-3">
-          <v-flex class="pt-2 ">
-            <v-layout justify-center column class="reg-17 textdarkgrey-text mb-3 text-xs-center">
-              САМЫЕ АКТИВНЫЕ
-              <v-layout column justify-center>
-                <v-list two-line v-for="person in persons" dense class="pa-0 mb-0 blocklight">
-                  <v-divider class="ml-4 divider"></v-divider>
-                  <v-list-tile class="person">
-                    <a :href="'profile/'+person.id" target="_blank">
-                      <v-list-tile-avatar>
-                        <img :src="person.avatar">
-                      </v-list-tile-avatar>
-                    </a>
-                    <v-list-tile-content>
-                      <v-list-tile-title class="reg-14">вопросов: 16</v-list-tile-title>
-                      <v-list-tile-sub-title class="reg-14 black--text">комментариев: 31</v-list-tile-sub-title>
-                    </v-list-tile-content>
-                  </v-list-tile>
-                </v-list>
-              </v-layout>
-            </v-layout>
-          </v-flex>
-        </v-flex>
-
+        <most-active :persons="persons"></most-active>
       </v-flex>
     </v-layout>
   </v-container>
@@ -88,8 +22,9 @@
 
 <script>
   import question from '../Main/question/question'
-
-
+  import bestQuestions from './best-questions'
+  import bestComments from './best-comments'
+  import mostActive from './most-active'
   export default {
     data() {
       return {
@@ -99,9 +34,11 @@
     },
     components: {
       'question': question,
+      'best-questions': bestQuestions,
+      'best-comments': bestComments,
+      'most-active': mostActive,
     },
     mounted() {
-
       this.questions = [
         {
           id: 1,
@@ -255,28 +192,14 @@
           following: false // is following to you
         }
       ];
-
     }
   }
 </script>
 
 <style scoped>
-  .right-block {
-    width: 275px;
-    max-width: 275px;
-    height: 300px;
-  }
-  .most-active{
-    height:340px;
-  }
-
   .label {
     width: 777px;
     max-width: 777px;
     height: 25px;
   }
-  .divider{
-    width: 80%;
-  }
-
 </style>
