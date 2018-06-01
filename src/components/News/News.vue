@@ -25,8 +25,6 @@
   import bestQuestions from './best-questions'
   import bestComments from './best-comments'
   import mostActive from './most-active'
-
-
   export default {
     data() {
       return {
@@ -41,7 +39,6 @@
       'most-active': mostActive,
     },
     mounted() {
-
       this.questions = [
         {
           id: 1,
@@ -195,7 +192,6 @@
           following: false // is following to you
         }
       ];
-
     }
   }
 </script>
