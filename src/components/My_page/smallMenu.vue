@@ -1,64 +1,20 @@
 <template>
   <v-content class="main border blocklight mx-3">
     <v-content v-for="category in categories" class="ml-2 mt-2" :key="category.id">
-      <a v-if="category.id===3" @click.stop="feedBack = true"
-         @onmouseout.stop="feedBack = false" class="textdarkgrey-text categories">
-        {{category.name}}</a>
-
-      <v-dialog v-if="category.id===3" v-model="feedBack" max-width="500px" width="50%">
-        <v-card class="pa-2">
-
-          <v-layout class="right">
-            <v-icon @click="feedBack=false" class="material-icons pointer">
-              clear
-            </v-icon>
-          </v-layout>
-          <v-layout justify-center class="textblue-text bold-22 mt-2">Обратная связь</v-layout>
-
-
-          <v-flex class="ml-2">
-            <v-layout justify-left class="textblue-text med-18">Выберите тему</v-layout>
-            <v-layout justify-left column v-for="problem in problems" :key="problem.id">
-              <v-layout row>
-                <v-checkbox color="blue" class="check" hide-details v-model="problem.checked"
-                            style="max-width: 30px;"></v-checkbox>
-                <v-layout justify-left class="med-16 pointer mt-1"
-                          @click="problem.checked=!problem.checked">{{problem.name}}
-                </v-layout>
-              </v-layout>
-            </v-layout>
-          </v-flex>
-
-          <v-container class="px-2 pt-0 pb-0">
-            <v-layout justify-left class="textblue-text med-16 mt-2 mb-0">Сообщение</v-layout>
-            <v-text-field
-              class="pt-0"
-              placeholder="Введите ваше сообщение разработчикам"
-              light
-              color="black"
-              :counter="400"
-              textarea
-            ></v-text-field>
-            <v-content>
-              <v-btn class="bigBtn med-16 border blockblue white--text" round depressed>
-                Отправить
-              </v-btn>
-            </v-content>
-          </v-container>
-        </v-card>
-      </v-dialog>
-
+      
+      <send-feedback v-if="category.id===3" :feedBack="feedBack"></send-feedback>
       <a v-if="category.id!==3" class="textdarkgrey-text categories">{{category.name}}</a>
       <v-divider v-if="category.id===3" class="divider mt-1"></v-divider>
-
 
     </v-content>
   </v-content>
 </template>
 <script>
+  import sendFeedBack from './sendFeedBack'
   export default {
     data() {
       return {
+        feedBack:false,
         categories: [
           {
             id: 1,
@@ -77,40 +33,13 @@
             name: "Выход",
           },
         ],
-        feedBack: false,
-        problems: [
-          {
-            id: 1,
-            name: "Ошибка",
-            checked: false,
-          },
-          {
-            id: 2,
-            name: "Предложение",
-            checked: false,
-          },
-          {
-            id: 3,
-            name: "Жалоба",
-            checked: false,
-          },
-          {
-            id: 4,
-            name: "Другое",
-            checked: false,
-          },
-
-        ]
       }
     },
     name: "smallMenu",
-    mounted(){
-      let inputs=this.$root.$el.getElementsByClassName("input-group__input");
-      let textField=inputs[inputs.length-1];
-      textField.style.paddingTop="5px";
-      textField.style.paddingLeft="5px";
-      textField.classList.add("border");
-    }
+    components: {
+      'send-feedback': sendFeedBack,
+    },
+
   }
 </script>
 
@@ -126,18 +55,7 @@
     width: 95%;
   }
 
-  .pointer {
-    cursor: pointer;
-  }
-
   .categories:hover {
     color: #1A93F0 !important;
-  }
-
-  .bigBtn {
-    text-transform: none;
-    width: 150px;
-    height: 31px;
-    float: right;
   }
 </style>
