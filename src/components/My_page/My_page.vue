@@ -8,6 +8,7 @@
       <mini-header class="mini-header mb-2" :amounts="amounts"></mini-header>
       <router-view/>
     </v-flex>
+    <small-menu></small-menu>
   </v-layout>
 </v-container>
 </template>
@@ -15,6 +16,7 @@
 <script>
 import profileInfo from './profile-info'
 import miniHeader from './mini_header'
+import smallMenu from "./smallMenu";
 
 export default {
   data () {
@@ -31,7 +33,7 @@ export default {
       name: 'Елизавета Седова',
       sex: '2',
       age: '20',
-      about: `Студентка 3 курса национального исседовательского университета 
+      about: `Студентка 3 курса национального исседовательского университета
               информационных технологий, механики и оптики`,
       avatar: 'https://pp.userapi.com/c622120/v622120519/2607c/k0wPW3Pp__k.jpg',
       stats: {
@@ -92,7 +94,7 @@ export default {
         {
           name: 'telegram',
           url: 'https://www.telegram.org/someid'
-        }        
+        }
       ]
     }
     this.amounts = {
@@ -106,6 +108,7 @@ export default {
     this.$router.push({name: 'ProfileQuestions', params: {id: 1}});
   },
   components: {
+    'small-menu': smallMenu,
     'profile-info' : profileInfo,
     'mini-header' : miniHeader
   }
