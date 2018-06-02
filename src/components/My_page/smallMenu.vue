@@ -22,7 +22,7 @@
               <v-layout row>
                 <v-checkbox color="blue" class="check" hide-details v-model="problem.checked"
                             style="max-width: 30px;"></v-checkbox>
-                <v-layout justify-left class="med-16 pointer"
+                <v-layout justify-left class="med-16 pointer mt-1"
                           @click="problem.checked=!problem.checked">{{problem.name}}
                 </v-layout>
               </v-layout>
@@ -37,7 +37,6 @@
               light
               color="black"
               :counter="400"
-              multi-line
               textarea
             ></v-text-field>
             <v-content>
@@ -104,7 +103,14 @@
         ]
       }
     },
-    name: "smallMenu"
+    name: "smallMenu",
+    mounted(){
+      let inputs=this.$root.$el.getElementsByClassName("input-group__input");
+      let textField=inputs[inputs.length-1];
+      textField.style.paddingTop="5px";
+      textField.style.paddingLeft="5px";
+      textField.classList.add("border");
+    }
   }
 </script>
 
