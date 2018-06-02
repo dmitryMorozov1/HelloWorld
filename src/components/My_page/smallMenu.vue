@@ -1,7 +1,7 @@
 <template>
   <v-content class="main border blocklight mx-3">
     <v-content v-for="category in categories" class="ml-2 mt-2" :key="category.id">
-      
+
       <send-feedback v-if="category.id===3" :feedBack="feedBack"></send-feedback>
       <a v-if="category.id!==3" class="textdarkgrey-text categories">{{category.name}}</a>
       <v-divider v-if="category.id===3" class="divider mt-1"></v-divider>
@@ -11,10 +11,11 @@
 </template>
 <script>
   import sendFeedBack from './sendFeedBack'
+
   export default {
     data() {
       return {
-        feedBack:false,
+        feedBack: false,
         categories: [
           {
             id: 1,

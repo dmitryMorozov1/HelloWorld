@@ -2,7 +2,7 @@
   <v-layout>
     <a @click.stop="feedBack = true"
        @onmouseout.stop="feedBack = false" class="textdarkgrey-text categories">
-       Обратная связь</a>
+      Обратная связь</a>
     <v-dialog v-model="feedBack" max-width="500px" width="50%">
       <v-card class="pa-2">
 
@@ -49,46 +49,46 @@
 </template>
 
 <script>
-    export default {
-        name: "sendFeedBack",
-      data() {
-        return {
-          problems: [
-            {
-              id: 1,
-              name: "Ошибка",
-              checked: false,
-            },
-            {
-              id: 2,
-              name: "Предложение",
-              checked: false,
-            },
-            {
-              id: 3,
-              name: "Жалоба",
-              checked: false,
-            },
-            {
-              id: 4,
-              name: "Другое",
-              checked: false,
-            },
+  export default {
+    name: "sendFeedBack",
+    data() {
+      return {
+        problems: [
+          {
+            id: 1,
+            name: "Ошибка",
+            checked: false,
+          },
+          {
+            id: 2,
+            name: "Предложение",
+            checked: false,
+          },
+          {
+            id: 3,
+            name: "Жалоба",
+            checked: false,
+          },
+          {
+            id: 4,
+            name: "Другое",
+            checked: false,
+          },
 
-          ]
-        }
-      },
-      props:{
-        feedBack: false,
-      },
-      mounted(){
-        let inputs=this.$root.$el.getElementsByClassName("input-group__input");
-        let textField=inputs[inputs.length-1];
-        textField.style.paddingTop="5px";
-        textField.style.paddingLeft="5px";
-        textField.classList.add("border");
+        ]
       }
+    },
+    props: {
+      feedBack: false,
+    },
+    mounted() {
+      let inputs = this.$root.$el.getElementsByClassName("input-group__input");
+      let textField = inputs[inputs.length - 1];
+      textField.style.paddingTop = "5px";
+      textField.style.paddingLeft = "5px";
+      textField.classList.add("border");
     }
+  }
 
 </script>
 
@@ -99,9 +99,11 @@
     height: 31px;
     float: right;
   }
+
   .pointer {
     cursor: pointer;
   }
+
   .categories:hover {
     color: #1A93F0 !important;
   }
