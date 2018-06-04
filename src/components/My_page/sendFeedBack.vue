@@ -11,7 +11,7 @@
             clear
           </v-icon>
         </v-layout>
-        <v-layout justify-center class="textblue-text bold-22 mt-2">Обратная связь</v-layout>
+        <v-layout justify-center class="textblue-text bold-24 mt-2">Обратная связь</v-layout>
 
 
         <v-flex class="ml-2">
@@ -28,8 +28,9 @@
         </v-flex>
 
         <v-container class="px-2 pt-0 pb-0">
-          <v-layout justify-left class="textblue-text med-16 mt-2 mb-0">Сообщение</v-layout>
+          <v-layout justify-left class="textblue-text med-18 mt-2 mb-0">Сообщение</v-layout>
           <v-text-field
+            @input="(event) => {this.inputLength=event.length}"
             class="pt-0"
             placeholder="Введите ваше сообщение разработчикам"
             light
@@ -38,8 +39,10 @@
             textarea
           ></v-text-field>
           <v-content>
-            <v-btn class="bigBtn med-16 border blockblue white--text" round depressed>
-              Отправить
+            <v-btn class="bigBtn med-16 border white--text"
+                   :class="inputLength === 0 ? 'blockblue' : 'textblue'"
+                   round depressed>
+              <v-layout class="btnText">Отправить</v-layout>
             </v-btn>
           </v-content>
         </v-container>
@@ -53,6 +56,7 @@
     name: "sendFeedBack",
     data() {
       return {
+        inputLength: 0,
         problems: [
           {
             id: 1,
@@ -87,7 +91,7 @@
       textField.style.paddingTop = "5px";
       textField.style.paddingLeft = "5px";
       textField.classList.add("border");
-    }
+    },
   }
 
 </script>
@@ -100,6 +104,10 @@
     float: right;
   }
 
+  .btnText {
+    transform: translate(17%, -5%);
+  }
+
   .pointer {
     cursor: pointer;
   }
@@ -107,4 +115,5 @@
   .categories:hover {
     color: #1A93F0 !important;
   }
+
 </style>
